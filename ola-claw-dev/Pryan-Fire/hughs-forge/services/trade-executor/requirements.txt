@@ -1,0 +1,6 @@
+solders
+solana
+jupiter-solana
+anchorpy
+requests
+websocket-client
