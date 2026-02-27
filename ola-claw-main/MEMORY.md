@@ -123,7 +123,7 @@
 
 ## MEMORY MANAGEMENT
 - This file is protected by memory-guard service (inotifywait watcher)
-- On every write: identity is validated, backup is saved, and file is synced to Nexus-Vaults
+- On every write: identity is validated and backup is saved
 - If corrupted (wrong identity, truncated): auto-restored from last good backup + ntfy alert
 - Local backups: /data/openclaw/workspace/.memory-backups/ (last 20 versions)
 - When updating, APPEND to sections — do not rewrite the entire file

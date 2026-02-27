@@ -7,23 +7,20 @@
 - Cron: `*/15 * * * *` — curls /health on all 3 proxies, posts report to #jarvis
 - Status: ACTIVE AND RUNNING
 
-### Memory Guard (systemd service)
-- Service: `memory-guard.service` — watches MEMORY.md for corruption, auto-restores
+### Memory Guard (cron every 5min)
+- Watches MEMORY.md for corruption, auto-restores from shadow copy
 - Running on ALL 3 servers — DO NOT DISABLE
-- Backups: `/data/openclaw/workspace/.memory-backups/`
 
 ## Active Tasks
 
-### Owner Intelligence: Windows File Sync
-- Status: In Progress
-- GitHub: Abarrach-Stone#1
+### Haplo: Pryan-Fire crypto pipeline
+- Status: In Progress — check Pryan-Fire GitHub issues for current work
+- DO NOT assign new Pryan-Fire tasks without checking open issues first
 
-### Haplo: solders venv issue
-- Status: Waiting on Haplo to create Python venv and install deps
-- GitHub: Pryan-Fire#73
-
-## RESOLVED (close GitHub issues if still open)
-- Hugh embedding 404 — FIXED by XAR (Rate Guard proxy embedding passthrough)
+## RESOLVED (DO NOT RE-ASSIGN — these are DONE)
+- Nexus-Vaults backup — DONE by XAR
+- Hugh embedding 404 — FIXED by XAR (Rate Guard proxy)
 - Old rate limiter — SUPERSEDED by Rate Guard v2
-- Memory corruption — FIXED by XAR (memory-guard service deployed fleet-wide, memory-checkpoint cron removed)
-- Nexus-Vaults backup empty — FIXED by XAR (all 3 agents backed up to correct directories)
+- Memory corruption — FIXED (memory-guard deployed fleet-wide)
+- Agent heartbeat monitor — NOT NEEDED (rate guard monitor handles fleet health)
+- Gateway health cron jobs — NOT NEEDED (rate guard monitor covers this)
