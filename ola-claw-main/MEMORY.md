@@ -67,6 +67,12 @@
 - **VENDOR PATCH REQUIRED:** Gateway has hardcoded `GEMINI_API_BASE` in vendor files. These must be re-patched after every OpenClaw update.
 - **POST-UPDATE PROCEDURE:** After any OpenClaw update on any server, run `sudo bash /data/openclaw/rate-guard-v2/reapply-rate-guard-patches.sh`, then `rm -rf ~/.cache/node/compile_cache && systemctl --user restart openclaw-gateway`.
 
+## Wallet Architecture (decided 2026-02-25)
+- **Bot wallet**: `74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x` — TRADING_WALLET_PUBLIC_KEY on ola-claw-trade. This is the wallet Hugh trades with. Private key is on ola-claw-trade only.
+- **Owner wallet**: `sh36vHUDHcXqVD8aZJR8GF3Z3PdaU69XG8wJeB1e1xb` — OWNER_WALLET_PUBLIC_KEY on ola-claw-trade + ola-claw-main. READ-ONLY — no private key on any server. Used for analysis, monitoring, and emergency ntfy alerts only.
+- Owner wallet has 7 years of Solana trade history — valuable for quant analysis.
+- Emergency exit authority (owner wallet controlling bot wallet) deferred until bot proves itself.
+
 ## DISCORD
 - @Zifnab (me): #the-Nexus (requireMention: true), #jarvis (requireMention: false), #coding (requireMention: false)
 - @HughTheHand: #trading (requireMention: false), #the-Nexus
