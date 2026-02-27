@@ -78,13 +78,6 @@
 - #the-Nexus: 1475082874234343621 | #jarvis: 1475082997027049584
 - #coding: 1475083038810443878 | #trading: 1475082964156157972
 
-## CRYPTO WALLET ARCHITECTURE (decided session 13)
-- **Two-wallet approach**: bot wallet for trading, owner wallet for analysis/monitoring
-- **Bot wallet:** `74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x` (TRADING_WALLET_PUBLIC_KEY on ola-claw-trade)
-- **Owner wallet:** `sh36vHUDHcXqVD8aZJR8GF3Z3PdaU69XG8wJeB1e1xb` (OWNER_WALLET_PUBLIC_KEY on trade + main)
-- Owner wallet is READ-ONLY — no private key on servers, analysis + emergency alerts only
-- Owner wallet has 7 years of trade history — valuable for quant analysis
-
 ## GITHUB (The-Nexus-Decoded org)
 - **5 repos (all PUBLIC):** Arianus-Sky, Pryan-Fire, Abarrach-Stone, Chelestra-Sea, .github
 - **PAT:** github_pat_11AALFHTY... deployed to all 3 servers via gh CLI
