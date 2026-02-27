@@ -163,3 +163,10 @@ After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get
    You should see request logs flowing through rate guard, NOT direct to Google.
 
 4. **Rate guard dist/ patches are SAFE** — they live in /data/openclaw/rate-guard-v2/dist/ which OpenClaw updates do NOT touch. No action needed for: budget-tracker.js, proxy.js, health.js.
+
+## CRITICAL: Discord Session Management (2026-02-27)
+- **NEVER delete Discord session keys from sessions.json** — these track which messages the bot has already seen
+- Deleting keys causes the bot to reprocess ALL recent channel messages as new on restart → replays stale orders
+- **To reset conversation:** truncate the .jsonl session FILE (empties conversation history) but KEEP the session KEY in sessions.json
+- **If you need a clean slate:** set `updatedAt` to current epoch ms, then truncate the .jsonl file referenced by `sessionFile`
+- This was learned the hard way: deleting keys caused 3 spam loop restarts (Nexus-Vaults, cron jobs, heartbeat monitor all replayed)
