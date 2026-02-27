@@ -30,6 +30,8 @@ EXCLUDE=(
   --exclude 'staging_windows_docs/'
   --exclude 'H:\*'
   --exclude 'document_index.db'
+  --exclude 'testvenv/'
+  --exclude 'site-packages/'
 )
 
 # Server definitions: name:source_type:source_path
