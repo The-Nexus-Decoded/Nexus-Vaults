@@ -170,3 +170,10 @@ After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get
 - **To reset conversation:** truncate the .jsonl session FILE (empties conversation history) but KEEP the session KEY in sessions.json
 - **If you need a clean slate:** set `updatedAt` to current epoch ms, then truncate the .jsonl file referenced by `sessionFile`
 - This was learned the hard way: deleting keys caused 3 spam loop restarts (Nexus-Vaults, cron jobs, heartbeat monitor all replayed)
+- **Proper reset procedure (if you ever need to do it yourself):**
+  1. `systemctl --user stop openclaw-gateway`
+  2. Back up sessions.json: `cp sessions.json sessions.json.bak-$(date +%Y%m%d-%H%M%S)`
+  3. For each discord session key, truncate the .jsonl file: `> /path/to/sessionFile.jsonl`
+  4. Update `updatedAt` to current epoch ms in sessions.json (python: `int(time.time() * 1000)`)
+  5. DO NOT delete the session key itself
+  6. `systemctl --user start openclaw-gateway`
