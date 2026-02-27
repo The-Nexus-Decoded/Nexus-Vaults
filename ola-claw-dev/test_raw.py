@@ -15,11 +15,11 @@ def test():
     print(f"DEBUG: Using raw Client.get_program_accounts...")
     
     try:
-        [REDACTED_DYNAMIC_KEY] Test 1: Minimal filter
+        # Test 1: Minimal filter
         memcmp_filter = MemcmpOpts(offset=8, bytes=str(BOT_WALLET_PUBKEY))
         
         print("Calling get_program_accounts...")
-        [REDACTED_DYNAMIC_KEY] Note: calling the synchronous version for simplicity in this test
+        # Note: calling the synchronous version for simplicity in this test
         response = client.get_program_accounts(
             METEORA_DLMM_PROGRAM_ID,
             filters=[memcmp_filter]

@@ -1,17 +1,17 @@
-[REDACTED_DYNAMIC_KEY] TOOLS.md -- Haplo's Environment & Tool Reference
+# TOOLS.md -- Haplo's Environment & Tool Reference
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Tailscale Network
+## Tailscale Network
 
 | Host | Tailscale IP | User | Role |
 |------|-------------|------|------|
-| ola-claw-dev (you) | [REDACTED_IP] | openclaw | Development |
-| ola-claw-main (Zifnab) | [REDACTED_IP] | openclaw | Coordinator |
-| ola-claw-trade (Hugh) | [REDACTED_IP] | openclaw | Trading (standby) |
-| Windows workstation | [REDACTED_IP] | olawal | Claude CLI, GSD, backups |
+| ola-claw-dev (you) | [REDACTED_TS_IP] | openclaw | Development |
+| ola-claw-main (Zifnab) | [REDACTED_TS_IP] | openclaw | Coordinator |
+| ola-claw-trade (Hugh) | [REDACTED_TS_IP] | openclaw | Trading (standby) |
+| Windows workstation | [REDACTED_TS_IP] | olawal | Claude CLI, GSD, backups |
 
 All connections via Tailscale IPs. Never use LAN IPs.
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Key Paths (this server)
+## Key Paths (this server)
 
 | Path | Purpose |
 |------|---------|
@@ -27,29 +27,29 @@ All connections via Tailscale IPs. Never use LAN IPs.
 
 The OS drive is sacrosanct. All data on /data NVMe only.
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Discord
+## Discord
 
 | Channel | ID | Your Access |
 |---------|-----|-------------|
-| [REDACTED_DYNAMIC_KEY]coding | 1475083038810443878 | requireMention: false (your channel) |
-| [REDACTED_DYNAMIC_KEY]the-Nexus | 1475082874234343621 | requireMention: true |
+| #coding | 1475083038810443878 | requireMention: false (your channel) |
+| #the-Nexus | 1475082874234343621 | requireMention: true |
 
 Guild ID: 1475082873777426494
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Gateway Management
+## Gateway Management
 
 ```bash
-[REDACTED_DYNAMIC_KEY] Health check
+# Health check
 curl -s http://127.0.0.1:18789/health
 
-[REDACTED_DYNAMIC_KEY] View logs
+# View logs
 journalctl --user -u openclaw-gateway --no-pager -n 50
 
-[REDACTED_DYNAMIC_KEY] Quota monitor
+# Quota monitor
 systemctl --user status quota-monitor.timer
 ```
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] GitHub
+## GitHub
 
 - **Org:** The-Nexus-Decoded (all repos PUBLIC)
 - **Auth:** HTTPS + gh credential helper (not SSH deploy key)
@@ -57,7 +57,7 @@ systemctl --user status quota-monitor.timer
 - **Actions secrets on Pryan-Fire:** GH_PAT_FOR_HAPLO, TRADE_SERVER_HOST, TRADE_SERVER_USER, TRADE_SERVER_SSH_KEY
 - **Deploy key:** deploy_to_trade on this server for CI/CD to ola-claw-trade
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Repo Structure
+### Repo Structure
 ```
 Pryan-Fire/
   haplos-workshop/     → Your tools and utilities
@@ -72,17 +72,17 @@ Arianus-Sky/           → Monitoring (dashboards, alerting)
 Abarrach-Stone/        → Data (schemas, models, knowledge base)
 ```
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Dev Tools
+## Dev Tools
 
 - **GSD:** Installed globally. Use /gsd:new-project, /gsd:plan-phase, /gsd:execute-phase
-- **code-server:** http://[REDACTED_IP]:8080 (Tailscale-only, no auth)
+- **code-server:** http://[REDACTED_TS_IP]:8080 (Tailscale-only, no auth)
 - **Ollama:** localhost:11434 (qwen2.5-coder:7b and qwen2.5-coder:32b available)
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Lobster Workflows
+## Lobster Workflows
 
 Lobster is installed and enabled. Use it for any multi-step task to save tokens.
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Running Pipelines
+### Running Pipelines
 ```json
 {
   "action": "run",
@@ -91,7 +91,7 @@ Lobster is installed and enabled. Use it for any multi-step task to save tokens.
 }
 ```
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Workflow Files (.lobster)
+### Workflow Files (.lobster)
 ```yaml
 name: build-and-test
 steps:
@@ -105,20 +105,20 @@ steps:
     condition: $test.exitCode == 0
 ```
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] When to Use
+### When to Use
 - Multi-file builds (scaffold → deps → code → test → commit → push)
 - Deployment pipelines (build → deploy → verify → report)
 - Any task with more than 2 sequential steps
 
 Do NOT stop between steps of a multi-step task. Chain with Lobster.
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Limitations
+### Limitations
 - Local subprocess only. Cross-server ops need SSH as exec steps.
 - Default timeout: 20s. Set timeoutMs for longer operations.
 
 Store workflows at: `/data/openclaw/workflows/`
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Model Configuration
+## Model Configuration
 
 - **Primary:** google/gemini-3.1-pro-preview
 - **Fallback 1:** google/gemini-3-flash-preview
@@ -127,14 +127,14 @@ Store workflows at: `/data/openclaw/workflows/`
 - Own Google Cloud project: ola-claw-dev (own 1M TPM quota)
 - OpenRouter REMOVED -- too expensive
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Hardware
+## Hardware
 
 - AMD Ryzen (ASUS PRIME X570-PRO), 64GB RAM
 - 2x GPUs: GTX 1070 + GTX 1070 Ti (16GB VRAM total)
 - 240GB SSD (OS only) + 1.8TB NVMe (/data)
 - Ollama runs on local GPUs (zero cost)
 
-[REDACTED_DYNAMIC_KEY][REDACTED_DYNAMIC_KEY] Workspace Git Sync
+## Workspace Git Sync
 
 All agents' workspace folders are version-controlled in GitHub for backup and config drift tracking.
 
@@ -146,7 +146,7 @@ Script: `/data/openclaw/scripts/redact-and-sync.sh`
 
 The script must:
 1. Copy workspace to a temp staging directory (NEVER modify live workspace)
-2. Strip all secrets from the copy: API keys, tokens, PATs (`[REDACTED_GH_PAT]`, `[REDACTED_API_KEY]`, `[REDACTED_BSA_TOKEN]`, `Bearer`), wallet addresses, Tailscale IPs (replace with `[REDACTED_IP]`), Discord bot tokens, phone numbers, emails, anything from `/data/openclaw/keys/`
+2. Strip all secrets from the copy: API keys, tokens, PATs (`[REDACTED_GH_PAT]`, `[REDACTED_API_KEY]`, `BSA`, `Bearer`), wallet addresses, Tailscale IPs (replace with `[REDACTED_IP]`), Discord bot tokens, phone numbers, emails, anything from `/data/openclaw/keys/`
 3. Diff against last commit and flag any new potential secrets
 4. Commit and push only the redacted copy
 5. Include a pre-commit git hook that greps for known secret patterns and blocks push if any found

@@ -4,10 +4,10 @@ from solana.rpc.api import Client
 from anchorpy import Program, Provider, Wallet, Idl
 import json
 
-[REDACTED_DYNAMIC_KEY] Meteora DLMM Program ID
+# Meteora DLMM Program ID
 METEORA_DLMM_PROGRAM_ID = Pubkey.from_string("LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo")
 BOT_WALLET_PUBKEY = Pubkey.from_string("74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x")
-RPC_ENDPOINT = "https://api.mainnet-beta.solana.com" [REDACTED_DYNAMIC_KEY] Public mainnet just for testing
+RPC_ENDPOINT = "https://api.mainnet-beta.solana.com" # Public mainnet just for testing
 
 METEORA_IDL_DICT = {
     "version": "0.1.0",
@@ -43,7 +43,7 @@ async def test():
     
     print(f"Fetching accounts for owner {BOT_WALLET_PUBKEY}...")
     try:
-        [REDACTED_DYNAMIC_KEY] Use a raw dictionary filter to avoid MemcmpOpts type conflicts
+        # Use a raw dictionary filter to avoid MemcmpOpts type conflicts
         memcmp_filter = {
             "memcmp": {
                 "offset": 8,
@@ -51,7 +51,7 @@ async def test():
             }
         }
         
-        [REDACTED_DYNAMIC_KEY] We need to fetch via the provider/program to get the decoded accounts directly
+        # We need to fetch via the provider/program to get the decoded accounts directly
         accounts = await program.account["Position"].all([memcmp_filter])
         
         print(f"Found {len(accounts)} Position accounts.")

@@ -38,7 +38,7 @@ METEORA_IDL = Idl.from_json(json.dumps(METEORA_IDL_DICT))
 
 async def test():
     async with AsyncClient(RPC_ENDPOINT) as client:
-        [REDACTED_DYNAMIC_KEY] 1. Fetch raw accounts FIRST, without using any anchorpy objects in the call
+        # 1. Fetch raw accounts FIRST, without using any anchorpy objects in the call
         memcmp_filter = MemcmpOpts(offset=8, bytes=str(BOT_WALLET_PUBKEY))
         
         print(f"DEBUG: Fetching raw accounts from RPC...")
@@ -53,7 +53,7 @@ async def test():
 
         print(f"Found {len(response.value)} accounts. Decoding now...")
 
-        [REDACTED_DYNAMIC_KEY] 2. NOW use anchorpy for decoding only
+        # 2. NOW use anchorpy for decoding only
         provider = Provider(client, Wallet.dummy())
         program = Program(METEORA_IDL, METEORA_DLMM_PROGRAM_ID, provider)
         

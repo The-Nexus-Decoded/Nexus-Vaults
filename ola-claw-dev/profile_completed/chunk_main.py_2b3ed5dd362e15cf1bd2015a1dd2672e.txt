@@ -1,4 +1,4 @@
-[REDACTED_DYNAMIC_KEY] main.py for the Risk Manager service
+# main.py for the Risk Manager service
 import time
 from .logger import audit_logger
 from fastapi import FastAPI
@@ -6,7 +6,7 @@ import uvicorn
 
 app = FastAPI()
 
-[REDACTED_DYNAMIC_KEY] ... (RiskManager class and RISK_CONFIG remain the same) ...
+# ... (RiskManager class and RISK_CONFIG remain the same) ...
 risk_manager_instance = RiskManager(RISK_CONFIG)
 
 @app.get("/health")
@@ -19,30 +19,30 @@ def health_check():
         "circuit_breaker_tripped": risk_manager_instance.breaker_tripped_at > 0
     }
 
-[REDACTED_DYNAMIC_KEY] This is a placeholder for the actual trade checking endpoint
+# This is a placeholder for the actual trade checking endpoint
 @app.post("/check_trade")
 def check_trade_endpoint(trade_details: dict):
     is_approved, reason = risk_manager_instance.check_trade(trade_details)
     return {"approved": is_approved, "reason": reason}
 
 if __name__ == "__main__":
-    [REDACTED_DYNAMIC_KEY] The test suite is now replaced by running the server
-    [REDACTED_DYNAMIC_KEY] uvicorn.run(app, host="0.0.0.0", port=8000)
+    # The test suite is now replaced by running the server
+    # uvicorn.run(app, host="0.0.0.0", port=8000)
     
-    [REDACTED_DYNAMIC_KEY] Keeping test suite for now for local validation
-    [REDACTED_DYNAMIC_KEY] Test Suite
+    # Keeping test suite for now for local validation
+    # Test Suite
     manager = risk_manager_instance
     manager.check_trade({"pair": "SOL/USDC", "amount_usd": 500, "side": "buy"})
-    [REDACTED_DYNAMIC_KEY] ... (rest of test suite)
+    # ... (rest of test suite)
 
 
-[REDACTED_DYNAMIC_KEY] Configuration will be moved to a separate file later
+# Configuration will be moved to a separate file later
 RISK_CONFIG = {
     "max_trade_size_usd": 1000.00,
     "max_open_positions": 5,
     "circuit_breaker": {
         "max_consecutive_losses": 3,
-        "cooldown_period_seconds": 300, [REDACTED_DYNAMIC_KEY] 5 minutes
+        "cooldown_period_seconds": 300, # 5 minutes
     }
 }
 
@@ -68,15 +68,15 @@ class RiskManager:
             audit_logger.info("Profit reported, resetting consecutive losses.", extra_info={"pnl": pnl})
 
     def check_position_size(self, trade_details: dict) -> (bool, str):
-        [REDACTED_DYNAMIC_KEY] ... (implementation unchanged)
+        # ... (implementation unchanged)
         return True, "Position size is within limits."
 
     def check_open_positions(self) -> (bool, str):
-        [REDACTED_DYNAMIC_KEY] ... (implementation unchanged)
+        # ... (implementation unchanged)
         return True, "Open positions within limit."
 
     def check_circuit_breaker(self) -> (bool, str):
-        [REDACTED_DYNAMIC_KEY] ... (implementation unchanged)
+        # ... (implementation unchanged)
         breaker_config = self.config.get("circuit_breaker", {})
         max_losses = breaker_config.get("max_consecutive_losses", 3)
         if self.consecutive_losses >= max_losses:
@@ -110,5 +110,5 @@ class RiskManager:
         return True, "Trade approved."
 
 if __name__ == "__main__":
-    [REDACTED_DYNAMIC_KEY] Test suite remains, demonstrating the new logging
+    # Test suite remains, demonstrating the new logging
     pass

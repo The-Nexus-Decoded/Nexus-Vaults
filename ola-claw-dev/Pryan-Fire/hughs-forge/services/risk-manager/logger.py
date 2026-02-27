@@ -1,4 +1,4 @@
-[REDACTED_DYNAMIC_KEY] logger.py - Structured JSON Logger for the Risk Manager
+# logger.py - Structured JSON Logger for the Risk Manager
 import logging
 import json
 import sys

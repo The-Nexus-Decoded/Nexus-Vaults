@@ -24,7 +24,7 @@ class HealthHandler(http.server.BaseHTTPRequestHandler):
             logger.warning(f"Invalid path requested from {self.client_address[0]}: {self.path}. Status: 404 Not Found")
 
 def start_health_server(port=8000):
-    global httpd [REDACTED_DYNAMIC_KEY] Make httpd accessible for graceful shutdown
+    global httpd # Make httpd accessible for graceful shutdown
     Handler = HealthHandler
     httpd = socketserver.TCPServer(("", port), Handler)
     logger.info(f"Health server starting on port {port}...")
@@ -40,7 +40,7 @@ def stop_health_server():
         httpd.server_close()
 
 if __name__ == '__main__':
-    [REDACTED_DYNAMIC_KEY] For testing the health server independently
-    import datetime [REDACTED_DYNAMIC_KEY] Import here for independent test run
+    # For testing the health server independently
+    import datetime # Import here for independent test run
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     start_health_server(port=8001)

@@ -1,4 +1,4 @@
-[REDACTED_DYNAMIC_KEY] USER.md - About Your Master
+# USER.md - About Your Master
 
 - **Name:** Ola Lawal
 - **Title:** Lord Xar, Lord of the Patryns
