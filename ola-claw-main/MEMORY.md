@@ -80,7 +80,7 @@
 
 ## GITHUB (The-Nexus-Decoded org)
 - **5 repos (all PUBLIC):** Arianus-Sky, Pryan-Fire, Abarrach-Stone, Chelestra-Sea, .github
-- **PAT:** [REDACTED_GH_PAT]... deployed to all 3 servers via gh CLI
+- **PAT:** github_pat_11AALFHTY... deployed to all 3 servers via gh CLI
 - **Pryan-Fire:** Haplo's code repo (haplos-workshop, zifnabs-scriptorium, hughs-forge)
 - **Chelestra-Sea:** Infra repo (ansible, systemd, comms/discord)
 - **GitHub Actions secrets on Pryan-Fire:** GH_PAT_FOR_HAPLO, TRADE_SERVER_HOST, TRADE_SERVER_USER, TRADE_SERVER_SSH_KEY
@@ -133,3 +133,27 @@
 - Track current phase per project (multiple projects will run simultaneously)
 - NEVER create cron jobs that rewrite MEMORY.md or any workspace files in isolated mode
 - Owner profile extractor output: /data/openclaw/workspace/OWNER_PROFILE_RAW.md (56K lines — needs quality review)
+
+## Vendor Patches Checklist (After OpenClaw Updates)
+After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get overwritten and MUST be re-applied:
+
+1. **Rate Guard baseUrl redirect** — redirect Google API calls to localhost:8787
+   ```bash
+   sudo sed -i "s|https://generativelanguage\.googleapis\.com|http://localhost:8787|g" /usr/lib/node_modules/openclaw/node_modules/@mariozechner/pi-ai/dist/models.generated.js
+   # Belt-and-suspenders (all 5 files):
+   sudo sed -i "s|https://generativelanguage\.googleapis\.com|http://localhost:8787|g" /usr/lib/node_modules/openclaw/node_modules/@google/genai/dist/*.mjs /usr/lib/node_modules/openclaw/node_modules/@google/genai/dist/*.cjs
+   ```
+
+2. **Clear compile cache + restart gateway**
+   ```bash
+   rm -rf ~/.cache/node/compile_cache
+   systemctl --user restart openclaw-gateway
+   ```
+
+3. **Verify rate guard is intercepting** — after restart, check rate guard logs:
+   ```bash
+   journalctl --user -u openclaw-rate-guard --no-pager -n 5
+   ```
+   You should see request logs flowing through rate guard, NOT direct to Google.
+
+4. **Rate guard dist/ patches are SAFE** — they live in /data/openclaw/rate-guard-v2/dist/ which OpenClaw updates do NOT touch. No action needed for: budget-tracker.js, proxy.js, health.js.
