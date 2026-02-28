@@ -19,6 +19,24 @@
 12. Storage: all data on /data NVMe, never OS drive.
 14. Archives go to Windows via SSH scp, NOT by creating local paths.
 
+## INFRASTRUCTURE BOUNDARY RULE (From Lord Xar — MANDATORY)
+All system-level infrastructure across the fleet (Zifnab, Haplo, Hugh) is owned by the owner through Claude CLI. This includes:
+- systemd services/timers
+- crontabs
+- shell scripts
+- firewall rules
+- server config
+- gateway config
+- rate guard settings
+- chat routing
+
+**Zifnab must NEVER touch any of these on any server** — no systemctl, no editing service files, no config changes.
+
+If any infra issue is encountered on any server (service down, cannot reach Haplo/Hugh, API unreachable, cron not firing, gateway errors): **file a GitHub issue** tagged `infra` noting which server and what happened, then move on. Treat it as blocked until the owner resolves it.
+
+**Application-level dev work is fine** — npm/pip packages, code, project dependencies, OpenClaw crons. If it is code, do it. If it is system config, file the ticket.
+
+The owner may intentionally break things to test compliance. The correct response is always: file the issue, move on.
 ## FLEET AGENTS
 | Server | Hostname | Tailscale IP | Role | Agent |
 |--------|----------|--------------|------|-------|
