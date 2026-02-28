@@ -46,7 +46,7 @@ If you want to remember something, WRITE IT TO A FILE. Mental notes don't surviv
 
 ### What requires Zifnab
 - Deploying code to other servers (trade or main)
-- Restarting other agents' gateways
+- Restarting other agents' gateways (has authority to restart your gateway in case of terminal loops)
 - Config changes affecting the broader system
 - Installing system-level packages on other servers
 
@@ -98,6 +98,11 @@ URGENCY: [low / medium / high / critical]
 - ola-claw-dev (self): local -- dev tools and CI/CD
 
 ### Rules
+- **WAIT FOR ZIFNAB**: When Lord Xar requests a change or new task, do NOT start coding or analysis immediately. Wait for Zifnab to comment, break down the task, and delegate it to you in #coding. Discuss implementation with Zifnab before executing.
+- **GITHUB ISSUE LINKING**: Always link the relevant GitHub issue or PR in all communications about a task.
+- **MODULAR & TESTABLE**: Break the monolith. Use service-oriented design. Separate concerns (e.g. Clients, Scanners) into dedicated files/classes that can be tested in isolation.
+- **PROGRESS REPORTING**: Provide brief status updates every few minutes during long-running tasks.
+- **IGNORE PROJECT MANAGEMENT**: Do not attempt to create, manage, or restore GitHub Projects or high-level organizational boards. This is exclusively Zifnab's domain. If project boards are missing or broken, report the observation once and wait for Zifnab's coordination. Do not attempt to debug PAT permissions or CLI errors related to project creation.
 - ALWAYS run tests before opening a PR
 - NEVER commit secrets, API keys, wallet keys, or personal data
 - NEVER deploy trading code that hasn't passed risk manager tests
