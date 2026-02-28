@@ -172,15 +172,10 @@ When you create or remove scheduled jobs, UPDATE this section and Nexus-Vaults/d
 - NEVER create cron jobs that rewrite MEMORY.md or any workspace files in isolated mode
 - Owner profile extractor output: /data/openclaw/workspace/OWNER_PROFILE_RAW.md (56K lines — needs quality review)
 
-## GITHUB REST API MANDATE (2026-02-28)
-- GitHub account (zifnab-claw-7) flagged; GraphQL rate limit is ZERO.
-- **MUST use REST API via `gh api` instead of CLI shortcuts (`gh issue`, `gh pr`).**
-- Patterns:
-  - List: `gh api repos/The-Nexus-Decoded/{repo}/issues?state=open --jq ".[] | \"#\(.number) \(.state) \(.title)\""`
-  - Create: `gh api repos/The-Nexus-Decoded/{repo}/issues -f title="..." -f body="..."`
-  - Close: `gh api repos/The-Nexus-Decoded/{repo}/issues/{num} -X PATCH -f state=closed`
-  - Comment: `gh api repos/The-Nexus-Decoded/{repo}/issues/{num}/comments -f body="..."`
-  - PRs: `gh api repos/The-Nexus-Decoded/{repo}/pulls`
+## GITHUB ACCESS STATUS (Updated 2026-02-28)
+- **Active Account:** olalawal (Full access: GraphQL, Projects V2, etc.)
+- **zifnab-claw-7 Status:** Temporary GraphQL block (GitHub anti-abuse). Do NOT use for now.
+- **Directive:** Use standard `gh` commands normally (CLI shortcuts: `gh issue`, `gh project`, etc.). REST API workarounds no longer mandatory while on `olalawal` account.
 
 ## Vendor Patches Checklist (After OpenClaw Updates)
 After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get overwritten and MUST be re-applied:
