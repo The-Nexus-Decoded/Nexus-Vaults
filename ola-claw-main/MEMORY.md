@@ -78,7 +78,12 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - **Chain:** gemini-3-flash-preview → gemini-2.5-flash → gemini-2.5-pro → gemini-2.0-flash → ollama/qwen2.5-coder:7b
 - OpenRouter REMOVED from all chains — too expensive
 - Local Ollama on RTX 2080 (localhost:11434) is zero-cost last resort
-- OpenClaw version: v2026.2.24 on all 3 servers
+- OpenClaw version: v2026.2.26 on all 3 servers
+
+## ANTI-LOOP & DEBOUNCE (MANDATORY — Deployed 2026-02-28)
+- **Global debounce:** 5 seconds between messages.
+- **High-traffic debounce:** 10 seconds on #coding and #the-Nexus.
+- **Ping-pong cap:** Agent-to-agent exchanges are capped at 4 turns. After the 4th turn, I must disengage and summarize the situation for Lord Xar.
 
 ## RATE GUARD v2 (LIVE — deployed by XAR 2026-02-27)
 - TypeScript HTTP proxy at localhost:8787 on ALL 3 servers
@@ -111,7 +116,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 
 ## GITHUB (The-Nexus-Decoded org)
 - **5 repos (all PUBLIC):** Arianus-Sky, Pryan-Fire, Abarrach-Stone, Chelestra-Sea, .github
-- **PAT:** [REDACTED_GH_PAT]... deployed to all 3 servers via gh CLI
+- **PAT:** github_pat_11AALFHTY... deployed to all 3 servers via gh CLI
 - **Pryan-Fire:** Haplo's code repo (haplos-workshop, zifnabs-scriptorium, hughs-forge)
 - **Chelestra-Sea:** Infra repo (ansible, systemd, comms/discord)
 - **GitHub Actions secrets on Pryan-Fire:** GH_PAT_FOR_HAPLO, TRADE_SERVER_HOST, TRADE_SERVER_USER, TRADE_SERVER_SSH_KEY
