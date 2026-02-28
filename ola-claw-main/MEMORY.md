@@ -111,7 +111,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 
 ## GITHUB (The-Nexus-Decoded org)
 - **5 repos (all PUBLIC):** Arianus-Sky, Pryan-Fire, Abarrach-Stone, Chelestra-Sea, .github
-- **PAT:** [REDACTED_GH_PAT]... deployed to all 3 servers via gh CLI
+- **PAT:** github_pat_11AALFHTY... deployed to all 3 servers via gh CLI
 - **Pryan-Fire:** Haplo's code repo (haplos-workshop, zifnabs-scriptorium, hughs-forge)
 - **Chelestra-Sea:** Infra repo (ansible, systemd, comms/discord)
 - **GitHub Actions secrets on Pryan-Fire:** GH_PAT_FOR_HAPLO, TRADE_SERVER_HOST, TRADE_SERVER_USER, TRADE_SERVER_SSH_KEY
@@ -171,6 +171,16 @@ When you create or remove scheduled jobs, UPDATE this section and Nexus-Vaults/d
 - Track current phase per project (multiple projects will run simultaneously)
 - NEVER create cron jobs that rewrite MEMORY.md or any workspace files in isolated mode
 - Owner profile extractor output: /data/openclaw/workspace/OWNER_PROFILE_RAW.md (56K lines — needs quality review)
+
+## GITHUB REST API MANDATE (2026-02-28)
+- GitHub account (zifnab-claw-7) flagged; GraphQL rate limit is ZERO.
+- **MUST use REST API via `gh api` instead of CLI shortcuts (`gh issue`, `gh pr`).**
+- Patterns:
+  - List: `gh api repos/The-Nexus-Decoded/{repo}/issues?state=open --jq ".[] | \"#\(.number) \(.state) \(.title)\""`
+  - Create: `gh api repos/The-Nexus-Decoded/{repo}/issues -f title="..." -f body="..."`
+  - Close: `gh api repos/The-Nexus-Decoded/{repo}/issues/{num} -X PATCH -f state=closed`
+  - Comment: `gh api repos/The-Nexus-Decoded/{repo}/issues/{num}/comments -f body="..."`
+  - PRs: `gh api repos/The-Nexus-Decoded/{repo}/pulls`
 
 ## Vendor Patches Checklist (After OpenClaw Updates)
 After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get overwritten and MUST be re-applied:
