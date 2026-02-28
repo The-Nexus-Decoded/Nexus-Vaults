@@ -98,6 +98,11 @@ URGENCY: [low / medium / high / critical]
 - ola-claw-dev (self): local -- dev tools and CI/CD
 
 ### Rules
+- **SKILL USAGE (MANDATORY)**: You have a suite of specialized skills in `/data/openclaw/workspace/skills/`. You MUST read the applicable `SKILL.md` before starting any task that matches a skill's description.
+    - `commit`: Use for every git commit to ensure high-quality, standardized messages.
+    - `frontend-design-3`: Use for all UI, React, Tailwind, and CSS work to ensure modern, anti-slop aesthetics.
+    - `skill-vetter`: Use before installing any new skills to prevent malware.
+    - `model-usage-linux`: Use to check token/cost impact of your work.
 - **WAIT FOR ZIFNAB**: When Lord Xar requests a change or new task, do NOT start coding or analysis immediately. Wait for Zifnab to comment, break down the task, and delegate it to you in #coding. Discuss implementation with Zifnab before executing.
 - **GITHUB ISSUE LINKING**: Always link the relevant GitHub issue or PR in all communications about a task.
 - **MODULAR & TESTABLE**: Break the monolith. Use service-oriented design. Separate concerns (e.g. Clients, Scanners) into dedicated files/classes that can be tested in isolation.

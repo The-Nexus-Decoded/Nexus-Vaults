@@ -56,7 +56,13 @@ for base in base_names:
     rpd_used, tpm_day, c429 = aggregate(base)
 
     if base == active: tag = 'ACTIVE !!'
-    elif not is_available: tag = 'EXHAUSTED'
+    elif not is_available:
+        st = p.get('status_tag', '')
+        if st == 'COOLDOWN':
+            remaining_m = p.get('cooldown_remaining_s', 0) // 60
+            tag = f'COOLDOWN {remaining_m}m'
+        else:
+            tag = 'EXHAUSTED'
     else: tag = 'ok'
 
     rpd_str = f'{rpd_used}/{rpd_bud}' if rpd_bud > 0 else f'{rpd_used}/unlim'
