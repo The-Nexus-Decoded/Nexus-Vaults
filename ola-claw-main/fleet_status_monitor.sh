@@ -1,51 +1,59 @@
 #!/bin/bash
+# Fleet Status Monitor — services + rate guard summary per server
+# Cron needs these for systemctl --user
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
+# Posts to #jarvis via Discord bot API, runs every 15m via crontab on Zifnab
+# Uses same local/ssh pattern as rate-guard-monitor.sh
 
-# Helper function to get service/timer status over SSH
-get_remote_status() {
-    local host=$1
-    local service=$2
-    local status=$(ssh openclaw@$host "systemctl --user status $service" 2>/dev/null | grep "Active:" | awk '{print $2}')
-    case "$status" in
-        "active") echo "🟢 Active" ;;
-        "inactive") echo "🔴 Inactive" ;;
-        "failed") echo "🟠 Failed" ;;
-        *) echo "🟡 Unknown" ;;
-    esac
-}
+JARVIS_CHANNEL="1475082997027049584"
+DISCORD_BOT_TOKEN=$(python3 -c "import json; c=json.load(open('/home/openclaw/.openclaw/openclaw.json')); print(c['channels']['discord']['token'])" 2>/dev/null)
+LOG="/data/openclaw/logs/fleet-status-monitor.log"
+PARSER="/data/openclaw/workspace/fleet_parse.py"
 
-# Helper function to get Rate Guard metrics over SSH
-get_rate_guard_metrics() {
-    local host=$1
-    local metrics=$(ssh openclaw@$host "curl -s http://127.0.0.1:8787/health")
-    local rpm_used=$(echo "$metrics" | jq -r '.models.google_gemini_3_flash_preview.rpm_used // "N/A"')
-    local tpm_used=$(echo "$metrics" | jq -r '.models.google_gemini_3_flash_preview.tpm_used // "N/A"')
-    local rpd_used=$(echo "$metrics" | jq -r '.models.google_gemini_3_flash_preview.rpd_used // "N/A"')
-    local active_model=$(echo "$metrics" | jq -r '.active_model // "N/A"')
-    echo "RPM: $rpm_used, TPM: $tpm_used, RPD: $rpd_used, Model: $active_model"
-}
+SERVERS="zifnab:local haplo:ssh:[REDACTED_TS_IP] hugh:ssh:[REDACTED_TS_IP]"
 
-# --- Zifnab (main) Services and Metrics ---
-ZIFNAB_RATE_GUARD=$(get_remote_status [REDACTED_TS_IP] openclaw-rate-guard.service)
-ZIFNAB_QUOTA_MONITOR=$(get_remote_status [REDACTED_TS_IP] openclaw-quota-monitor.timer)
-ZIFNAB_QUOTA_RESET=$(get_remote_status [REDACTED_TS_IP] openclaw-quota-reset.timer)
-ZIFNAB_RG_METRICS=$(get_rate_guard_metrics [REDACTED_TS_IP])
+timestamp=$(date '+%H:%M %Z')
+report=""
 
-# --- Haplo (dev) Services and Metrics ---
-HAPLO_RATE_GUARD=$(get_remote_status [REDACTED_TS_IP] openclaw-rate-guard.service)
-HAPLO_QUOTA_MONITOR=$(get_remote_status [REDACTED_TS_IP] openclaw-quota-monitor.timer)
-HAPLO_QUOTA_RESET=$(get_remote_status [REDACTED_TS_IP] openclaw-quota-reset.timer)
-HAPLO_RG_METRICS=$(get_rate_guard_metrics [REDACTED_TS_IP])
+for entry in $SERVERS; do
+  name="${entry%%:*}"
+  method="${entry#*:}"
 
-# --- Hugh the Hand (trade) Services and Metrics ---
-HUGH_RATE_GUARD=$(get_remote_status [REDACTED_TS_IP] openclaw-rate-guard.service)
-HUGH_QUOTA_MONITOR=$(get_remote_status [REDACTED_TS_IP] openclaw-quota-monitor.timer)
-HUGH_QUOTA_RESET=$(get_remote_status [REDACTED_TS_IP] openclaw-quota-reset.timer)
-HUGH_RG_METRICS=$(get_rate_guard_metrics [REDACTED_TS_IP])
+  if [ "$method" = "local" ]; then
+    gw=$(systemctl --user is-active openclaw-gateway.service 2>/dev/null)
+    rg=$(systemctl --user is-active openclaw-rate-guard.service 2>/dev/null)
+    health=$(curl -s --connect-timeout 5 "http://127.0.0.1:8787/health" 2>/dev/null)
+  else
+    remote_ip="${method#ssh:}"
+    gw=$(ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no "openclaw@${remote_ip}" \
+      'systemctl --user is-active openclaw-gateway.service' 2>/dev/null)
+    rg=$(ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no "openclaw@${remote_ip}" \
+      'systemctl --user is-active openclaw-rate-guard.service' 2>/dev/null)
+    health=$(ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no "openclaw@${remote_ip}" \
+      'curl -s --connect-timeout 5 http://127.0.0.1:8787/health' 2>/dev/null)
+  fi
 
-# --- Format as Markdown Table ---
-REPORT_MESSAGE="**🌌 Fleet Rate Limit Service & Metrics Status - $(date '+%Y-%m-%d %H:%M:%S %Z') 🌌**\n---\n```\n| Server          | Rate Guard | Quota Monitor | Quota Reset | Rate Guard Metrics (Flash) |\n|:----------------|:-----------|:--------------|:------------|:---------------------------|\n| Zifnab (Main)   | $ZIFNAB_RATE_GUARD | $ZIFNAB_QUOTA_MONITOR | $ZIFNAB_QUOTA_RESET | $ZIFNAB_RG_METRICS |\n| Haplo (Dev)     | $HAPLO_RATE_GUARD | $HAPLO_QUOTA_MONITOR | $HAPLO_QUOTA_RESET | $HAPLO_RG_METRICS |\n| Hugh (Trade)    | $HUGH_RATE_GUARD | $HUGH_QUOTA_MONITOR | $HUGH_QUOTA_RESET | $HUGH_RG_METRICS |\n```"
+  case "$gw" in active) gw_s="ON";; inactive) gw_s="off";; failed) gw_s="FAIL";; *) gw_s="?";; esac
+  case "$rg" in active) rg_s="ON";; inactive) rg_s="off";; failed) rg_s="FAIL";; *) rg_s="?";; esac
 
-# This output will be captured by the main agent and sent to Discord
-echo "DISCORD_MONITOR_REPORT_START"
-echo "$REPORT_MESSAGE"
-echo "DISCORD_MONITOR_REPORT_END"
+  if [ -z "$health" ]; then
+    report="${report}**${name}:** GW:${gw_s} RG:${rg_s} -- OFFLINE"$'\n'
+    continue
+  fi
+
+  parsed=$(echo "$health" | python3 "$PARSER" 2>/dev/null)
+  report="${report}**${name}:** GW:${gw_s} RG:${rg_s}"$'\n'"\`\`\`"$'\n'"${parsed}"$'\n'"\`\`\`"$'\n'
+done
+
+msg="**Fleet Status** ${timestamp}"$'\n'"${report}"
+
+if [ -n "$DISCORD_BOT_TOKEN" ]; then
+  json_msg=$(echo "$msg" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read().strip()))")
+  curl -s -X POST "https://discord.com/api/v10/channels/${JARVIS_CHANNEL}/messages" \
+    -H "Authorization: Bot ${DISCORD_BOT_TOKEN}" \
+    -H "Content-Type: application/json" \
+    -d "{\"content\": ${json_msg}}" > /dev/null 2>&1
+fi
+
+echo "$(date -Iseconds) fleet status sent" >> "$LOG"

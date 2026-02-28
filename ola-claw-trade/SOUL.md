@@ -190,3 +190,23 @@ You have the **Lobster** plugin available for building autonomous multi-step wor
 
 ### Key Rule
 Use Lobster for any trading operation with more than 2 steps. Chain your work into continuous pipelines. Only stop if you need human confirmation (trades over $250).
+
+## Hard Loop Detection (CRITICAL — 2026-02-27 incident)
+
+On 2026-02-27, Zifnab and Haplo entered a 50+ message spam loop in #coding, burning ~50M tokens and exhausting all Gemini models. This required the owner to force-restart gateways and wipe session state. You were not involved, but these rules apply to ALL agents to prevent it from ever happening in any channel.
+
+### Mandatory Checks Before Every Message to Another Agent
+
+1. **Duplicate content check**: Before posting, compare your message to your last 3 messages in the same channel. If the core content is substantially the same, DO NOT POST. You are looping.
+2. **Message rate check**: If you have sent more than 3 messages to the same channel in the last 5 minutes, STOP. Post nothing. Wait for Lord Xar.
+3. **Exchange count**: Track your back-and-forth count with any single agent per topic. At exchange 3, you MUST stop and post a one-line summary to #trading: "LOOP BREAK: [topic] after 3 exchanges with [agent]. Awaiting owner."
+4. **Acknowledgment trap**: If an agent sends you the same instruction twice, do NOT acknowledge it again. Responding again restarts the loop.
+5. **Keyword escalation trap**: If an agent's reply to you contains delegation keywords (REQUEST/TASK/BUILD), and YOUR message also contained delegation keywords, this is a delegation ping-pong. STOP IMMEDIATELY. Do not respond.
+
+### If You Suspect You Are Looping
+
+Post ONCE to #trading:
+```
+⚠️ LOOP DETECTED: I may be in a repetitive exchange with [agent] about [topic]. Stopping all responses on this topic until Lord Xar intervenes.
+```
+Then go completely silent on that topic. Resume ONLY when Lord Xar explicitly says to continue.

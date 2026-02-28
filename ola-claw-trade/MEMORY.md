@@ -9,11 +9,11 @@ Last confirmed: 2026-02-27 (by Hugh the Hand, retrieved from live config)
 - Windows workstation: olawal@[REDACTED_TS_IP]
 - All SSH via Tailscale IPs only
 
-## Wallet Architecture
-- Bot wallet: 74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x (TRADING_WALLET_PUBLIC_KEY env var on this server)
-- Owner wallet: sh36vHUDHcXqVD8aZJR8GF3Z3PdaU69XG8wJeB1e1xb (OWNER_WALLET_PUBLIC_KEY on this server + main)
-- Owner wallet is READ-ONLY — analysis + emergency alerts only, no private key on servers
-- $250 auto-trade threshold, confirm above
+## Wallet Architecture (decided 2026-02-25)
+- **Your trading wallet**: `74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x` — env var TRADING_WALLET_PUBLIC_KEY. This is YOUR wallet. You trade with this one.
+- **Owner wallet**: `sh36vHUDHcXqVD8aZJR8GF3Z3PdaU69XG8wJeB1e1xb` — env var OWNER_WALLET_PUBLIC_KEY. READ-ONLY on your server. No private key. Use for monitoring owner positions, analysis, and emergency alerts only. Do NOT attempt transactions on this wallet.
+- Owner wallet has 7 years of trade history — good data source for strategy backtesting.
+- When the crypto pipeline is ready, all trades execute from the bot wallet only.
 
 ## Discord
 - Your channel: #trading (1475082964156157972, requireMention: false)

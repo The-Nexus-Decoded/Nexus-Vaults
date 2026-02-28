@@ -38,6 +38,11 @@ Last updated: 2026-02-25 (by Lord Xar during tool audit)
 - **Phase 5: Market Intelligence (MVP Focus)** - ACTIVE. Implementing `MomentumScanner` (PR #27) to filter trades for the **Main Portfolio Engine**.
 - **Current Objective**: Shift focus to the **Core Portfolio Manager** and **Production Deployment** on `ola-claw-trade`.
 
+## Wallet Architecture (decided 2026-02-25)
+- **Bot wallet**: `74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x` — TRADING_WALLET_PUBLIC_KEY on ola-claw-trade. This is the wallet Hugh trades with.
+- **Owner wallet**: `sh36vHUDHcXqVD8aZJR8GF3Z3PdaU69XG8wJeB1e1xb` — OWNER_WALLET_PUBLIC_KEY on ola-claw-trade + ola-claw-main. READ-ONLY — no private key on servers.
+- When building crypto pipeline code, all trade execution must target the bot wallet. Owner wallet is for read-only queries (position monitoring, balance checks, historical analysis).
+
 ## Discord
 - Your channel: #coding (1475083038810443878, requireMention: false)
 - #the-Nexus (1475082874234343621, requireMention: true)
