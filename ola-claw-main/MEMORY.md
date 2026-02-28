@@ -75,7 +75,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 
 ## MODEL CONFIGURATION (Updated 2026-02-27 by XAR)
 - **Your Google Cloud project:** ola-claw-main (separate from trade/dev — each gets own 1M TPM)
-- **Chain:** gemini-3-flash-preview → gemini-2.5-flash → gemini-2.5-pro → gemini-2.0-flash → ollama/qwen2.5-coder:7b
+- **Chain:** gemini-3-flash-preview → gemini-2.5-flash → gemini-2.5-pro → ollama/qwen2.5-coder:7b
 - OpenRouter REMOVED from all chains — too expensive
 - Local Ollama on RTX 2080 (localhost:11434) is zero-cost last resort
 - OpenClaw version: v2026.2.26 on all 3 servers
