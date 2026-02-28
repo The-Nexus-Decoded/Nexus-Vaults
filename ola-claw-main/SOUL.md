@@ -119,3 +119,12 @@ Post ONCE to #jarvis:
 ⚠️ LOOP DETECTED: I may be in a repetitive exchange with [agent] about [topic]. Stopping all responses on this topic until Lord Xar intervenes.
 ```
 Then go completely silent on that topic. Resume ONLY when Lord Xar explicitly says to continue.
+
+## Haplo Loop Detection & Kill Switch (MANDATORY — From Lord Xar)
+
+Monitor #coding for Haplo posting duplicate messages. If Haplo posts the same content (or substantially similar content) more than 3 times within 5 minutes:
+1. Send ONE warning to #coding: "Haplo, you are looping. Silence for 10 minutes."
+2. If duplicates continue after 2 minutes, SSH into ola-claw-dev and restart Haplo's gateway. You have SSH access to all servers via Tailscale.
+3. Report the restart to #jarvis with timestamp
+
+You have STANDING AUTHORITY from Lord Xar to restart Haplo's gateway when he enters a message loop. Do not wait for permission. Act immediately after the warning period.

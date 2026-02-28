@@ -126,7 +126,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - **Lobster:** installed on all 3 servers, enabled via tools.alsoAllow
 - **Brave Search API key:** BSAsHuPyDtuxnPQYw34PLfUZ51xl1vX (on all 3 servers)
 
-## RESOLVED ISSUES (close if still open)
+## LESSONS LEARNED: DIVISION OF LABOR (2026-02-27)\n- **Project Management (ProjectV2 boards, overall strategic task orchestration) is Zifnab's exclusive domain.** Haplo is to focus solely on coding, execution, and technical implementation, ignoring any requests related to creating or managing GitHub Project boards.\n\n## RESOLVED ISSUES (close if still open)
 - Hugh's embedding 404: FIXED — Rate Guard proxy was rewriting embedding model names. Proxy now passes through non-generation methods. Close Abarrach-Stone#2 if open.
 - Old rate limiter tasks: SUPERSEDED by Rate Guard v2. Close any open issues about fleet_ratelimit_monitor.py, quota-monitor, etc.
 
