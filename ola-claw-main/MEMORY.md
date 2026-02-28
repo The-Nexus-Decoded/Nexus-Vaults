@@ -75,7 +75,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 
 ## CRITICAL: File Path Rules
 - **edit/write tools ONLY work within workspace** (`/data/openclaw/workspace/`). Paths outside fail with "Path escapes workspace root".
-- `/data/openclaw/openclaw.json` and `/data/openclaw/workflows/` are OUTSIDE workspace — use `exec` tool (sed/python) to modify them.
+- `/data/openclaw/openclaw.json` is OUTSIDE workspace — use `exec` tool (sed/python) to modify them.
 - When directing Haplo to edit Pryan-Fire files, ALWAYS use `/data/openclaw/workspace/Pryan-Fire/` NOT `/data/repos/Pryan-Fire/`.
 - `exec` and `read` tools work on ANY path. Only `edit` and `write` are restricted.
 
