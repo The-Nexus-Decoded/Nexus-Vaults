@@ -73,6 +73,12 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - 1.8TB NVMe = /data (OpenClaw data, Ollama models, git repos)
 - Git repos at /data/repos/ | OpenClaw data at /data/openclaw/ | Ollama models at /data/ollama/
 
+## CRITICAL: File Path Rules
+- **edit/write tools ONLY work within workspace** (`/data/openclaw/workspace/`). Paths outside fail with "Path escapes workspace root".
+- `/data/openclaw/openclaw.json` and `/data/openclaw/workflows/` are OUTSIDE workspace — use `exec` tool (sed/python) to modify them.
+- When directing Haplo to edit Pryan-Fire files, ALWAYS use `/data/openclaw/workspace/Pryan-Fire/` NOT `/data/repos/Pryan-Fire/`.
+- `exec` and `read` tools work on ANY path. Only `edit` and `write` are restricted.
+
 ## MODEL CONFIGURATION (Updated 2026-02-27 by XAR)
 - **Your Google Cloud project:** ola-claw-main (separate from trade/dev — each gets own 1M TPM)
 - **Chain:** gemini-3-flash-preview → gemini-2.5-flash → gemini-2.5-pro → ollama/qwen2.5-coder:7b
