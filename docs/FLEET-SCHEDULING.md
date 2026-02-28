@@ -232,3 +232,23 @@ SERVERS="zifnab:local haplo:ssh:<dev-ip> hugh:ssh:<trade-ip>"
 **Remaining on crontab (Zifnab only):**
 - `fleet_status_monitor.sh` — stays on crontab (just fixed, working)
 - `retrieve_windows_logs.sh` — stays on crontab (Zifnab's code)
+
+---
+
+## Rate Guard Proxy Fix (2026-02-28) — Chelestra-Sea#26
+
+### Problem
+Rate guard proxy at localhost:8787 was completely bypassed on all 3 servers. Two root causes:
+1. **Vendor files** had hardcoded `https://generativelanguage.googleapis.com` URLs (21 files across @mariozechner/pi-ai, @google/genai, OpenClaw dist)
+2. **gemini.conf corruption** — Zifnab's had `-e` prefix from bad `echo -e`, Haplo had none. GEMINI_API_KEY env var never reached gateway process.
+
+### Fix
+1. `sudo bash /data/openclaw/rate-guard-v2/reapply-rate-guard-patches.sh` — patches 21 vendor files (idempotent)
+2. Fixed gemini.conf on all servers using `printf` (never `echo -e`)
+3. `rm -rf ~/.cache/node/compile_cache && systemctl --user daemon-reload && systemctl --user restart openclaw-gateway`
+
+### Post-update rule
+Vendor patches are overwritten by OpenClaw updates. After ANY update: run reapply script + clear cache + restart.
+
+### Verification
+Rate guard logs show requests flowing through proxy on all 3 servers. Overflow keys activate on 429s.
