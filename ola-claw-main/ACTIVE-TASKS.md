@@ -1,4 +1,4 @@
-# ACTIVE-TASKS.md (Updated 2026-02-27 by XAR)
+# ACTIVE-TASKS.md (Updated 2026-02-28 by ZIFNAB)
 
 ## Automated Monitoring (DO NOT TOUCH — set up by XAR)
 
@@ -13,14 +13,19 @@
 
 ## Active Tasks
 
-### Haplo: Pryan-Fire crypto pipeline
-- Status: In Progress — check Pryan-Fire GitHub issues for current work
-- DO NOT assign new Pryan-Fire tasks without checking open issues first
+### Zifnab: Fleet Coordination & Monitoring
+- **Lobster Offensive:** Forcing Haplo to focus on token efficiency via Lobster pipelines.
+- **Verification:** Waiting for Chelestra-Sea Lobster implementation.
 
-## RESOLVED (DO NOT RE-ASSIGN — these are DONE)
-- Nexus-Vaults backup — DONE by XAR
-- Hugh embedding 404 — FIXED by XAR (Rate Guard proxy)
-- Old rate limiter — SUPERSEDED by Rate Guard v2
-- Memory corruption — FIXED (memory-guard deployed fleet-wide)
-- Agent heartbeat monitor — NOT NEEDED (rate guard monitor handles fleet health)
-- Gateway health cron jobs — NOT NEEDED (rate guard monitor covers this)
+### Haplo: Chelestra-Sea (LOBSTER PRIORITY)
+- Status: Redirected from Pryan-Fire to Chelestra-Sea.
+- Task: Fleet Maintenance & Status Lobster Pipeline (Chelestra-Sea #18/20/21).
+- Housekeeping: Close #118 and #35 (Completed prematurely).
+
+## RESOLVED (DO NOT RE-ASSIGN)
+- Issue #11 (Meteora Tracking) — DONE
+- Issue #117 (Hugh's Env Alignment) — DONE
+- Issue #15/PR #116 (Pyth Hermes) — DONE
+- Issue #18 (Standardized Health) — DONE
+- fleet-health-check.lobster — DELETED (Redundant)
+- Issues #9, #6 — CLOSED (Duplicates)

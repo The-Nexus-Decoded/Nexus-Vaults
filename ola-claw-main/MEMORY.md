@@ -233,3 +233,12 @@ After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get
   4. Update `updatedAt` to current epoch ms in sessions.json (python: `int(time.time() * 1000)`)
   5. DO NOT delete the session key itself
   6. `systemctl --user start openclaw-gateway`
+
+## Delegation Rules (use fleet workflows)
+- Assign Haplo code work: tell him to run `patryn-workhorse` then `nexus-bridge`
+- After OpenClaw updates: run `chelestra-tide` yourself
+- Before ANY gateway restart: run `seventh-gate` (never raw systemctl)
+- Weekly: run `labyrinth-watch` and post summary to #jarvis
+- Monthly: run `abarrach-seal` to clean branches
+- Quick health check: `fleet health --json | fleet format` (no workflow needed)
+- Cron logs at `/data/openclaw/logs/fleet/` — read these instead of running commands
