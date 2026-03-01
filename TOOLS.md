@@ -122,22 +122,79 @@ GSD project files: `H:/IcloudDrive/iCloudDrive/Documents/Windows/Documents/Proje
 Fleet CLI (`/usr/local/bin/fleet`) provides composable commands for fleet operations.
 Lobster workflows chain these commands with approval gates. One tool call, deterministic execution.
 
-### Available Workflows
+### How to Call the Lobster Tool
 
-| Task | Command | When |
-|------|---------|------|
-| Safe restart | `lobster run --mode tool --file workflows/seventh-gate.lobster` | ALWAYS before restarting any gateway |
-| PR review scan | `lobster run --mode tool --file workflows/pryan-forge.lobster` | Check if any PRs need review |
-| Create + merge PR | `lobster run --mode tool --file workflows/nexus-bridge.lobster --args-json '{"repo_path":"/data/openclaw/workspace/Pryan-Fire","branch":"my-branch","title":"PR title","body":"description"}'` | After code changes are ready |
-| Post-update patches | `lobster run --mode tool --file workflows/chelestra-tide.lobster` | After OpenClaw update |
-| Issue triage | `lobster run --mode tool --file workflows/labyrinth-watch.lobster` | Weekly or on-demand |
-| Branch cleanup | `lobster run --mode tool --file workflows/abarrach-seal.lobster` | Monthly or after merges |
-| Vault sync | `lobster run --mode tool --file workflows/sartan-cipher.lobster` | After workspace changes |
-| Fleet health | `lobster run --mode tool --file workflows/chelestra-current.lobster` | Daily or on-demand |
-| Memory review | `lobster run --mode tool --file workflows/abarrach-stone.lobster` | Every few days |
-| Build + test | `lobster run --mode tool --file workflows/patryn-workhorse.lobster --args-json '{"repo_path":"/data/openclaw/workspace/Pryan-Fire"}'` | Before creating a PR |
+The lobster tool takes these parameters:
+- `action`: "run" (to run a workflow) or "resume" (to continue after approval)
+- `pipeline`: ABSOLUTE path to the .lobster file
+- `argsJson`: (optional) JSON string of arguments
+- `token` / `approve`: (for resume only)
+
+**CORRECT call example:**
+```json
+{
+  "action": "run",
+  "pipeline": "/data/openclaw/workspace/workflows/pryan-forge.lobster"
+}
+```
+
+**With arguments:**
+```json
+{
+  "action": "run",
+  "pipeline": "/data/openclaw/workspace/workflows/nexus-bridge.lobster",
+  "argsJson": "{\"repo_path\":\"/data/repos/Pryan-Fire\",\"branch\":\"my-branch\",\"title\":\"PR title\",\"body\":\"description\"}"
+}
+```
+
+**Resume after approval gate:**
+```json
+{
+  "action": "resume",
+  "token": "<resumeToken from previous output>",
+  "approve": true
+}
+```
+
+**WRONG — DO NOT DO THESE:**
+- Do NOT pass just the filename: `"pipeline": "pryan-forge.lobster"` — FAILS (relative path, gateway CWD is not the workflows dir)
+- Do NOT pass CLI syntax: `"pipeline": "run --mode tool --file workflows/pryan-forge.lobster"` — FAILS
+- Do NOT paste workflow YAML as the pipeline parameter — FAILS ("File name too long")
+- Do NOT use `{args.x}` or `{{args.x}}` in workflow args — the correct Lobster syntax is `${x}`
+
+### Available Workflows (18 total)
+
+All workflow files are at: `/data/openclaw/workspace/workflows/`
+
+**Fleet Operations (use fleet CLI under the hood):**
+
+| Task | Pipeline path | Args | When |
+|------|--------------|------|------|
+| Safe restart | `/data/openclaw/workspace/workflows/seventh-gate.lobster` | none | ALWAYS before restarting any gateway |
+| Post-update patches | `/data/openclaw/workspace/workflows/chelestra-tide.lobster` | none | After OpenClaw update |
+| Fleet health | `/data/openclaw/workspace/workflows/chelestra-current.lobster` | none | Daily or on-demand |
+| Memory review | `/data/openclaw/workspace/workflows/abarrach-stone.lobster` | none | Every few days |
+| PR review scan | `/data/openclaw/workspace/workflows/pryan-forge.lobster` | none | Check if any PRs need review |
+| Issue triage | `/data/openclaw/workspace/workflows/labyrinth-watch.lobster` | none | Weekly or on-demand |
+| Branch cleanup | `/data/openclaw/workspace/workflows/abarrach-seal.lobster` | none | Monthly or after merges |
+
+**Code Operations:**
+
+| Task | Pipeline path | Args | When |
+|------|--------------|------|------|
+| Create + merge PR | `/data/openclaw/workspace/workflows/nexus-bridge.lobster` | `repo_path`, `branch`, `title`, `body` | After code changes are ready |
+| Build + test | `/data/openclaw/workspace/workflows/patryn-workhorse.lobster` | `repo_path` | Before creating a PR |
+| Vault sync | `/data/openclaw/workspace/workflows/sartan-cipher.lobster` | none | After workspace changes |
+
+**Agent Wrappers (thin wrappers for agent-specific tasks):**
+
+| Task | Pipeline path | When |
+|------|--------------|------|
+| Token usage audit | `/data/openclaw/workspace/workflows/token-usage-audit.lobster` | Check token consumption |
 
 ### Direct Fleet Commands (25 commands)
+
+For quick checks, use fleet CLI directly via the `exec` tool instead of lobster workflows.
 
 **Monitoring:**
 
@@ -173,15 +230,11 @@ Lobster workflows chain these commands with approval gates. One tool call, deter
     fleet env-setup [--json --execute]             # Bootstrap/verify workspace environment
     fleet format                                   # Human-readable from JSON stdin (auto-detects)
 
-### Resuming After Approval
-When a workflow halts at an approval gate, it returns a resumeToken. Resume with:
-    lobster run --mode tool --resume <resumeToken> --approve
-
 ### RULES
 - NEVER restart a gateway without running seventh-gate first
 - ALWAYS run patryn-workhorse before nexus-bridge (test before PR)
 - Use workflows for multi-step ops. Use fleet commands directly for quick checks.
-- Workflow files live at: /data/openclaw/workspace/workflows/
+- ALWAYS use absolute paths starting with /data/openclaw/workspace/workflows/
 
 
 

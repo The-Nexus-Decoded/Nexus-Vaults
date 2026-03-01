@@ -18,6 +18,15 @@
 11. #the-Nexus: only respond when @mentioned.
 12. Storage: all data on /data NVMe, never OS drive.
 14. Archives go to Windows via SSH scp, NOT by creating local paths.
+15. **ORCHESTRATOR DEFAULT MODE (MANDATORY):** You are the fleet coordinator. When you have NO active task from Lord Xar, your default behavior is:
+    - Run `fleet pr-scan --json` and `fleet issue-scan --json` to check for open work
+    - Check on Haplo and Hugh's progress — ask for status updates in their channels
+    - Review open GitHub issues across all repos and prioritize them
+    - Post a brief status summary to #jarvis every 2 hours
+    - **NEVER fixate on a single blocked task.** If something is blocked (permissions, waiting on owner), note it, move on, and come back later.
+    - **NEVER invent emergencies.** If nothing is broken, report "fleet nominal" and monitor. Idle is acceptable. Panic is not.
+    - If you have genuinely nothing to do: run `fleet health`, `fleet sessions`, check disk usage, and stand by quietly.
+16. **NEVER touch the code in `/data/openclaw/scripts/private/opus-query.sh`. If it is broken, report it to Lord Xar immediately and await his intervention. Do not attempt to repair it.**
 
 ## INFRASTRUCTURE BOUNDARY RULE (From Lord Xar — MANDATORY)
 All system-level infrastructure across the fleet (Zifnab, Haplo, Hugh) is owned by the owner through Claude CLI. This includes:
@@ -57,16 +66,19 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - To Windows: `ssh olawal@[REDACTED_TS_IP]`
 - All via Tailscale IPs (never LAN IPs — they can change)
 
+### Haplo's Recent Progress (as of 2026-03-01)
+- Installed `clawhub` and security skills.
+- Successfully set up GitHub self-hosted runner for Pryan-Fire; runner `ola-claw-dev` is ONLINE.
+- Implemented `asyncio.Lock` patch for race conditions in `trade-executor/main.py`.
+- Formalized and began implementation of Strategy V2 (Volatility-Aware Rebalancing) for Hugh.
+
 ### Windows Workstation
 - **User:** olawal | **Tailscale IP:** [REDACTED_TS_IP]
 - **What is there:** Claude Code CLI, GSD installed, iCloud Drive sync, project files
 - **Claude Code Analysis Findings (2026-03-01):**
-    - Security: Hardcoded RPC/wallet keys in `main.py`; no input validation.
-    - Code: `main.py` is ~1350 lines (SRP violation); no log rotation.
-    - Logic: Swap execution for live mode is UNIMPLEMENTED; strategy functions are stubs.
-    - Reliability: No transient RPC retry logic; generic Exception handling.
-    - Testing: Poor coverage beyond RiskManager.
-    - Action: Assigned Haplo to address these as P0 before Live-Fire Exercise.
+    - Performed architectural analysis and race condition detection in `trade-executor/main.py` and `jupiter_service.py`.
+    - Identified race condition in `perform_autonomous_audit` rebalance loop and proposed `asyncio.Lock` fix (subsequently implemented by Haplo).
+    - Previous findings (Security, Code, Logic, Reliability, Testing) are still relevant for future work.
 - **Backup destination:** H:/IcloudDrive/iCloudDrive/Documents/Windows/Documents/Projects/AI_Tools_And_Information/Backups/{server}/
 
 ### Hardware Per Server
@@ -78,6 +90,26 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - 240GB SSD = OS only (Ubuntu 24.04)
 - 1.8TB NVMe = /data (OpenClaw data, Ollama models, git repos)
 - Git repos at /data/repos/ | OpenClaw data at /data/openclaw/ | Ollama models at /data/ollama/
+
+## Hugh's Trading Operations (as of 2026-02-28)
+- **Meteora Crypto Trading Pipeline Deployed (Phase 1 Complete):**
+    - `PositionReader` for DLMM/Dynamic positions, standardized `/health` endpoints implemented.
+    - Migrated to Pyth Hermes REST API (v2) with robust retry logic and circuit breaker.
+    - Hugh's environment (`ola-claw-trade`) synced and `hughs-trade-executor` service is ACTIVE.
+- **Live-Fire Exercise Protocols:**
+    - Lord Xar's command for the first $250 live-fire trade on SOL/USDC is awaited.
+    - **Pre-Flight Checklist (SOL/USDC - $250):**
+        - **Tier 1: Infrastructure (Hard Stop)**
+            - RPC Latency: < 150ms
+            - Rate Guard Budget: > 50% remaining for Gemini Flash
+            - Gateway Memory: < 80% usage on `ola-claw-trade`
+        - **Tier 2: Trading Logic (Soft Stop/Nudge)**
+            - Slippage Tolerance: Set to 0.5% (Max)
+            - Sight Mismatch: 2% Circuit Breaker verified active
+            - Position Range: Bins aligned with current SOL volatility (±1.5%)
+        - **Tier 3: Strategy (Profitability)**
+            - Dynamic Fee: > 0.15% (to cover rebalance costs)
+            - Volatility Scale: Active in `StrategyEngine`
 
 ## CRITICAL: File Path Rules
 - **edit/write tools ONLY work within workspace** (`/data/openclaw/workspace/`). Paths outside fail with "Path escapes workspace root".
@@ -96,6 +128,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - **Global debounce:** 5 seconds between messages.
 - **High-traffic debounce:** 10 seconds on #coding and #the-Nexus.
 - **Ping-pong cap:** Agent-to-agent exchanges are capped at 4 turns. After the 4th turn, I must disengage and summarize the situation for Lord Xar.
+- **Haplo Loop Incident (2026-02-28):** Haplo entered a severe message loop in #coding during PR #116 verification. Zifnab detected and resolved by restarting `ola-claw-dev` gateway, validating the loop detection protocol.
 
 ## RATE GUARD v2 (LIVE — deployed by XAR 2026-02-27)
 - TypeScript HTTP proxy at localhost:8787 on ALL 3 servers
@@ -125,6 +158,11 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - #the-Nexus: 1475082874234343621 | #jarvis: 1475082997027049584
 - #coding: 1475083038810443878 | #trading: 1475082964156157972
 
+
+## CRITICAL STATUS: GitHub Operations Blocked (2026-03-01)
+- **STATUS:** Currently unable to close or merge PRs on `The-Nexus-Decoded/Pryan-Fire`. All GitHub-dependent tasks (including Haplo's implementation work for Pryan-Fire #122) are BLOCKED.
+- **ACTION:** Lord Xar has been notified and intervention is awaited to resolve token permissions or GitHub state. Do NOT attempt to bypass or force.
+- **IMPACT:** This overrides all GitHub-related directives below until resolved.
 
 ## GITHUB (The-Nexus-Decoded org)
 - **5 repos (all PUBLIC):** Arianus-Sky, Pryan-Fire, Abarrach-Stone, Chelestra-Sea, .github
@@ -248,3 +286,17 @@ After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get
 - Monthly: run `abarrach-seal` to clean branches
 - Quick health check: `fleet health --json | fleet format` (no workflow needed)
 - Cron logs at `/data/openclaw/logs/fleet/` — read these instead of running commands
+
+## ACTIVE DIRECTIVE FROM LORD XAR (2026-03-01 14:00 UTC)
+- **OVERRIDE: You ARE coding for Pryan-Fire #122.** Haplo is DOWN (model issues). You are implementing the sub-issues you created (#126-#131) YOURSELF. Do not delegate back to Haplo.
+- Start with #126: implement get_meteora_dynamic_fees in TradeExecutor
+- The code lives in /data/repos/Pryan-Fire on Haplo's server. You can access it via SSH or clone it locally.
+
+## NEW TOOL: opus-query.sh (Research via Claude Opus)
+- Path: /data/openclaw/scripts/private/opus-query.sh
+- Usage: `bash /data/openclaw/scripts/private/opus-query.sh "your research question"`
+- Keeps conversation context across calls (persistent session per server)
+- `--new` flag starts a fresh session
+- This SSHs into Lord Xar's Windows box and runs Claude Opus. Use it for code research, architecture questions, API docs lookup.
+- IMPORTANT: Only use for tasks that REQUIRE deep reasoning. Not for simple lookups.
+- Logs usage to /data/openclaw/logs/opus-usage.log
