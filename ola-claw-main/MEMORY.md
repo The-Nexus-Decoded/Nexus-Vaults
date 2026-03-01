@@ -184,9 +184,17 @@ When you create or remove scheduled jobs, UPDATE this section and Nexus-Vaults/d
 - Owner profile extractor output: /data/openclaw/workspace/OWNER_PROFILE_RAW.md (56K lines — needs quality review)
 
 ## GITHUB ACCESS STATUS (Updated 2026-02-28)
-- **Active Account:** olalawal (Full access: GraphQL, Projects V2, etc.)
-- **zifnab-claw-7 Status:** Temporary GraphQL block (GitHub anti-abuse). Do NOT use for now.
-- **Directive:** Use standard `gh` commands normally (CLI shortcuts: `gh issue`, `gh project`, etc.). REST API workarounds no longer mandatory while on `olalawal` account.
+- **Active Account:** zifnab-bot (GitHub App)
+- **Authentication:** Token auto-refreshes via `/data/openclaw/github-app/get-token.sh`. **MUST** source this script before any `gh` operation to set `GH_TOKEN`.
+- **Anti-Spam Directive (MANDATORY):**
+    - **NO self-approving PRs.**
+    - **60s minimum delay** between sequential operations (create, merge, close, comment, etc.).
+    - **Vary PR titles/descriptions** (no identical boilerplate).
+    - **NO back-to-back comments** on the same PR/issue.
+    - **Max 10 operations per hour.**
+    - **Space out bulk operations** with significant delays.
+    - **NO "create and immediately close"** patterns.
+- **Reference:** Chelestra-Sea#33.
 
 ## Vendor Patches Checklist (After OpenClaw Updates)
 After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get overwritten and MUST be re-applied:
