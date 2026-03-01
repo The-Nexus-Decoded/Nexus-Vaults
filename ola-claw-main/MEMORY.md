@@ -60,7 +60,13 @@ When creating any scheduled, recurring, or automated task across the fleet:
 ### Windows Workstation
 - **User:** olawal | **Tailscale IP:** [REDACTED_TS_IP]
 - **What is there:** Claude Code CLI, GSD installed, iCloud Drive sync, project files
-- **GSD project files:** H:/IcloudDrive/iCloudDrive/Documents/Windows/Documents/Projects/AI_Tools_And_Information/openclaw-homelab/
+- **Claude Code Analysis Findings (2026-03-01):**
+    - Security: Hardcoded RPC/wallet keys in `main.py`; no input validation.
+    - Code: `main.py` is ~1350 lines (SRP violation); no log rotation.
+    - Logic: Swap execution for live mode is UNIMPLEMENTED; strategy functions are stubs.
+    - Reliability: No transient RPC retry logic; generic Exception handling.
+    - Testing: Poor coverage beyond RiskManager.
+    - Action: Assigned Haplo to address these as P0 before Live-Fire Exercise.
 - **Backup destination:** H:/IcloudDrive/iCloudDrive/Documents/Windows/Documents/Projects/AI_Tools_And_Information/Backups/{server}/
 
 ### Hardware Per Server
