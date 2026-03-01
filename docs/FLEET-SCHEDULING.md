@@ -11,7 +11,7 @@ All scheduled jobs across the OpenClaw fleet. Updated 2026-02-28.
 | discord-daily-digest | Zifnab | OpenClaw cron | 8 AM CT | _(agent prompt, no script)_ |
 | redact-and-sync | Zifnab | OpenClaw cron | 2 AM CT | `/data/repos/Nexus-Vaults/scripts/redact-and-sync.sh` |
 | daily-tithe | Haplo | OpenClaw cron | 10 AM CT | `/data/repos/Pryan-Fire/haplos-workshop/scripts/daily_tithe.sh` |
-| fleet_status_monitor | Zifnab | crontab `*/10` | every 10m | `/data/openclaw/workspace/fleet_status_monitor.sh` |
+| fleet_alert_monitor | Zifnab | crontab `*/10` | every 10m | `/data/openclaw/workspace/fleet_alert_monitor.sh` |
 | retrieve_windows_logs | Zifnab | crontab `*/5` | every 5m | `/data/openclaw/workspace/retrieve_windows_logs.sh` |
 
 ## OpenClaw Cron Management
@@ -186,11 +186,11 @@ echo "[$(date)] Tithe collected."
 
 ---
 
-### fleet_status_monitor.sh (Zifnab crontab only)
+### fleet_alert_monitor.sh (Zifnab crontab only)
 
 Posts fleet status to #jarvis every 10 minutes. Uses `fleet_parse.py` to parse rate guard health data.
 
-**Path:** `/data/openclaw/workspace/fleet_status_monitor.sh`
+**Path:** `/data/openclaw/workspace/fleet_alert_monitor.sh`
 **Parser:** `/data/openclaw/workspace/fleet_parse.py`
 
 ```bash
@@ -230,7 +230,7 @@ SERVERS="zifnab:local haplo:ssh:<dev-ip> hugh:ssh:<trade-ip>"
 - `daily_tithe.sh` crontab -> OpenClaw cron (Haplo)
 
 **Remaining on crontab (Zifnab only):**
-- `fleet_status_monitor.sh` — stays on crontab (just fixed, working)
+- `fleet_alert_monitor.sh` — stays on crontab (just fixed, working)
 - `retrieve_windows_logs.sh` — stays on crontab (Zifnab's code)
 
 ---
