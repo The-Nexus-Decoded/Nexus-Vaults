@@ -75,10 +75,33 @@ Last Updated: 2026-03-01
 Status: CLOSED by Lord Xar's directive (Sterol). Model usage and cost optimization work discontinued.
 Last Updated: 2026-03-01
 
-## Cron: memory-guard (ID: 56b4bca9-7678-4eb6-bfe1-652c219128bd)
-Status: EXECUTED. memory-guard.sh ran successfully again (no output, MEMORY.md unchanged). .memory-backups directory exists with 6 historical MEMORY backups. Last backup: 2026-03-01 05:07.
-Last Updated: 2026-03-01 17:50
+## Memory-Guard Service (Nexus-Vaults #14)
+Status: COMPLETED. Created systemd user service unit (`memory-guard.service`) and enabled on `ola-claw-dev`. Service is active, watching MEMORY.md for changes, validating, backing up, and syncing to Nexus-Vaults. Initial backup and git push succeeded.
+Last Updated: 2026-03-02
 
 ## Cron: health-check (ID: a8b9375f-3ad9-441a-8e65-6ad9e93866a0)
 Status: COMPLETED. Gateway OK, disk usage 4%, Ollama OK. No alerts triggered.
 Last Updated: 2026-03-01 21:44
+
+## Current Session Notes (2026-03-02)
+- Closed duplicate tracking issues: Chelestra-Sea #66, #67 (duplicate of #68).
+- Verified lobster templates (Nexus-Vaults #9) already exist in repo and are functional; no further action needed.
+- Implemented and deployed memory-guard systemd service on ola-claw-dev (Nexus-Vaults #14).
+- Runner re-registration still pending (GitHub PAT lacks `Administration:write`; need elevated token or App key).
+
+## Jupiter API Integration for Real Trading (Pryan-Fire #147)
+Status: NOT STARTED. Assigned to Haplo. This is the critical path blocker for all trading operations.
+- Issue Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/147
+- Must implement `execute_jupiter_trade()` in `rpc_integration.py` using Jupiter v6 API
+- Requires: wallet credentials (blocked on #145), Jupiter API key handling
+- Service stub currently logs and returns True without on-chain activity
+Last Updated: 2026-03-02
+
+## Provision Trading Wallet Credentials (Pryan-Fire #145)
+Status: BLOCKED (waiting for Jupiter integration #147). Assigned to HughTheHand.
+- Issue Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/145
+- Create `/data/openclaw/keys/trading_wallet.json` with 600 permissions after Jupiter integration deployed
+- Wallet address: `74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x`
+- Private key held by Sterol; secure provisioning required
+- Must NOT provision before Jupiter integration (#147) is deployed or key will be exposed unnecessarily
+Last Updated: 2026-03-02

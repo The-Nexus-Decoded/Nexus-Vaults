@@ -1,8 +1,11 @@
 # Haplo - Long-Term Memory
 
-Last updated: 2026-03-01
+Last updated: 2026-03-02
 
 ## Recent Events & Blocks
+- **2026-03-02 | Issue Creation: Jupiter API Integration (Pryan-Fire #147):** Created new issue for implementing Jupiter Aggregator v6 API. Assigned to Haplo. Blocks Pryan-Fire #145. Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/147
+- **2026-03-02 | Issue Creation: Wallet Provisioning (Pryan-Fire #145):** Created issue for provisioning trading wallet credentials on `ola-claw-trade`. Assigned to HughTheHand. Blocked by Pryan-Fire #147. Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/145
+- **2026-03-02 | Issue Closed: Duplicate Wallet Provisioning (Pryan-Fire #146):** Closed as a duplicate of Pryan-Fire #145.
 - **2026-03-01 | Blocked `trade-executor` Testing:** Attempted to test `trade-executor` for Pryan-Fire #122, but was blocked due to a missing `python3.12-venv` package on `ola-claw-dev`. **RESOLVED 2026-03-01:** Verified python3.12-venv package is installed (apt list → installed). Tested venv creation successfully. No longer blocking trade-executor testing. GitHub issue: https://github.com/The-Nexus-Decoded/Chelestra-Sea/issues/42.
 - **2026-03-01 | Memory Guard Cron Execution:** Successfully executed the `memory-guard.sh` script as part of a cron job. `ACTIVE-TASKS.md` was updated.
 
@@ -59,3 +62,8 @@ Last updated: 2026-03-01
 -   Storage on `/data` NVMe only; never OS drive.
 -   Do NOT create Windows-style paths on Linux.
 -   Report progress to Zifnab in #coding.
+
+## Critical Implementation Gap
+- **Pryan-Fire #147 (Jupiter API integration) NOT STARTED:** `rpc_integration.py` remains a stub (logs and returns True). Real on-chain trading requires implementation of Jupiter v6 quote/swap endpoints, transaction signing, and sending. Assigned to Haplo.
+- **Pryan-Fire #145 (Trading wallet credentials) BLOCKED:** No `trading_wallet.json` or `TRADING_WALLET_SECRET` set on ola-claw-trade. Sterol has the keys but waiting for #147 completion to provision securely. Assigned to HughTheHand.
+- **Jupiter API key exposure:** Current key visible in PR #142 commit `4b61e7f`; must rotate (#143) after first real trade.
