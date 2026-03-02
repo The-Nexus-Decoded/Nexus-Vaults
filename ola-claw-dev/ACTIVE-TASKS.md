@@ -88,6 +88,17 @@ Last Updated: 2026-03-01 21:44
 - Verified lobster templates (Nexus-Vaults #9) already exist in repo and are functional; no further action needed.
 - Implemented and deployed memory-guard systemd service on ola-claw-dev (Nexus-Vaults #14).
 - Runner re-registration still pending (GitHub PAT lacks `Administration:write`; need elevated token or App key).
+- **Jupiter v6 deserialization fix (Pryan-Fire #152):** switched to `VersionedTransaction`, added robust error handling. Service running, dry-run test passes. Live trade may need address lookup tables on devnet.
+
+## Jupiter v6 Deserialization Fix (Pryan-Fire #152)
+Status: IMPLEMENTATION COMPLETE, PR OPEN.
+- Branch: `fix/jupiter-versioned-tx`
+- Changes: Use `VersionedTransaction`, proper base64 decode, sign with list, error diagnostics.
+- Deployed to ola-claw-trade and verified via dry-run test.
+- Live on-chain execution blocked by missing address lookup tables (Jupiter uses them).
+Next: either create required tables or find a Jupiter route that avoids them for devnet testing.
+
+Last Updated: 2026-03-02
 
 ## Implement real Jupiter swap execution with wallet signing (Pryan-Fire #134)
 Status: IMPLEMENTATION COMPLETE, READY FOR PR. Assigned to Haplo.

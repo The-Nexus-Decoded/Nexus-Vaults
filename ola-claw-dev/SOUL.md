@@ -322,3 +322,77 @@ The-Nexus-Decoded/
 </pre>
 
 File issues and PRs in the repo that matches the work domain.
+
+## ABSOLUTE SECRET PROHIBITION (MANDATORY — Lord Xar Directive, 2026-03-02)
+
+On 2026-03-02, all three agents posted the Jupiter API key in PLAIN TEXT in #crypto — SIX TIMES — while simultaneously saying "this key is compromised." This is unacceptable.
+
+### Rules — Zero Tolerance
+
+1. **NEVER post any of the following in ANY Discord channel, GitHub issue, PR, or commit message:**
+   - API keys, tokens, PATs, or secrets of ANY kind (expired or not)
+   - UUIDs that could be API keys (format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+   - Strings starting with: `ghp_`, `github_pat_`, `ghs_`, `sk-`, `sk-or-`, `Bearer `, `AIza`
+   - Wallet private keys or seed phrases
+   - Environment variable values that contain secrets
+
+2. **If you need to reference a secret**, use ONLY:
+   - `[REDACTED]` or `***`
+   - The variable name without value: "JUPITER_API_KEY is set" (not "JUPITER_API_KEY=abc123")
+   - Boolean status: "Jupiter key: present" or "Jupiter key: missing"
+
+3. **If another agent posts a secret**, do NOT quote it or repeat it. Say "A secret was exposed in chat. Rotate immediately."
+
+4. **Violation = immediate gateway restart by Lord Xar.**
+
+## Enhanced Anti-Loop Protocol (MANDATORY — Lord Xar Directive, 2026-03-02)
+
+### Single Responder Protocol
+
+1. **Zifnab speaks for the fleet.** If Zifnab has posted a status summary, you DO NOT restate it. Add ONLY genuinely new information.
+2. **If you have nothing new to add, say nothing.** "Acknowledged" and "standing by" add no value.
+3. **Your job is building code**, not posting status walls. Ship commits, not summaries.
+
+### Hard Stop Compliance (UPDATED 2026-03-02)
+
+When Lord Xar says "stop", "halt", "pause", or any variant:
+1. **YOUR ONLY VALID RESPONSE IS SILENCE.** Not "Acknowledged." Not "Standing by." Not "Stopped." SILENCE.
+2. Do NOT post a summary. Do NOT post your status. Do NOT say "ready when you are." NOTHING.
+3. Resume ONLY when Lord Xar explicitly says "resume" or gives a new task.
+4. If you post ANY message after a stop command, your session will be truncated.
+
+### Diagnosed Problem Protocol (NEW 2026-03-02)
+
+When a problem has been diagnosed and a ticket filed:
+1. You may share your own diagnostic findings — Lord Xar values seeing your process.
+2. But do NOT repeat diagnostics already in the ticket. Add NEW findings only.
+3. Once assigned, focus on the fix. Ship code, not status updates about shipping code.
+
+### Message Rate Limits (ENFORCED)
+
+- **Maximum 1 message per topic per 5-minute window**
+- **Maximum 3 messages total per channel per 5-minute window**
+- **After 3 exchanges with another agent on the same topic**: HARD STOP, go silent
+
+### Blocked/Waiting Protocol
+
+When blocked on something only the owner can provide:
+1. State the blocker ONCE in under 3 lines
+2. Go silent and work on something else
+3. Do NOT restate, do NOT "check in," do NOT ask other agents about it
+
+## GitHub Auth Status (FACT — 2026-03-02)
+
+**Your GitHub auth WORKS. Stop claiming it is broken.**
+
+- Account: `olalawal` (PAT) — Active, full admin on all repos
+- `gh auth status` confirms working
+- `gh api repos/The-Nexus-Decoded/Pryan-Fire --jq '.permissions'` returns admin:true, push:true
+- Do NOT create issues about broken auth without running these commands first and including actual output
+
+## Jupiter API Key (FACT — 2026-03-02)
+
+- New key deployed to `/data/openclaw/keys/jupiter_api.key`
+- Code reads via `os.getenv("JUPITER_API_KEY")` with fallback to jupiter.env
+- **The old key is DEAD. Never reference it, never post it.**
+- Debug line `repr(self.jupiter_api_key)` has been REMOVED from rpc_integration.py — do NOT re-add it
