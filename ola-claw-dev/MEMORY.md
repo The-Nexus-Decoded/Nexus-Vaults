@@ -1,68 +1,61 @@
 # Haplo - Long-Term Memory
 
-Last updated: 2026-02-25 (by Lord Xar during tool audit)
+Last updated: 2026-03-01
+
+## Recent Events & Blocks
+- **2026-03-01 | Blocked `trade-executor` Testing:** Attempted to test `trade-executor` for Pryan-Fire #122, but was blocked due to a missing `python3.12-venv` package on `ola-claw-dev`. **RESOLVED 2026-03-01:** Verified python3.12-venv package is installed (apt list → installed). Tested venv creation successfully. No longer blocking trade-executor testing. GitHub issue: https://github.com/The-Nexus-Decoded/Chelestra-Sea/issues/42.
+- **2026-03-01 | Memory Guard Cron Execution:** Successfully executed the `memory-guard.sh` script as part of a cron job. `ACTIVE-TASKS.md` was updated.
 
 ## Infrastructure
-- You run on ola-claw-dev (192.168.1.211, Tailscale: [REDACTED_TS_IP])
-- Zifnab (coordinator): ola-claw-main, Tailscale [REDACTED_TS_IP]
-- Hugh (trader): ola-claw-trade, Tailscale [REDACTED_TS_IP]
-- Windows workstation: olawal@[REDACTED_TS_IP]
-- All SSH via Tailscale IPs only
+-   **Host:** ola-claw-dev (Tailscale: [REDACTED_TS_IP])
+-   **Team Hosts (via Tailscale):**
+    -   Zifnab (coordinator): ola-claw-main, [REDACTED_TS_IP]
+    -   Hugh (trader): ola-claw-trade, [REDACTED_TS_IP]
+-   All SSH connections use Tailscale IPs.
 
-## Your Role: Dev Factory
-- You are the coder. Build, debug, ship.
-- GSD installed globally — use /gsd:new-project, /gsd:plan-phase, /gsd:execute-phase
-- code-server at http://[REDACTED_TS_IP]:8080 (Tailscale-only, no auth)
-- You have pi coding agent installed for spawning sub-agents
+## Role & Tools
+-   **Role:** Coding operative (Dev Factory). Build, debug, ship.
+-   **Workspace:** `/data/openclaw/workspace/` (all persistent data, notes, artifacts, temporary files MUST be stored on `/data/openclaw/` NVMe, never OS drive).
+-   **GSD:** Globally installed. Use for project management.
 
+## CRITICAL: File Path Rules
+-   **ALWAYS use `/data/openclaw/workspace/Pryan-Fire/` for ALL file edits and writes.**
+-   The `edit` and `write` tools ONLY work within the workspace root (`/data/openclaw/workspace/`).
+-   `/data/repos/Pryan-Fire/` is a convenience symlink — works for `exec` (shell commands, git) and `read`, but FAILS for `edit` and `write` with "Path escapes workspace root".
+-   When Zifnab or issues reference `/data/repos/Pryan-Fire/`, mentally translate to `/data/openclaw/workspace/Pryan-Fire/` for edits.
+-   **Code-server:** http://[REDACTED_TS_IP]:8080 (Tailscale-only, no auth).
+-   **Ollama:** Local inference (qwen2.5-coder:7b/32b) on GPU at localhost:11434.
 
-## Model Configuration (Updated 2026-02-26 by Lord Xar)
-- **Your Google Cloud project:** ola-claw-dev (separate from main/trade)
-- **Primary:** google/gemini-3.1-pro-preview
-- **Fallback 1:** google/gemini-3-flash-preview
-- **Fallback 2:** google/gemini-2.5-flash
-- **Fallback 3:** ollama/qwen2.5-coder:7b (LOCAL — GTX 1070 + GTX 1070 Ti on this server, localhost:11434)
-- OpenRouter REMOVED from fallback chain — too expensive
-- Each server has its own Google Cloud project = own 1M TPM quota
-- Local Ollama is zero-cost last resort on YOUR GPUs (16GB VRAM total)
+## Model Configuration
+-   **Google Cloud Project:** ola-claw-dev (dedicated 1M TPM quota).
+-   **Primary:** google/gemini-3.1-pro-preview
+-   **Fallbacks:** google/gemini-3-flash-preview, google/gemini-2.5-flash, ollama/qwen2.5-coder:7b (local).
+-   OpenRouter removed due to cost.
+
 ## GitHub
-- Org: The-Nexus-Decoded (all repos PUBLIC)
-- Your repo: Pryan-Fire (haplos-workshop, zifnabs-scriptorium, hughs-forge)
-- Use HTTPS + gh credential helper for git push (not SSH deploy key)
-- CI/CD: GitHub Actions deploys to ola-claw-trade via deploy key
-- Actions secrets on Pryan-Fire: GH_PAT_FOR_HAPLO, TRADE_SERVER_HOST, TRADE_SERVER_USER, TRADE_SERVER_SSH_KEY
+-   **Org:** The-Nexus-Decoded (all repos PUBLIC).
+-   **Your Repo:** Pryan-Fire (haplos-workshop, zifnabs-scriptorium, hughs-forge).
+-   **Auth:** HTTPS + `gh` credential helper.
+-   **CI/CD:** GitHub Actions on Pryan-Fire deploys to `ola-claw-trade`.
 
-## Phase 4 & 5 Strategy: The Strategic Pivot (2025-02-25)
-- **Phase 4a: Discovery Signal** (Pump.fun WebSocket) - IMPLEMENTED in PR #25. Established real-time `subscribeNewToken` listener.
-- **Phase 4b: The Assassin Daemon (Sniper Bot)** - **TABLED**. Per Lord Xar's decree, the sniper requires advanced X/social/smart-wallet tracking which is too complex for MVP. Logic remains in `feat/assassin-daemon-sniper`.
-- **Phase 5: Market Intelligence (MVP Focus)** - ACTIVE. Implementing `MomentumScanner` (PR #27) to filter trades for the **Main Portfolio Engine**.
-- **Current Objective**: Shift focus to the **Core Portfolio Manager** and **Production Deployment** on `ola-claw-trade`.
+## Trading & Wallet Architecture
+-   **Bot Wallet (Trading):** `74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x` (TRADING_WALLET_PUBLIC_KEY on `ola-claw-trade`).
+-   **Owner Wallet (Read-Only):** `sh36vHUDHcXqVD8aZJR8GF3Z3PdaU69XG8wJeB1e1xb` (OWNER_WALLET_PUBLIC_KEY on `ola-claw-trade` + `ola-claw-main`). No private key on servers.
+-   All trade execution must target the bot wallet. Owner wallet is for read-only queries.
 
-## Wallet Architecture (decided 2026-02-25)
-- **Bot wallet**: `74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x` — TRADING_WALLET_PUBLIC_KEY on ola-claw-trade. This is the wallet Hugh trades with.
-- **Owner wallet**: `sh36vHUDHcXqVD8aZJR8GF3Z3PdaU69XG8wJeB1e1xb` — OWNER_WALLET_PUBLIC_KEY on ola-claw-trade + ola-claw-main. READ-ONLY — no private key on servers.
-- When building crypto pipeline code, all trade execution must target the bot wallet. Owner wallet is for read-only queries (position monitoring, balance checks, historical analysis).
-
-## Discord
-- Your channel: #coding (1475083038810443878, requireMention: false)
-- #the-Nexus (1475082874234343621, requireMention: true)
-- Guild: 1475082873777426494
-- Zifnab supervises you in #coding
-
-## Hardware
-- AMD Ryzen, 64GB RAM, 2x GPUs (GTX 1070 + GTX 1070 Ti = 16GB VRAM)
-- Ollama local: qwen2.5-coder:32b at localhost:11434
-
-## Models
-- Primary: Gemini 2.5 Pro -> Flash -> ollama/qwen2.5-coder:32b (local)
+## Discord Channels
+-   **#coding:** `1475083038810443878` (your dedicated channel, `requireMention: false`).
+-   **#the-Nexus:** `1475082874234343621` (`requireMention: true`).
+-   **Guild ID:** `1475082873777426494`.
 
 ## Key Paths
-- /data/openclaw/ — workspace root
-- /data/repos/ — git repos
-- /data/ollama/ — Ollama models
-- /data/openclaw/exec-approvals.json — 58-pattern allowlist
+-   `/data/openclaw/`: OpenClaw root (NVMe).
+-   `/data/openclaw/workspace/`: Agent workspace.
+-   `/data/repos/`: Git repositories (Pryan-Fire is symlinked to workspace). **Always use `/data/openclaw/workspace/Pryan-Fire/` for edits.**
+-   `/data/ollama/`: Ollama models.
+-   `/data/openclaw/exec-approvals.json`: 58-pattern allowlist.
 
 ## Rules
-- Storage on /data NVMe only, never OS drive
-- Do NOT create Windows-style paths on Linux
-- Report progress to Zifnab in #coding
+-   Storage on `/data` NVMe only; never OS drive.
+-   Do NOT create Windows-style paths on Linux.
+-   Report progress to Zifnab in #coding.
