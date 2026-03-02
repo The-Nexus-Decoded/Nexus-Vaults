@@ -8,7 +8,7 @@ Last updated: 2026-03-02
 - **2026-03-02 | Issue Closed: Duplicate Wallet Provisioning (Pryan-Fire #146):** Closed as a duplicate of Pryan-Fire #145.
 - **2026-03-02 | PR Merged (PR #155):** `fix/phantom-gauntlet-deps` - added `--dry-run` to Orchestrator dry‑run step and removed `workflows/` from `.gitignore`. SHA=3b25fc3, merged at 2026-03-02T15:12:12Z.
 - **2026-03-02 | PR Merged (PR #157):** `fix/jupiter-solana-stub` - added `jupiter_solana.py` stub and whitelisted it in `.gitignore`. SHA=c431910, merged at 2026-03-02T15:14:52Z.
-- **2026-03-02 | PR Closed (PR #154):** `feature/chelestra-sea-71-jupiter-api-fix` - changes already present in main (Jupiter API endpoint updated to `https://api.jup.ag/swap/v1`). PR became redundant and closed without merge.
+- **2026-03-02 | PR Merged (PR #154):** `feature/chelestra-sea-71-jupiter-api-fix` - updated Jupiter API endpoint to `https://api.jup.ag/swap/v1` and forced legacy transaction format. SHA=86a9d61, merged at 2026-03-02T15:25:19Z.
 - **2026-03-01 | Blocked `trade-executor` Testing:** Attempted to test `trade-executor` for Pryan-Fire #122, but was blocked due to a missing `python3.12-venv` package on `ola-claw-dev`. **RESOLVED 2026-03-01:** Verified python3.12-venv package is installed (apt list → installed). Tested venv creation successfully. No longer blocking trade-executor testing. GitHub issue: https://github.com/The-Nexus-Decoded/Chelestra-Sea/issues/42.
 - **2026-03-01 | Memory Guard Cron Execution:** Successfully executed the `memory-guard.sh` script as part of a cron job. `ACTIVE-TASKS.md` was updated.
 
