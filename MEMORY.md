@@ -292,11 +292,46 @@ After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get
 - Start with #126: implement get_meteora_dynamic_fees in TradeExecutor
 - The code lives in /data/repos/Pryan-Fire on Haplo's server. You can access it via SSH or clone it locally.
 
-## NEW TOOL: opus-query.sh (Research via Claude Opus)
-- Path: /data/openclaw/scripts/private/opus-query.sh
-- Usage: `bash /data/openclaw/scripts/private/opus-query.sh "your research question"`
-- Keeps conversation context across calls (persistent session per server)
-- `--new` flag starts a fresh session
-- This SSHs into Lord Xar's Windows box and runs Claude Opus. Use it for code research, architecture questions, API docs lookup.
-- IMPORTANT: Only use for tasks that REQUIRE deep reasoning. Not for simple lookups.
-- Logs usage to /data/openclaw/logs/opus-usage.log
+## NEW TOOL: opus-deep-think (Research via Claude Opus) -- Queue-Managed
+- Use the `opus-deep-think.lobster` workflow for all Opus queries. This manages the fleet-wide queue automatically.
+- Only one query runs at a time across the entire fleet. If another agent is using Opus, you will wait.
+
+### How to Call
+| Action | Pipeline | Args |
+|--------|----------|------|
+| Deep think | `/data/openclaw/workspace/workflows/opus-deep-think.lobster` | `prompt`, `reason`, `agent` |
+
+**Example:**
+```json
+{
+  "action": "run",
+  "pipeline": "/data/openclaw/workspace/workflows/opus-deep-think.lobster",
+  "argsJson": "{\"prompt\":\"Analyze the Meteora DLMM fee structure\",\"reason\":\"research\",\"agent\":\"zifnab\"}"
+}
+```
+
+### WHEN to Use Opus (MANDATORY -- follow these rules)
+USE Opus when:
+- Deep research requiring multi-step reasoning across many sources
+- Architecture decisions affecting multiple repos or the fleet
+- Synthesizing conflicting information from large datasets
+- You have tried Gemini 2+ times and the result is wrong or incomplete
+- Lord Xar explicitly requests Opus usage
+- Code review of critical/complex changes (>200 lines, security-sensitive)
+
+NEVER use Opus for:
+- Simple lookups, formatting, summarization
+- Routine fleet checks, status queries, log scanning
+- Anything Gemini handles adequately on the first try
+- Quick questions with obvious answers
+- Tasks you have NOT attempted with Gemini first
+
+### Rules
+- ALWAYS try Gemini first. Opus is the escalation, not the default.
+- ALWAYS use the opus-deep-think workflow. NEVER call `opus-query.sh` directly via exec.
+- ALWAYS provide a valid reason: `research | architecture | analysis | stuck | owner-requested | review`
+- Only one query runs fleet-wide at a time. You will wait in queue if another agent is using Opus.
+- All queries are logged (prompt + response summary) and reviewed by Lord Xar.
+- If the queue wait exceeds 10 minutes, your request times out. Retry later.
+- No hard daily limit, but Lord Xar monitors usage. Abuse will result in limits being enforced.
+- Queue status: run `/data/openclaw/scripts/shared/opus-queue.sh status` via exec for a quick check.

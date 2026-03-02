@@ -17,67 +17,46 @@
 - [x] Pryan-Fire Windows Clone (Nexus-Vaults #11 related) - Zifnab - `Pryan-Fire` repository successfully cloned to `C:\Users\olawal\Pryan-Fire` on Windows workstation.
 - [x] Claude Code Analysis (Nexus-Vaults #11) - Zifnab - Completed initial analysis; identified race condition.
 - [ ] Fleet Workspace Git Sync (Nexus-Vaults#1) - Zifnab - Ongoing daily redaction and push to GitHub.
+- [ ] Security: PAT exposed in channel - rotation required (Chelestra-Sea #43) - Zifnab (PAT rotation pending GitHub unblock), Haplo (local verification)
 
 ### Zifnab: Fleet Coordination & Monitoring
-- **Fleet Protocol: Claude-Opus 4.6 Bypass Integration (Nexus-Vaults #12):** Awaiting assignment.
-- **Fleet Protocol: Multi-Session Claude Code Orchestration (Nexus-Vaults #11):** Awaiting assignment.
-- **CI/CD Monitoring:** Verifying workflow runs on `ola-claw-dev`.
-- **Strategy Oversight:** GitHub Issue Assignment (Chelestra-Sea #40) — RESOLVED for Haplo, but **zifnab-claw-7 assignment to Chelestra-Sea #39 is still blocked due to 'not found' error.** Lord Xar will need to investigate. 
-- **Infra: Harden Windows SSH for Claude-Only Access (Chelestra-Sea #39):** **BLOCKED - Assignment to zifnab-claw-7 failed.** Requires Lord Xar's intervention.
+- **Rate Guard Fleet Monitor:** Active (15-min cron).
+- **Memory Guard:** Active (5-min cron).
+- **GitHub Operations:** Currently blocked from merging/closing PRs on Pryan-Fire due to token permissions (infection flagged by GitHub). Escalated to Lord Xar.
+- **Trading Pipeline Bugfixes (Pryan-Fire #133–#139):** In Progress. Implemented:
+  - TradeExecutor: config-driven paper mode, fail-fast wallet loading (issues #136, #139)
+  - Jupiter swap execution via direct HTTP (issue #134)
+  - Signal ingestion endpoint on orchestrator (issue #138)
+  - Pyth price fallback to CoinGecko (> $1k) likely resolves #137 (verify)
+  - Updated RpcIntegrator callers? (RpcIntegrator itself still stub; note: active service uses TradeOrchestrator, not RpcIntegrator)
+  - Next: Deploy changes to ola-claw-trade, install missing deps (FastAPI, uvicorn) in orchestrator venv, set env vars for live wallet, test end-to-end.
+- **Service Integration:** Modified TradeOrchestrator to embed TradeExecutor and start HTTP signal server (port 8002). Need to verify dependencies and restart service.
 
 ### Haplo: CI/CD Deployment Pipeline (Pryan-Fire #1)
-- Status: VERIFIED / ONLINE (2026-03-01)
-- Task: Self-hosted runner `ola-claw-dev` is active.
-- Action: Monitoring for workflow runs.
+- Status: **BLOCKED** - Self-hosted runner `ola-claw-dev` token expired/signature invalid; GitHub Actions jobs stuck in queued.
+- Action: Re-register runner with fresh token.
+- Impact: Blocks deployments (PR #132 already merged, but not yet deployed).
 
-### Haplo: Trade Executor Race Condition Patch (Nexus-Vaults #11)
-- Status: MERGED (2026-03-01)
-- Task: PR #120 merged. Logic is now hardened against rebalance race conditions.
-
-### Haplo: Volatility-Aware Rebalancing Implementation (Pryan-Fire #122)
-- Status: **BLOCKED** on specification merge, but now **assigned to haplo-claw-3**.
-- Task: Implement dynamic fee ingestion and profitability thresholds as per `rebalance-v2.md`.
-- Action: Awaiting resolution of GitHub blockage. (Issue: Pryan-Fire #122)
-
-### Haplo: P&L tracking (fees - IL - gas) (Pryan-Fire #14)
-- Status: **COMPLETED (2026-03-01)**.
-- Task: Implemented P&L tracking including fees, impermanent loss, and gas costs.
-
-### Haplo: Ensure hughs-forge is correctly deployed/synced to Hugh's workspace (Chelestra-Sea #37)
-- Status: **COMPLETED (2026-03-01)**.
-- Task: Verified and ensured correct deployment and synchronization of `hughs-forge` to Hugh's workspace on `ola-claw-trade`.
-
-### Haplo: Agent Reports 'Sessions: self failed' Error (Chelestra-Sea #27)
-- Status: Awaiting assignment.
-- Task: Investigate and resolve the 'Sessions: self failed' error reported by the Haplo agent.
-
-### Haplo: Infra: Browser Tool Failure - Gateway Token Mismatch on ola-claw-dev (Chelestra-Sea #22)
-- Status: Awaiting assignment.
-- Task: Investigate and resolve the browser tool failure and gateway token mismatch on `ola-claw-dev`.
+### Hugh: Chelestra-Sea #2 (Profile Distillation)
+- Status: **BLOCKED** - Pending dependency installation (sqlite3, chromadb, PyPDF2, python-docx, openpyxl) requested 2026-03-01.
+- Role: Trading operative; will test trading pipeline once Zifnab's fixes are deployed.
 
 ### Lord Xar: Lobster Workflow Management
-- Status: Under direct management.
-- Task: Orchestrate all Lobster pipeline development and execution.
-
-### Lord Xar: Created Lobster Templates for Token Reduction (Nexus-Vaults #9)
-- Status: Awaiting review.
-- Task: Review the created Lobster workflow templates for token reduction.
-
-### Hugh: End-to-End App Testing on Devnet
-- Status: PENDING - Blocked by Lord Xar's approval for Testnet SOL (Pryan-Fire #125).
-- Task: Perform end-to-end testing of trading applications on devnet.
-- Action: Awaiting Lord Xar's approval on Pryan-Fire #125 and subsequent acquisition of Testnet SOL.
+- Under direct management.
 
 ## RESOLVED (DO NOT RE-ASSIGN)
 - Fleet Security & Cost Monitoring (Pryan-Fire #94) — DONE (2026-03-01)
 - Issue #1 (Self-hosted runner setup) — DONE (2026-03-01)
 - PR #120 (Race condition fix) — MERGED (2026-03-01)
-- PR #121, #123, #124 (Volatility Spec - Ghost Merges) — UNRESOLVED/BLOCKED (2026-03-01)
+- PR #132 (Volatility-Aware Rebalancing Implementation) — MERGED (2026-03-01 23:34)
+- Pryan-Fire #122 (Volatility-Aware Rebalancing) — DEPLOYED (2026-03-01)
+- Pryan-Fire #125 (Devnet Testing Approval) — CLOSED (2026-03-01)
+- Nexus-Vaults #10 (GitHub auth issue) — RESOLVED (2026-03-01)
+- Chelestra-Sea #34, #35, #48 — CLOSED (2026-03-01)
 - Issue #11 (Meteora Tracking) — DONE
 - Issue #117 (Hugh's Env Alignment) — DONE
 - Issue #15/PR #116 (Pyth Hermes) — DONE
 - Issue #18 (Standardized Health) — DONE
 - fleet-health-check.lobster — DELETED (Redundant)
 - Issues #9, #6 — CLOSED (Duplicates)
-- Nexus-Vaults #10 (GitHub PAT Issue - duplicate of Chelestra-Sea #40) — RESOLVED (2026-03-01)
 

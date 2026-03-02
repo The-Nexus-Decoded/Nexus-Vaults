@@ -68,18 +68,52 @@ ssh openclaw@[REDACTED_TS_IP] "systemctl --user restart openclaw-gateway"
 4. On next boot: read .restart-state.md, delete after reading
 5. **Fallback:** If SSH to Windows fails, report to Lord Xar via Discord and wait.
 
-## Claude Opus (Deep Reasoning)
+## Claude Opus (Deep Reasoning) -- Queue-Managed
 
-```bash
-/data/openclaw/scripts/private/opus-query.sh "your prompt"
-# or for longer prompts:
-/data/openclaw/scripts/private/opus-query.sh --file /tmp/opus-prompt.txt
+Use the opus-deep-think workflow for all Opus queries. This manages the fleet-wide queue automatically.
+Only one query runs at a time across the entire fleet. If another agent is using Opus, you will wait.
+
+### How to Call
+
+| Action | Pipeline | Args |
+|--------|----------|------|
+| Deep think | `/data/openclaw/workspace/workflows/opus-deep-think.lobster` | `prompt`, `reason`, `agent` |
+
+**Example:**
+```json
+{
+  "action": "run",
+  "pipeline": "/data/openclaw/workspace/workflows/opus-deep-think.lobster",
+  "argsJson": "{\"prompt\":\"Analyze the Meteora DLMM fee structure\",\"reason\":\"research\",\"agent\":\"zifnab\"}"
+}
 ```
 
-**Rule:** Try Gemini first. Only use Opus if Gemini result is inadequate.
-**Only for:** Multi-step reasoning, complex architecture, synthesizing conflicting info, debugging after Gemini fails, high-cost-of-error tasks.
-**Never for:** Simple lookups, formatting, routine checks, anything not tried with Gemini first.
-Usage logged to /data/openclaw/logs/opus-usage.log. Lord Xar reviews this.
+### WHEN to Use Opus (MANDATORY -- follow these rules)
+
+USE Opus when:
+- Deep research requiring multi-step reasoning across many sources
+- Architecture decisions affecting multiple repos or the fleet
+- Synthesizing conflicting information from large datasets
+- You have tried Gemini 2+ times and the result is wrong or incomplete
+- Lord Xar explicitly requests Opus usage
+- Code review of critical/complex changes (>200 lines, security-sensitive)
+
+NEVER use Opus for:
+- Simple lookups, formatting, summarization
+- Routine fleet checks, status queries, log scanning
+- Anything Gemini handles adequately on the first try
+- Quick questions with obvious answers
+- Tasks you have NOT attempted with Gemini first
+
+### Rules
+- ALWAYS try Gemini first. Opus is the escalation, not the default.
+- ALWAYS use the opus-deep-think workflow. NEVER call opus-query.sh directly via exec.
+- ALWAYS provide a valid reason: research | architecture | analysis | stuck | owner-requested | review
+- Only one query runs fleet-wide at a time. You will wait in queue if another agent is using Opus.
+- All queries are logged (prompt + response summary) and reviewed by Lord Xar.
+- If the queue wait exceeds 10 minutes, your request times out. Retry later.
+- No hard daily limit, but Lord Xar monitors usage. Abuse will result in limits being enforced.
+- Queue status: run `/data/openclaw/scripts/shared/opus-queue.sh status` via exec for a quick check.
 
 ## Claude CLI on Windows
 
@@ -191,6 +225,8 @@ All workflow files are at: `/data/openclaw/workspace/workflows/`
 | Task | Pipeline path | When |
 |------|--------------|------|
 | Token usage audit | `/data/openclaw/workspace/workflows/token-usage-audit.lobster` | Check token consumption |
+| Opus deep think | `/data/openclaw/workspace/workflows/opus-deep-think.lobster` | Deep reasoning via Claude Opus (queue-managed) |
+| Opus deep think |  | Deep reasoning via Claude Opus (queue-managed) |
 
 ### Direct Fleet Commands (25 commands)
 
@@ -302,3 +338,9 @@ A redaction script MUST run before every commit. It strips:
 **Git hook:** Pre-commit hook that greps for known secret patterns and blocks push if found
 
 This is a TODO until Lord Xar greenlights the repo creation and Haplo builds the redaction script.
+
+## Messaging Channels — IMPORTANT
+- The ONLY messaging channel available is **Discord**. 
+- NEVER attempt to use WhatsApp, Slack, Telegram, email, or any other messaging platform.
+- All message tool calls MUST target Discord channels: #coding, #trading, #jarvis, or #the-Nexus.
+- If you need to contact Lord Xar, post in the appropriate Discord channel. Do NOT try WhatsApp.
