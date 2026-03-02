@@ -89,19 +89,16 @@ Last Updated: 2026-03-01 21:44
 - Implemented and deployed memory-guard systemd service on ola-claw-dev (Nexus-Vaults #14).
 - Runner re-registration still pending (GitHub PAT lacks `Administration:write`; need elevated token or App key).
 
-## Jupiter API Integration for Real Trading (Pryan-Fire #147)
-Status: NOT STARTED. Assigned to Haplo. This is the critical path blocker for all trading operations.
-- Issue Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/147
-- Must implement `execute_jupiter_trade()` in `rpc_integration.py` using Jupiter v6 API
-- Requires: wallet credentials (blocked on #145), Jupiter API key handling
-- Service stub currently logs and returns True without on-chain activity
+## Implement real Jupiter swap execution with wallet signing (Pryan-Fire #134)
+Status: IMPLEMENTATION COMPLETE, READY FOR PR. Assigned to Haplo.
+- Issue Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/134
+- Implementation is complete in workspace branch `feature/126-meteora-dynamic-fees`. The `RpcIntegrator.execute_jupiter_trade` method now performs full quote/swap/sign/send flow using Jupiter v6 API.
+- Wallet credentials are PROVISIONED.
+- Requires Jupiter API key (already exists, but should be rotated after first live trade #143).
 Last Updated: 2026-03-02
 
 ## Provision Trading Wallet Credentials (Pryan-Fire #145)
-Status: BLOCKED (waiting for Jupiter integration #147). Assigned to HughTheHand.
-- Issue Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/145
-- Create `/data/openclaw/keys/trading_wallet.json` with 600 permissions after Jupiter integration deployed
+Status: COMPLETED. Credentials provisioned to `/data/openclaw/keys/trading_wallet.json` on `ola-claw-trade` with 600 permissions.
+- Issue Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/145 (CLOSED)
 - Wallet address: `74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x`
-- Private key held by Sterol; secure provisioning required
-- Must NOT provision before Jupiter integration (#147) is deployed or key will be exposed unnecessarily
 Last Updated: 2026-03-02
