@@ -49,6 +49,24 @@ Last updated: 2026-03-02
 -   **Owner Wallet (Read-Only):** `sh36vHUDHcXqVD8aZJR8GF3Z3PdaU69XG8wJeB1e1xb` (OWNER_WALLET_PUBLIC_KEY on `ola-claw-trade` + `ola-claw-main`). No private key on servers.
 -   All trade execution must target the bot wallet. Owner wallet is for read-only queries.
 
+## Website Creation Directive (2026-03-03)
+-   **WHEN:** Lord Xar asks me to create a website for research that is complete and approved.
+-   **WHAT:** Automatically build a cool, responsive HTML portal with the research findings, include both summary and detailed pages, and create clickable hyperlinks for direct access.
+-   **HOW:**
+    1.  Use `python3 -m http.server` from `/data/openclaw/workspace` (Zifnab's proven pattern) to serve files.
+    2.  Prefer port 8081; if busy, try 8082, etc.
+    3.  Create main index.html with card-based navigation, dark theme, clean typography.
+    4.  Generate separate pages for detailed sections (e.g., `cluster-planner.html`, `full-research.html`).
+    5.  POST clickable hyperlinks to Discord (Markdown format) immediately upon completion.
+    6.  Use Tailscale IP of the serving server (likely ola-claw-dev:[REDACTED_TS_IP]).
+-   **TROUBLESHOOTING LESSONS:** If blank pages occur:
+    - Avoid `backdrop-filter: blur()` (causes rendering issues in some browsers).
+    - Use solid backgrounds (`rgba()` or hex colors).
+    - Test with simple HTML first.
+    - Verify server is running (`ps aux | grep http.server`).
+    - Provide both main and simplified versions if needed.
+-   **NO ASKING:** Do not ask permission — just build and deliver.
+
 ## Discord Channels
 -   **#coding:** `1475083038810443878` (your dedicated channel, `requireMention: false`).
 -   **#the-Nexus:** `1475082874234343621` (`requireMention: true`).

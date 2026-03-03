@@ -113,3 +113,19 @@ Status: COMPLETED. Credentials provisioned to `/data/openclaw/keys/trading_walle
 - Issue Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/145 (CLOSED)
 - Wallet address: `74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x`
 Last Updated: 2026-03-02
+
+## Discord Webhook Broadcaster (Pryan-Fire #185)
+Status: ABANDONED (wrong assignment). PR #191 opened then closed per Lord Xar directive.
+- Implementation was for trade alerts but should have been Meteora DLMM webhook.
+- Work rolled back; branch deleted.
+Last Updated: 2026-03-03
+
+## Meteora DLMM Webhook Service (Chelestra-Sea #84)
+Status: COMPLETED. PR #89 merged.
+- Service implemented in `integrations/meteora_webhook/`
+- HTTP endpoint `/webhooks/meteora` receives events and forwards to Discord.
+- Rate limiting (5/min), exponential retry, health check, structured logs.
+- 10 unit tests passing.
+- Systemd unit included for deployment.
+- **Note:** PR branch was force-pushed to remove accidental inclusion of SECURITY-TICKET-43-PAT-ROTATION.md; code is clean.
+Last Updated: 2026-03-03 (fixed)
