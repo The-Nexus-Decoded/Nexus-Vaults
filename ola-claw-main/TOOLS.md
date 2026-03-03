@@ -68,18 +68,52 @@ ssh openclaw@[REDACTED_TS_IP] "systemctl --user restart openclaw-gateway"
 4. On next boot: read .restart-state.md, delete after reading
 5. **Fallback:** If SSH to Windows fails, report to Lord Xar via Discord and wait.
 
-## Claude Opus (Deep Reasoning)
+## Claude Opus (Deep Reasoning) -- Queue-Managed
 
-```bash
-/data/openclaw/scripts/private/opus-query.sh "your prompt"
-# or for longer prompts:
-/data/openclaw/scripts/private/opus-query.sh --file /tmp/opus-prompt.txt
+Use the opus-deep-think workflow for all Opus queries. This manages the fleet-wide queue automatically.
+Only one query runs at a time across the entire fleet. If another agent is using Opus, you will wait.
+
+### How to Call
+
+| Action | Pipeline | Args |
+|--------|----------|------|
+| Deep think | `/data/openclaw/workspace/workflows/opus-deep-think.lobster` | `prompt`, `reason`, `agent` |
+
+**Example:**
+```json
+{
+  "action": "run",
+  "pipeline": "/data/openclaw/workspace/workflows/opus-deep-think.lobster",
+  "argsJson": "{\"prompt\":\"Analyze the Meteora DLMM fee structure\",\"reason\":\"research\",\"agent\":\"zifnab\"}"
+}
 ```
 
-**Rule:** Try Gemini first. Only use Opus if Gemini result is inadequate.
-**Only for:** Multi-step reasoning, complex architecture, synthesizing conflicting info, debugging after Gemini fails, high-cost-of-error tasks.
-**Never for:** Simple lookups, formatting, routine checks, anything not tried with Gemini first.
-Usage logged to /data/openclaw/logs/opus-usage.log. Lord Xar reviews this.
+### WHEN to Use Opus (MANDATORY -- follow these rules)
+
+USE Opus when:
+- Deep research requiring multi-step reasoning across many sources
+- Architecture decisions affecting multiple repos or the fleet
+- Synthesizing conflicting information from large datasets
+- You have tried Gemini 2+ times and the result is wrong or incomplete
+- Lord Xar explicitly requests Opus usage
+- Code review of critical/complex changes (>200 lines, security-sensitive)
+
+NEVER use Opus for:
+- Simple lookups, formatting, summarization
+- Routine fleet checks, status queries, log scanning
+- Anything Gemini handles adequately on the first try
+- Quick questions with obvious answers
+- Tasks you have NOT attempted with Gemini first
+
+### Rules
+- ALWAYS try Gemini first. Opus is the escalation, not the default.
+- ALWAYS use the opus-deep-think workflow. NEVER call opus-query.sh directly via exec.
+- ALWAYS provide a valid reason: research | architecture | analysis | stuck | owner-requested | review
+- Only one query runs fleet-wide at a time. You will wait in queue if another agent is using Opus.
+- All queries are logged (prompt + response summary) and reviewed by Lord Xar.
+- If the queue wait exceeds 10 minutes, your request times out. Retry later.
+- No hard daily limit, but Lord Xar monitors usage. Abuse will result in limits being enforced.
+- Queue status: run `/data/openclaw/scripts/shared/opus-queue.sh status` via exec for a quick check.
 
 ## Claude CLI on Windows
 
@@ -117,81 +151,127 @@ GSD project files: `H:/IcloudDrive/iCloudDrive/Documents/Windows/Documents/Proje
 - PAT configured via gh CLI on all servers
 - Use `gh` CLI for all GitHub operations
 
-## Lobster Workflows
+## Fleet CLI & Lobster Workflows
 
-Lobster is installed and enabled on this server. It runs deterministic, typed pipelines with approval gates as a single tool call -- saving tokens vs. multi-step LLM orchestration.
+Fleet CLI (`/usr/local/bin/fleet`) provides composable commands for fleet operations.
+Lobster workflows chain these commands with approval gates. One tool call, deterministic execution.
 
-### Running Pipelines
+### How to Call the Lobster Tool
 
-Inline:
+The lobster tool takes these parameters:
+- `action`: "run" (to run a workflow) or "resume" (to continue after approval)
+- `pipeline`: ABSOLUTE path to the .lobster file
+- `argsJson`: (optional) JSON string of arguments
+- `token` / `approve`: (for resume only)
+
+**CORRECT call example:**
 ```json
 {
   "action": "run",
-  "pipeline": "exec --json --shell 'command1' | exec --stdin json --shell 'command2' | approve --prompt 'Proceed?'",
-  "timeoutMs": 30000
+  "pipeline": "/data/openclaw/workspace/workflows/pryan-forge.lobster"
 }
 ```
 
-Workflow file:
+**With arguments:**
 ```json
 {
   "action": "run",
-  "pipeline": "/data/openclaw/workflows/my-workflow.lobster",
-  "argsJson": "{\"param\": \"value\"}"
+  "pipeline": "/data/openclaw/workspace/workflows/nexus-bridge.lobster",
+  "argsJson": "{\"repo_path\":\"/data/repos/Pryan-Fire\",\"branch\":\"my-branch\",\"title\":\"PR title\",\"body\":\"description\"}"
 }
 ```
 
-### Resuming After Approval
+**Resume after approval gate:**
 ```json
 {
   "action": "resume",
-  "token": "<resumeToken>",
+  "token": "<resumeToken from previous output>",
   "approve": true
 }
 ```
 
-### Workflow File Syntax (.lobster)
-```yaml
-name: example-workflow
-args:
-  target:
-    default: "default-value"
-steps:
-  - id: gather
-    command: some-command --json
-  - id: process
-    command: another-command --json
-    stdin: $gather.stdout
-  - id: confirm
-    command: apply-changes --approve
-    stdin: $process.stdout
-    approval: required
-  - id: execute
-    command: apply-changes --execute
-    stdin: $process.stdout
-    condition: $confirm.approved
-```
+**WRONG — DO NOT DO THESE:**
+- Do NOT pass just the filename: `"pipeline": "pryan-forge.lobster"` — FAILS (relative path, gateway CWD is not the workflows dir)
+- Do NOT pass CLI syntax: `"pipeline": "run --mode tool --file workflows/pryan-forge.lobster"` — FAILS
+- Do NOT paste workflow YAML as the pipeline parameter — FAILS ("File name too long")
+- Do NOT use `{args.x}` or `{{args.x}}` in workflow args — the correct Lobster syntax is `${x}`
 
-Key syntax: `stdin: $step.stdout` pipes between steps. `approval: required` creates a hard stop. `condition: $step.approved` gates on approval.
+### Available Workflows (18 total)
 
-### When to Use Lobster
-- Multi-step operations that should be deterministic (saves tokens)
-- Anything with side effects needing approval gates
-- Chaining CLI commands for structured JSON output
-- Cross-server operations via SSH as exec steps
+All workflow files are at: `/data/openclaw/workspace/workflows/`
 
-### When NOT to Use Lobster
-- Simple single-step tool calls
-- Tasks needing LLM judgment at every step
+**Fleet Operations (use fleet CLI under the hood):**
 
-### Limitations
-- Local subprocess only -- cannot directly orchestrate across SSH. Use SSH commands as individual exec steps within the pipeline.
-- Default timeout: 20s (set timeoutMs for longer operations)
-- Default max stdout: 512KB (set maxStdoutBytes if needed)
+| Task | Pipeline path | Args | When |
+|------|--------------|------|------|
+| Safe restart | `/data/openclaw/workspace/workflows/seventh-gate.lobster` | none | ALWAYS before restarting any gateway |
+| Post-update patches | `/data/openclaw/workspace/workflows/chelestra-tide.lobster` | none | After OpenClaw update |
+| Fleet health | `/data/openclaw/workspace/workflows/chelestra-current.lobster` | none | Daily or on-demand |
+| Memory review | `/data/openclaw/workspace/workflows/abarrach-stone.lobster` | none | Every few days |
+| PR review scan | `/data/openclaw/workspace/workflows/pryan-forge.lobster` | none | Check if any PRs need review |
+| Issue triage | `/data/openclaw/workspace/workflows/labyrinth-watch.lobster` | none | Weekly or on-demand |
+| Branch cleanup | `/data/openclaw/workspace/workflows/abarrach-seal.lobster` | none | Monthly or after merges |
 
-Store workflow files at: `/data/openclaw/workflows/`
+**Code Operations:**
 
-## Model Configuration
+| Task | Pipeline path | Args | When |
+|------|--------------|------|------|
+| Create + merge PR | `/data/openclaw/workspace/workflows/nexus-bridge.lobster` | `repo_path`, `branch`, `title`, `body` | After code changes are ready |
+| Build + test | `/data/openclaw/workspace/workflows/patryn-workhorse.lobster` | `repo_path` | Before creating a PR |
+| Vault sync | `/data/openclaw/workspace/workflows/sartan-cipher.lobster` | none | After workspace changes |
+
+**Agent Wrappers (thin wrappers for agent-specific tasks):**
+
+| Task | Pipeline path | When |
+|------|--------------|------|
+| Token usage audit | `/data/openclaw/workspace/workflows/token-usage-audit.lobster` | Check token consumption |
+| Opus deep think | `/data/openclaw/workspace/workflows/opus-deep-think.lobster` | Deep reasoning via Claude Opus (queue-managed) |
+
+### Direct Fleet Commands (25 commands)
+
+For quick checks, use fleet CLI directly via the `exec` tool instead of lobster workflows.
+
+**Monitoring:**
+
+    fleet health [--json]                          # Rate guard /health endpoint
+    fleet sessions [--json]                        # Session .jsonl file sizes
+    fleet status [--json --diff --alert-only]      # Health diff detection, change alerts
+    fleet agent-ping [--json]                      # Agent liveness via session timestamps
+    fleet gateway-check [--json --restart]         # 8-point gateway diagnostic
+    fleet log-scan [--json --hours N --pattern P]  # Journal log scanner (429/spam/error/all)
+    fleet config-check [--json]                    # Scan openclaw.json for misconfigs
+    fleet deps-check [--json]                      # Check tool versions + patch status
+    fleet daily-summary [--json --days N]          # Activity briefing (git, sessions, disk)
+
+**Code & Issues:**
+
+    fleet pr-scan [--json]                         # Open PRs across all repos
+    fleet issue-scan [--json --stale-days N]       # Open issues + stale detection
+    fleet branch-scan [--json]                     # Branches with PR state
+    fleet branch-delete [--json]                   # Delete MERGED/CLOSED branches
+    fleet deliver [--json --repo R --branch B --message M --execute]  # Full git delivery
+    fleet issues-batch [--json --action A --issues I --repo R --execute]  # Bulk close/reopen
+    fleet gauntlet [--json --repo R]               # Test+lint runner, auto-detects project
+
+**Operations:**
+
+    fleet patch-status [--json]                    # Vendor patch markers grep
+    fleet pre-restart [--json --execute]           # Session cleanup (dry-run default)
+    fleet maintenance [--json --execute]           # Disk/cache/journal sizes + cleanup
+    fleet memory [--json]                          # Workspace memory files listing
+    fleet agent-reset [--json --level N --execute] # Escalating reset levels 1-4
+    fleet session-guard [--json --max-kb N --execute]  # Truncate oversized sessions
+    fleet workspace-sync [--json --from F --to T --files --execute]  # Sync between servers
+    fleet env-setup [--json --execute]             # Bootstrap/verify workspace environment
+    fleet format                                   # Human-readable from JSON stdin (auto-detects)
+
+### RULES
+- NEVER restart a gateway without running seventh-gate first
+- ALWAYS run patryn-workhorse before nexus-bridge (test before PR)
+- Use workflows for multi-step ops. Use fleet commands directly for quick checks.
+- ALWAYS use absolute paths starting with /data/openclaw/workspace/workflows/
+
+
 
 - **Primary:** google/gemini-3.1-pro-preview
 - **Fallback 1:** google/gemini-3-flash-preview
@@ -257,3 +337,9 @@ A redaction script MUST run before every commit. It strips:
 **Git hook:** Pre-commit hook that greps for known secret patterns and blocks push if found
 
 This is a TODO until Lord Xar greenlights the repo creation and Haplo builds the redaction script.
+
+## Messaging Channels — IMPORTANT
+- The ONLY messaging channel available is **Discord**. 
+- NEVER attempt to use WhatsApp, Slack, Telegram, email, or any other messaging platform.
+- All message tool calls MUST target Discord channels: #coding, #trading, #jarvis, or #the-Nexus.
+- If you need to contact Lord Xar, post in the appropriate Discord channel. Do NOT try WhatsApp.

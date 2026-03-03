@@ -1,0 +1,17 @@
+[Unit]
+Description=Hugh's Meteora Trade Executor
+After=network.target
+
+[Service]
+User=openclaw
+Group=openclaw
+WorkingDirectory=/data/openclaw/services/hughs-forge/trade-executor/
+ExecStart=/data/openclaw/services/hughs-forge/trade-executor/venv/bin/python /data/openclaw/services/hughs-forge/trade-executor/trade_orchestrator.py
+Restart=always
+RestartSec=30
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=hughs-trade-executor
+
+[Install]
+WantedBy=multi-user.target

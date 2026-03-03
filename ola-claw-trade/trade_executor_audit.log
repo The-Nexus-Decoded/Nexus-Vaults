@@ -1,0 +1,67 @@
+2026-03-02 00:40:37,297 - INFO - Health server started in a separate thread.
+2026-03-02 00:40:37,298 - INFO - Quenching the blade: Checking connection to Solana network...
+2026-03-02 00:40:37,298 - INFO - Health server starting on port 8000...
+2026-03-02 00:40:37,391 - INFO - Risk Manager initialized in SAFE mode.
+2026-03-02 00:40:37,391 - INFO - -> Daily Loss Limit: -1000.0
+2026-03-02 00:40:37,391 - INFO - -> Max Trade Size: 100.0
+2026-03-02 00:40:37,391 - INFO - -> Strategy Risk Scores: {'Spot': 1, 'Curve': 3, 'BidAsk': 5}
+2026-03-02 00:40:37,391 - INFO - Rebalance Strategy V2 initialized (Base Buffer: 10 bins, Base Width: 20 bins)
+2026-03-02 00:40:37,406 - INFO - Trade Executor initialized.
+2026-03-02 00:40:37,406 - WARNING - -> Wallet not loaded (read-only mode). Open/Close LP positions will not function.
+2026-03-02 00:40:37,407 - INFO - 
+Checking balance for the designated bot wallet...
+2026-03-02 00:40:37,688 - INFO - HTTP Request: POST https://api.devnet.solana.com "HTTP/1.1 200 OK"
+2026-03-02 00:40:37,690 - INFO - --> Balance for 74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x: 9.000000000 SOL
+2026-03-02 00:40:37,690 - INFO - 
+Attempting to fetch a Jupiter quote for 0.01 SOL to USDC...
+2026-03-02 00:40:37,690 - INFO - Scrying market whispers for: 10000000 of So11111111111111111111111111111111111111112 to EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v via Jupiter v6
+2026-03-02 00:40:37,894 - ERROR - --> Error fetching Jupiter quote: [Errno -5] No address associated with hostname
+2026-03-02 00:40:37,894 - INFO - 
+Attempting to fetch Meteora DLMM LP positions for 74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x...
+2026-03-02 00:40:37,894 - INFO - Scrying Meteora DLMM for LP positions owned by 74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x using raw RPC + Anchor decoder (Vol: NORMAL)...
+2026-03-02 00:40:38,122 - INFO - HTTP Request: POST https://api.devnet.solana.com "HTTP/1.1 200 OK"
+2026-03-02 00:40:38,124 - INFO - No raw accounts found for owner 74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x.
+2026-03-02 00:40:38,124 - INFO - Found 0 decoded Position accounts.
+2026-03-02 00:40:38,124 - INFO - --> No LP positions found for the bot wallet. Cannot demonstrate claiming or compounding.
+2026-03-02 00:40:38,124 - WARNING - Cannot open LP position: Wallet not loaded.
+2026-03-02 00:40:38,124 - INFO - 
+--- Pyth Price Feed Integration ---
+2026-03-02 00:40:38,124 - INFO - Consulting the oracle for Pyth price feed 0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43...
+2026-03-02 00:40:38,439 - INFO - HTTP Request: GET https://hermes.pyth.network/v2/updates/price/latest?ids[]=0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43 "HTTP/1.1 200 OK"
+2026-03-02 00:40:38,441 - INFO - --> Oracle Sight (V2): 66224.5001 +/- 19.8461
+2026-03-02 00:40:38,441 - INFO - Consulting the oracle for Pyth price feed 0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a...
+2026-03-02 00:40:38,778 - INFO - HTTP Request: GET https://hermes.pyth.network/v2/updates/price/latest?ids[]=0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a "HTTP/1.1 200 OK"
+2026-03-02 00:40:38,780 - INFO - --> Oracle Sight (V2): 1.0000 +/- 0.0005
+2026-03-02 00:40:38,780 - INFO - 
+--- Risk Manager Demonstration ---
+2026-03-02 00:40:38,780 - INFO - Attempting trade with amount: 50.0
+2026-03-02 00:40:38,780 - INFO - Trade attempt initiated: {'amount': 50.0, 'pair': 'SOL/USDC'}
+2026-03-02 00:40:38,782 - INFO - Trade approved by Risk Manager for amount: 50.0
+2026-03-02 00:40:38,782 - INFO - Executing trade: {'amount': 50.0, 'pair': 'SOL/USDC'}
+2026-03-02 00:40:38,782 - INFO - --> [PAPER TRADING] Trade simulated. Tx Hash: sim_tx_1772433638
+2026-03-02 00:40:38,797 - INFO - Trade outcome: {'status': 'success', 'tx_hash': 'sim_tx_1772433638', 'paper_trade': True}
+2026-03-02 00:40:38,798 - INFO - Trade result: {'status': 'success', 'tx_hash': 'sim_tx_1772433638', 'paper_trade': True}
+2026-03-02 00:40:38,798 - INFO - 
+Attempting trade with amount: 150.0
+2026-03-02 00:40:38,798 - INFO - Trade attempt initiated: {'amount': 150.0, 'pair': 'SOL/USDC'}
+2026-03-02 00:40:38,798 - WARNING - Trade rejected: Proposed amount (150.0) exceeds max trade size (100.0).
+2026-03-02 00:40:38,799 - WARNING - Trade {'amount': 150.0, 'pair': 'SOL/USDC'} rejected by Risk Manager.
+2026-03-02 00:40:38,799 - INFO - Trade result: {'status': 'rejected', 'message': 'Trade rejected by Risk Manager'}
+2026-03-02 00:40:38,799 - INFO - 
+Activating circuit breaker...
+2026-03-02 00:40:38,799 - CRITICAL - 🚨 CIRCUIT BREAKER ACTIVATED: All trading halted.
+2026-03-02 00:40:38,799 - INFO - Trade attempt initiated: {'amount': 50.0, 'pair': 'SOL/USDC'}
+2026-03-02 00:40:38,799 - WARNING - Trade rejected: Circuit breaker is active.
+2026-03-02 00:40:38,800 - WARNING - Trade {'amount': 50.0, 'pair': 'SOL/USDC'} rejected by Risk Manager.
+2026-03-02 00:40:38,800 - INFO - Trade result after circuit breaker: {'status': 'rejected', 'message': 'Trade rejected by Risk Manager'}
+2026-03-02 00:40:38,800 - INFO - 
+Deactivating circuit breaker...
+2026-03-02 00:40:38,800 - INFO - ✅ CIRCUIT BREAKER DEACTIVATED: Trading can resume.
+2026-03-02 00:40:38,800 - INFO - Trade attempt initiated: {'amount': 50.0, 'pair': 'SOL/USDC'}
+2026-03-02 00:40:38,801 - INFO - Trade approved by Risk Manager for amount: 50.0
+2026-03-02 00:40:38,801 - INFO - Executing trade: {'amount': 50.0, 'pair': 'SOL/USDC'}
+2026-03-02 00:40:38,801 - INFO - --> [PAPER TRADING] Trade simulated. Tx Hash: sim_tx_1772433638
+2026-03-02 00:40:38,805 - INFO - Trade outcome: {'status': 'success', 'tx_hash': 'sim_tx_1772433638', 'paper_trade': True}
+2026-03-02 00:40:38,806 - INFO - Trade result after deactivation: {'status': 'success', 'tx_hash': 'sim_tx_1772433638', 'paper_trade': True}
+2026-03-02 00:40:38,806 - INFO - Health server shutting down...
+2026-03-02 00:40:39,301 - INFO - Main async function finished, health server stopped.

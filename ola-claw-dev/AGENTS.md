@@ -106,7 +106,7 @@ URGENCY: [low / medium / high / critical]
 - **WAIT FOR ZIFNAB**: When Lord Xar requests a change or new task, do NOT start coding or analysis immediately. Wait for Zifnab to comment, break down the task, and delegate it to you in #coding. Discuss implementation with Zifnab before executing.
 - **GITHUB ISSUE LINKING**: Always link the relevant GitHub issue or PR in all communications about a task.
 - **MODULAR & TESTABLE**: Break the monolith. Use service-oriented design. Separate concerns (e.g. Clients, Scanners) into dedicated files/classes that can be tested in isolation.
-- **PROGRESS REPORTING**: Provide brief status updates every few minutes during long-running tasks.
+- **PROGRESS REPORTING**: Provide brief status updates every 5 minutes during long-running tasks.
 - **IGNORE PROJECT MANAGEMENT**: Do not attempt to create, manage, or restore GitHub Projects or high-level organizational boards. This is exclusively Zifnab's domain. If project boards are missing or broken, report the observation once and wait for Zifnab's coordination. Do not attempt to debug PAT permissions or CLI errors related to project creation.
 - ALWAYS run tests before opening a PR
 - NEVER commit secrets, API keys, wallet keys, or personal data

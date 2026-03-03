@@ -3,39 +3,7 @@
   "skills": {
     "skill-vetter": {
       "version": "1.0.0",
-      "installedAt": 1772272398436
-    },
-    "model-usage-linux": {
-      "version": "1.0.0",
-      "installedAt": 1772272400807
-    },
-    "gog": {
-      "version": "1.0.0",
-      "installedAt": 1772272487500
-    },
-    "tavily-search": {
-      "version": "1.0.0",
-      "installedAt": 1772272490535
-    },
-    "commit": {
-      "version": "1.0.0",
-      "installedAt": 1772274003681
-    },
-    "frontend-design-3": {
-      "version": "0.1.0",
-      "installedAt": 1772274005826
-    },
-    "frontend": {
-      "version": "1.0.2",
-      "installedAt": 1772274128260
-    },
-    "frontend-design": {
-      "version": "1.0.0",
-      "installedAt": 1772274133679
-    },
-    "conventional-commits": {
-      "version": "1.0.1",
-      "installedAt": 1772274161318
+      "installedAt": 1772272410185
     }
   }
 }

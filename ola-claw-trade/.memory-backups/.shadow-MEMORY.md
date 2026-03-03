@@ -3,6 +3,13 @@
 Last confirmed: 2026-02-27 (by Hugh the Hand, retrieved from live config)
 
 ## Infrastructure
+
+### CRITICAL PATH WARNING
+- **CORRECT repo path:** `/data/openclaw/workspace/Pryan-Fire/`
+- **WRONG path (DO NOT USE):** `/data/repos/Pryan-Fire/` — this is a stale clone, not your workspace
+- ALL file edits, test scripts, and code changes MUST use `/data/openclaw/workspace/Pryan-Fire/`
+- If you get "File not found" errors, CHECK YOUR PATH FIRST
+
 - You run on ola-claw-trade (192.168.1.88, Tailscale: [REDACTED_TS_IP])
 - Zifnab (coordinator): ola-claw-main, Tailscale [REDACTED_TS_IP]
 - Haplo (dev): ola-claw-dev, Tailscale [REDACTED_TS_IP]

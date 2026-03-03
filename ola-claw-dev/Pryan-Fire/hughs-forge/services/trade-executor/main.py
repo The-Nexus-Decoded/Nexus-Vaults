@@ -24,6 +24,9 @@ import json
 import logging
 import datetime
 import threading
+from collections import deque
+import math
+import health_server
 from health_server import start_health_server, stop_health_server
 from models.keys import KeyManager
 from models.ledger import TradeLedger
@@ -91,7 +94,17 @@ TOKEN_PROGRAM_ID = Pubkey.from_string("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5
 ASSOCIATED_TOKEN_PROGRAM_ID = Pubkey.from_string("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
 
 # Pyth Hermes REST API Endpoint
-PYTH_HERMES_ENDPOINT = "https://hermes.pyth.network/api/latest_price_feeds" # Example endpoint
+PYTH_HERMES_ENDPOINT = "https://hermes.pyth.network/v2/updates/price/latest"
+
+# Pyth Price Feed IDs for volatility calculation
+SOL_USD_FEED_ID = "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43"
+
+# Volatility thresholds (percentage daily standard deviation)
+VOLATILITY_THRESHOLDS = {
+    "LOW": 0.02,     # < 2%
+    "NORMAL": 0.05,  # 2-5%
+    "HIGH": 0.10     # 5-10%
+}
 
 # Circuit breaker status
 CIRCUIT_BREAKER_ACTIVE = False
@@ -268,39 +281,59 @@ class RiskManager:
 
 class RebalanceStrategy:
     """Decision engine for determining when and where to move liquidity."""
-    def __init__(self, buffer_bins: int = 10, target_width: int = 20):
-        self.buffer_bins = buffer_bins
-        self.target_width = target_width
-        logger.info(f"Rebalance Strategy initialized (Buffer: {buffer_bins} bins, Target Width: {target_width} bins)")
+    def __init__(self, base_buffer_bins: int = 10, base_target_width: int = 20):
+        self.base_buffer_bins = base_buffer_bins
+        self.base_target_width = base_target_width
+        # Volatility multipliers
+        self.volatility_multipliers = {
+            "LOW": 0.5,
+            "NORMAL": 1.0,
+            "HIGH": 2.0
+        }
+        logger.info(f"Rebalance Strategy V2 initialized (Base Buffer: {base_buffer_bins} bins, Base Width: {base_target_width} bins)")
 
-    def should_rebalance(self, current_active_id: int, lower_bin: int, upper_bin: int) -> str:
+    def get_dynamic_parameters(self, market_volatility: str) -> tuple[int, int]:
+        """Calculates current buffer and width based on market volatility."""
+        multiplier = self.volatility_multipliers.get(market_volatility, 1.0)
+        current_buffer = max(1, int(self.base_buffer_bins * multiplier))
+        current_width = max(2, int(self.base_target_width * multiplier)) # Ensure a minimum width of 2 to have at least two bins
+        return current_buffer, current_width
+
+    def should_rebalance(self, current_active_id: int, lower_bin: int, upper_bin: int, market_volatility: str = "NORMAL") -> str:
         """
-        Determines the rebalance action based on price drift direction.
-        Returns: 'REBALANCE' (upward), 'STOP_LOSS' (downward), or 'HOLD' (stable).
+        Determines the rebalance action based on price drift direction and volatility.
         """
-        # Price is going UP (Active ID exceeds Upper Bin)
-        if current_active_id > (upper_bin + self.buffer_bins):
+        current_buffer, _ = self.get_dynamic_parameters(market_volatility)
+        
+        # Price is going UP (Active ID exceeds Upper Bin + dynamic buffer)
+        if current_active_id > (upper_bin + current_buffer):
             return "REBALANCE"
             
-        # Price is going DOWN (Active ID falls below Lower Bin)
-        if current_active_id < (lower_bin - self.buffer_bins):
+        # Price is going DOWN (Active ID falls below Lower Bin - dynamic buffer)
+        if current_active_id < (lower_bin - current_buffer):
             return "STOP_LOSS"
         
         return "HOLD"
 
-    def profitability_check(self, current_value: float, estimated_cost: float) -> bool:
-        """Checks if the rebalance cost is within acceptable limits (5%)."""
-        if current_value == 0: return False
-        cost_ratio = (estimated_cost / current_value) * 100
-        logger.info(f"--> Profitability Check: Cost Ratio {cost_ratio:.2f}% (Threshold: 5.00%)")
-        return cost_ratio < 5.0
+    def check_profitability_threshold(self, expected_fee_capture: float, estimated_swap_gas: float, potential_slippage: float) -> bool:
+        """
+        Checks if the rebalance is financially viable.
+        Requires expected fee capture to be greater than the cost of rebalancing.
+        """
+        total_friction = estimated_swap_gas + potential_slippage
+        is_profitable = expected_fee_capture > total_friction 
+        
+        logger.info(f"--> Profitability Threshold Check: Expected Capture: {expected_fee_capture:.5f}, Total Friction: {total_friction:.5f} (Gas: {estimated_swap_gas:.5f}, Slippage: {potential_slippage:.5f}). Approved: {is_profitable}")
+        
+        return is_profitable
 
-    def calculate_new_range(self, current_active_id: int) -> Dict[str, int]:
-        """Calculates a new bin range centered on the current active ID."""
-        half_width = self.target_width // 2
+    def calculate_new_range(self, current_active_id: int, market_volatility: str = "NORMAL") -> Dict[str, int]:
+        """Calculates a new bin range centered on the current active ID, scaled by volatility."""
+        _, current_width = self.get_dynamic_parameters(market_volatility)
+        half_width = current_width // 2
         new_lower = current_active_id - half_width
         new_upper = current_active_id + half_width
-        logger.info(f"--> Calculated new range: [{new_lower}, {new_upper}] centered on {current_active_id}")
+        logger.info(f"--> Calculated new range (Vol: {market_volatility}): [{new_lower}, {new_upper}] centered on {current_active_id}")
         return {"lower": new_lower, "upper": new_upper}
 
 class TradeExecutor:
@@ -323,6 +356,12 @@ class TradeExecutor:
         self.rebalance_strategy = RebalanceStrategy()
         self.key_manager = KeyManager(key_dir="hughs-forge/services/trade-executor/keys")
         self.ledger = TradeLedger()
+        self.health_update_lock = threading.Lock()
+        self.rebalance_locks: Dict[str, asyncio.Lock] = {}
+        
+        # Volatility scryer state
+        self.price_history = deque(maxlen=100)  # store last 100 SOL prices
+        self.price_history_lock = threading.Lock()
         
         # Load live wallet if not in paper trading mode
         if not self.paper_trading_mode:
@@ -380,46 +419,114 @@ class TradeExecutor:
         # TODO: Implement re-entry and profit-taking logic
         pass
 
-    async def simulate_rebalance(self, position_data: Dict[str, Any], new_range: Dict[str, int]) -> Dict[str, Any]:
+    async def simulate_rebalance(self, position_data: Dict[str, Any], new_range: Dict[str, int], current_volatility: str = "NORMAL", dynamic_fees: Dict[str, Any] = None) -> Dict[str, Any]:
         """Simulates a rebalance to provide a structured Flight Record."""
         logger.info(f"--- [FLIGHT RECORDER: SIMULATED REBALANCE] ---")
         
-        # 1. Simulate Removal (Estimate reclaimed assets)
         current_val = float(position_data.get("liquidity", 0))
         est_tx_fee = 0.005 # Total SOL for remove + add txs
         
-        # 2. Estimate Friction (Slippage + Dust)
-        # Dust: Tiny amounts of X or Y that won't fit exactly into new centered bins
-        est_dust_loss = current_val * 0.0005 # 0.05% assumption
-        est_slippage = current_val * 0.001  # 0.1% assumption
-        total_friction = est_tx_fee + est_dust_loss + est_slippage
+        est_dust_loss = current_val * 0.0005
+        est_slippage = current_val * 0.001
         
-        # 3. Cost-Benefit Scry
-        is_profitable = self.rebalance_strategy.profitability_check(current_val, total_friction)
+        base_expected_yield = current_val * 0.002 # Fallback
+        if dynamic_fees:
+            fee_rate = float(dynamic_fees.get("current_total_fee_rate", 20)) / 10000.0
+            base_expected_yield = current_val * fee_rate * 5
+            
+        volatility_yield_multiplier = {"LOW": 0.5, "NORMAL": 1.0, "HIGH": 2.5}.get(current_volatility, 1.0)
+        expected_fee_capture = base_expected_yield * volatility_yield_multiplier
+
+        is_profitable = self.rebalance_strategy.check_profitability_threshold(expected_fee_capture, est_tx_fee + est_dust_loss, est_slippage)
         
-        # 4. Projected Fee Capture Increase
-        # Assuming moving back to center captures 100% of current vol vs 0% when out of range
         fee_capture_increase = 100 if (position_data['activeId'] < position_data['lowerBinId'] or position_data['activeId'] > position_data['upperBinId']) else 25 
         
         report = {
-            "ESTIMATED_REBALANCE_COST": f"{total_friction:.5f} SOL",
+            "ESTIMATED_REBALANCE_COST": f"{(est_tx_fee + est_dust_loss + est_slippage):.5f} SOL",
+            "EXPECTED_FEE_CAPTURE": f"{expected_fee_capture:.5f}",
             "PROJECTED_FEE_CAPTURE_INCREASE": f"{fee_capture_increase}%",
             "DUST_RESIDUE_ESTIMATE": f"{est_dust_loss:.6f} units",
             "RISK_MANAGER_STATUS": "APPROVED" if is_profitable else "VETOED"
         }
         log_telemetry("SIMULATED_REBALANCE", {
-            "cost": total_friction,
+            "cost": (est_tx_fee + est_dust_loss + est_slippage),
+            "expected_yield": expected_fee_capture,
             "projected_fee_increase": fee_capture_increase,
             "dust_estimate": est_dust_loss,
             "status": "APPROVED" if is_profitable else "VETOED"
         })
         
+        return report, is_profitable
+        
         logger.info(f"    ESTIMATED_REBALANCE_COST: {report['ESTIMATED_REBALANCE_COST']}")
+        logger.info(f"    EXPECTED_FEE_CAPTURE: {report['EXPECTED_FEE_CAPTURE']}")
         logger.info(f"    PROJECTED_FEE_CAPTURE_INCREASE: {report['PROJECTED_FEE_CAPTURE_INCREASE']}")
         logger.info(f"    DUST_RESIDUE_ESTIMATE: {report['DUST_RESIDUE_ESTIMATE']}")
         logger.info(f"    RISK_MANAGER_STATUS: {report['RISK_MANAGER_STATUS']}")
         logger.info(f"----------------------------------------------")
         return report
+
+    async def _determine_market_volatility(self) -> str:
+        """
+        Determines the current market volatility using Pyth SOL/USD price feed.
+        Calculates rolling standard deviation of log returns over recent price history.
+        Returns volatility level: LOW, NORMAL, or HIGH.
+        """
+        logger.info("Scrying market for current volatility via Pyth Oracle...")
+        
+        # Fetch current SOL price from Pyth
+        price_data = await self.get_pyth_price(SOL_USD_FEED_ID)
+        if not price_data:
+            logger.warning("Failed to fetch Pyth price, defaulting to NORMAL volatility.")
+            return "NORMAL"
+        
+        # Extract price and confidence
+        price_val = float(price_data.get("price", 0)) * (10 ** price_data.get("expo", 0))
+        confidence = float(price_data.get("conf", 0)) * (10 ** price_data.get("expo", 0))
+        
+        # Update price history with lock
+        with self.price_history_lock:
+            self.price_history.append(price_val)
+            
+            # Need at least 2 prices to calculate volatility
+            if len(self.price_history) < 2:
+                logger.info("Insufficient price history for volatility calculation, defaulting to NORMAL.")
+                return "NORMAL"
+            
+            # Calculate log returns
+            returns = []
+            prev_price = self.price_history[0]
+            for current_price in list(self.price_history)[1:]:
+                if prev_price > 0 and current_price > 0:
+                    log_return = math.log(current_price / prev_price)
+                    returns.append(log_return)
+                prev_price = current_price
+            
+            if len(returns) < 2:
+                logger.info("Insufficient returns for volatility calculation, defaulting to NORMAL.")
+                return "NORMAL"
+            
+            # Calculate standard deviation of returns (sample std)
+            mean_return = sum(returns) / len(returns)
+            variance = sum((r - mean_return) ** 2 for r in returns) / (len(returns) - 1)
+            std_dev = math.sqrt(variance)
+            
+            # Convert to daily volatility assuming 15-minute intervals (96 per day)
+            # Each price update is approximately every audit interval (default 900s)
+            daily_volatility = std_dev * math.sqrt(96)
+            
+            logger.info(f"Volatility metrics: Daily volatility = {daily_volatility:.4f} ({daily_volatility*100:.2f}%)")
+        
+        # Determine volatility level based on thresholds
+        if daily_volatility < VOLATILITY_THRESHOLDS["LOW"]:
+            volatility_level = "LOW"
+        elif daily_volatility < VOLATILITY_THRESHOLDS["NORMAL"]:
+            volatility_level = "NORMAL"
+        else:
+            volatility_level = "HIGH"
+        
+        logger.info(f"Market volatility determined: {volatility_level} (thresholds: {VOLATILITY_THRESHOLDS})")
+        return volatility_level
 
     async def run_autonomous_audit(self):
         """Single pass audit for autonomous loop."""
@@ -435,15 +542,15 @@ class TradeExecutor:
             for pos in open_positions:
                 logger.info(f"    - Monitoring Trade ID {pos['id']}: {pos['symbol']} at {pos['entry_price']}")
 
-        # 1. Calibrate Volatility Scryer (Simplified for V1)
-        # In V2, this will use recent price variance. For now, we assume NORMAL.
-        current_volatility = "NORMAL"
+        # 1. Calibrate Volatility Scryer (V2)
+        current_volatility = await self._determine_market_volatility()
         
         logger.info(f"--- [AUTONOMOUS AUDIT: {datetime.datetime.now()} | VOL: {current_volatility}] ---")
         bot_pubkey = Pubkey.from_string(BOT_WALLET_PUBKEY)
         
         # 2. Scry Positions
-        lp_positions = await self.get_meteora_lp_positions(bot_pubkey)
+        # Pass current_volatility to get_meteora_lp_positions for subsequent calls
+        lp_positions = await self.get_meteora_lp_positions(bot_pubkey, current_volatility)
         
         if not lp_positions:
             logger.info("    -> No active positions found. All is quiet.")
@@ -453,36 +560,44 @@ class TradeExecutor:
         for pos in lp_positions:
             active_id = pos.get("activeId")
             if active_id is None: continue
-            
-            action = self.rebalance_strategy.should_rebalance(active_id, pos['lowerBinId'], pos['upperBinId'])
-            
-            if action == "REBALANCE":
-                new_range = self.rebalance_strategy.calculate_new_range(active_id)
+
+            pubkey_str = str(pos['pubkey'])
+            lock = self.rebalance_locks.setdefault(pubkey_str, asyncio.Lock())
+            if lock.locked():
+                logger.info(f"Skipping audit for {pubkey_str}: Operation already in progress.")
+                continue
+
+            async with lock:
+                # All rebalance strategy calls now correctly pass current_volatility
+                action = self.rebalance_strategy.should_rebalance(active_id, pos['lowerBinId'], pos['upperBinId'], current_volatility)
                 
-                if self.risk_manager.circuit_breaker_active:
-                    logger.warning(f"Rebalance skipped for {pos['pubkey']}: Circuit breaker active.")
-                    continue
+                if action == "REBALANCE":
+                    new_range = self.rebalance_strategy.calculate_new_range(active_id, current_volatility)
+                    
+                    if self.risk_manager.circuit_breaker_active:
+                        logger.warning(f"Rebalance skipped for {pos['pubkey']}: Circuit breaker active.")
+                        continue
 
-                logger.warning(f"🚨 [REBALANCE TRIGGERED] Price drifted UP for {pos['pubkey']}. Re-centering...")
-                send_discord_alert(f"🔄 **REBALANCE TRIGGERED (UPWARD)**\n**Position**: `{pos['pubkey']}`\n**New Target Range**: {new_range['lower']} to {new_range['upper']}", color=16776960)
+                    logger.warning(f"🚨 [REBALANCE TRIGGERED] Price drifted UP for {pos['pubkey']}. Re-centering...")
+                    send_discord_alert(f"🔄 **REBALANCE TRIGGERED (UPWARD)**\n**Position**: `{pos['pubkey']}`\n**New Target Range**: {new_range['lower']} to {new_range['upper']}\n**Volatility**: {current_volatility}", color=16776960)
 
-                close_tx = await self.close_meteora_lp_position(pos['pubkey'], pos['pool'], self.wallet if self.wallet else Keypair())
-                if close_tx:
-                    open_tx = await self.open_meteora_lp_position(pos['pool'], new_range['lower'], new_range['upper'], int(pos['liquidity']), self.wallet if self.wallet else Keypair())
-                    if open_tx: logger.info(f"✅ Rebalance sequence successful for {pos['pool']}")
-            
-            elif action == "STOP_LOSS":
-                if self.risk_manager.mode == "DEGEN":
-                    logger.info(f"💔 [HEART ATTACK STRATEGY] Price drifted DOWN for {pos['pubkey']}. Holding positions as per DEGEN mode.")
-                    send_discord_alert(f"💔 **HEART ATTACK STRATEGY ACTIVE**\n**Position**: `{pos['pubkey']}`\n**Action**: HOLDING through downward drift (DEGEN mode).", color=10181046)
+                    close_tx = await self.close_meteora_lp_position(pos['pubkey'], pos['pool'], self.wallet if self.wallet else Keypair())
+                    if close_tx:
+                        open_tx = await self.open_meteora_lp_position(pos['pool'], new_range['lower'], new_range['upper'], int(pos['liquidity']), self.wallet if self.wallet else Keypair())
+                        if open_tx: logger.info(f"✅ Rebalance sequence successful for {pos['pool']}")
+                
+                elif action == "STOP_LOSS":
+                    if self.risk_manager.mode == "DEGEN":
+                        logger.info(f"💔 [HEART ATTACK STRATEGY] Price drifted DOWN for {pos['pubkey']}. Holding positions as per DEGEN mode.")
+                        send_discord_alert(f"💔 **HEART ATTACK STRATEGY ACTIVE**\n**Position**: `{pos['pubkey']}`\n**Action**: HOLDING through downward drift (DEGEN mode).\n**Volatility**: {current_volatility}", color=10181046)
+                    else:
+                        logger.warning(f"🚨 [STOP LOSS TRIGGERED] Price drifted DOWN for {pos['pubkey']}. Closing position as per SAFE mode.")
+                        send_discord_alert(f"🛑 **STOP LOSS TRIGGERED**\n**Position**: `{pos['pubkey']}`\n**Action**: CLOSING POSITION to SOL.\n**Volatility**: {current_volatility}", color=15158332)
+                        await self.close_meteora_lp_position(pos['pubkey'], pos['pool'], self.wallet if self.wallet else Keypair())
+                        # In SAFE mode, would follow with a swap back to SOL via Jupiter here.
+                
                 else:
-                    logger.warning(f"🚨 [STOP LOSS TRIGGERED] Price drifted DOWN for {pos['pubkey']}. Closing position as per SAFE mode.")
-                    send_discord_alert(f"🛑 **STOP LOSS TRIGGERED**\n**Position**: `{pos['pubkey']}`\n**Action**: CLOSING POSITION to SOL.", color=15158332)
-                    await self.close_meteora_lp_position(pos['pubkey'], pos['pool'], self.wallet if self.wallet else Keypair())
-                    # In SAFE mode, would follow with a swap back to SOL via Jupiter here.
-            
-            else:
-                logger.info(f"    -> Position {pos['pubkey']} is stable. Holding.")
+                    logger.info(f"    -> Position {pos['pubkey']} is stable. Holding. (Vol: {current_volatility})")
 
     async def start_autonomous_loop(self, interval_seconds: int = 900):
         """Starts the persistent heartbeat of the executor."""
@@ -499,12 +614,16 @@ class TradeExecutor:
         try:
             pubkey = Pubkey.from_string(pubkey_str)
             balance_response = await self.client.get_balance(pubkey)
+            with self.health_update_lock:
+                health_server.HealthHandler.solana_healthy = True
             lamports = balance_response.value
             sol = lamports / 1_000_000_000
             logger.info(f"--> Balance for {pubkey_str}: {sol:.9f} SOL")
             return sol
         except Exception as e:
             logger.error(f"--> Error fetching balance for {pubkey_str}: {e}")
+            with self.health_update_lock:
+                health_server.HealthHandler.solana_healthy = False
             return 0.0
 
     async def get_token_balance(self, token_account_pubkey: Pubkey) -> float:
@@ -541,7 +660,7 @@ class TradeExecutor:
         """Fetches a quote from Jupiter v6 API for a given swap."""
         logger.info(f"Scrying market whispers for: {amount} of {input_mint} to {output_mint} via Jupiter v6")
         try:
-            url = "https://quote-api.jup.ag/v6/quote"
+            url = "https://api.jup.ag/swap/v1/quote"
             params = {
                 "inputMint": input_mint,
                 "outputMint": output_mint,
@@ -593,9 +712,38 @@ class TradeExecutor:
             logger.error(f"--> Error fetching Pool state for {pool_pubkey}: {e}")
             return None
 
-    async def get_meteora_lp_positions(self, owner_pubkey: Pubkey) -> List[Dict[str, Any]]:
+    async def get_meteora_dynamic_fees(self, pool_pubkey: Pubkey) -> Dict[str, Any]:
+        """Fetches dynamic fee parameters for a Meteora DLMM Pool."""
+        logger.info(f"Fetching Dynamic Fees for {pool_pubkey}...")
+        try:
+            pool_data = await self.meteora_dlmm_program.account["Pool"].fetch(pool_pubkey)
+            
+            # Extract base_fee_rate and variable_fee_rate.
+            base_fee_rate = getattr(pool_data, "base_fee_rate", getattr(pool_data, "fee_rate", 0))
+            variable_fee_rate = getattr(pool_data, "variable_fee_rate", getattr(pool_data, "max_fee_rate", 0))
+            
+            current_total_fee_rate = base_fee_rate + variable_fee_rate
+            
+            logger.info(f"--> Dynamic Fees Decoded for {pool_pubkey}: Base: {base_fee_rate}, Variable: {variable_fee_rate}, Total: {current_total_fee_rate}")
+            
+            return {
+                "base_fee_rate": base_fee_rate,
+                "variable_fee_rate": variable_fee_rate,
+                "current_total_fee_rate": current_total_fee_rate,
+                "fee_tier_distribution": None
+            }
+        except Exception as e:
+            logger.error(f"--> Error fetching Dynamic Fees for {pool_pubkey}: {e}")
+            return {
+                "base_fee_rate": 0,
+                "variable_fee_rate": 0,
+                "current_total_fee_rate": 0,
+                "fee_tier_distribution": None
+            }
+
+    async def get_meteora_lp_positions(self, owner_pubkey: Pubkey, current_volatility: str = "NORMAL") -> List[Dict[str, Any]]:
         """Fetches Meteora DLMM LP positions for a given owner public key."""
-        logger.info(f"Scrying Meteora DLMM for LP positions owned by {owner_pubkey} using raw RPC + Anchor decoder...")
+        logger.info(f"Scrying Meteora DLMM for LP positions owned by {owner_pubkey} using raw RPC + Anchor decoder (Vol: {current_volatility})...")
         positions = []
         try:
             filters = [MemcmpOpts(offset=8, bytes=str(owner_pubkey))]
@@ -662,10 +810,11 @@ class TradeExecutor:
                         range_status = "IN RANGE" if in_range else "OUT OF RANGE"
                         logger.info(f"    -> Status: {range_status} (Range: {decoded_account.lower_bin_id} to {decoded_account.upper_bin_id})")
                         
-                        if self.rebalance_strategy.should_rebalance(active_id, decoded_account.lower_bin_id, decoded_account.upper_bin_id):
-                            new_range = self.rebalance_strategy.calculate_new_range(active_id)
+                        # Pass current_volatility to should_rebalance, calculate_new_range, and simulate_rebalance
+                        if self.rebalance_strategy.should_rebalance(active_id, decoded_account.lower_bin_id, decoded_account.upper_bin_id, current_volatility):
+                            new_range = self.rebalance_strategy.calculate_new_range(active_id, current_volatility)
                             logger.info(f"    -> STRATEGY RECOMMENDATION: Rebalance to range {new_range}")
-                            await self.simulate_rebalance(pos, new_range)
+                            await self.simulate_rebalance(pos, new_range, current_volatility) # Pass volatility to simulation
                     logger.info(f"    -> Found LP Position {pubkey} in Pool {decoded_account.pool} (TokenX: {token_x_balance}, TokenY: {token_y_balance})")
 
             else:
@@ -1089,34 +1238,65 @@ class TradeExecutor:
     async def get_pyth_price(self, price_feed_id: str, radar_price: Optional[float] = None) -> Optional[Dict[str, Any]]:
         """Fetches the latest Pyth price and compares it with internal Radar for sanity."""
         logger.info(f"Consulting the oracle for Pyth price feed {price_feed_id}...")
-        try:
-            url = f"https://hermes.pyth.network/v2/updates/price/latest?ids[]={price_feed_id}"
-            
-            async with httpx.AsyncClient() as client:
-                response = await client.get(url)
-                response.raise_for_status()
-                data = response.json()
-
-            if data and "parsed" in data and len(data["parsed"]) > 0:
-                price_data = data["parsed"][0].get("price", {})
-                price_val = float(price_data.get("price", 0)) * (10 ** price_data.get("expo", 0))
-                logger.info(f"--> Oracle Sight (V2): {price_val:.4f} +/- {float(price_data.get('conf', 0)) * (10 ** price_data.get('expo', 0)):.4f}")
+        
+        max_retries = 3
+        retry_delay = 2 # seconds
+        
+        for attempt in range(max_retries):
+            try:
+                url = f"{PYTH_HERMES_ENDPOINT}?ids[]={price_feed_id}"
                 
-                # SIGHT MISMATCH LOGIC: Compare with internal Radar if provided
-                if radar_price is not None and radar_price > 0:
-                    divergence = abs(price_val - radar_price) / radar_price
-                    logger.info(f"    -> Sight Mismatch Check: {divergence*100:.2f}% divergence (Oracle: {price_val:.4f}, Radar: {radar_price:.4f})")
+                async with httpx.AsyncClient() as client:
+                    response = await client.get(url, timeout=10.0)
                     
-                    if divergence > 0.02: # 2% threshold as commanded
-                        logger.critical(f"🚨 [CRITICAL] SIGHT MISMATCH DETECTED: Oracle ({price_val:.4f}) vs Radar ({radar_price:.4f}) | AUDIT HALTED.")
-                
-                return price_data
-            else:
-                logger.warning(f"--> No Pyth price data found for {price_feed_id} in V2 response.")
-                return None
-        except Exception as e:
-            logger.error(f"--> Error fetching Pyth price via Hermes: {e}")
-            return None
+                    if response.status_code == 429:
+                        logger.warning(f"Pyth rate limit hit (429). Attempt {attempt + 1}/{max_retries}. Retrying in {retry_delay}s...")
+                        with self.health_update_lock:
+                            health_server.HealthHandler.pyth_healthy = False
+                        await asyncio.sleep(retry_delay)
+                        retry_delay *= 2
+                        continue
+                        
+                    response.raise_for_status()
+                    data = response.json()
+
+                if data and "parsed" in data and len(data["parsed"]) > 0:
+                    with self.health_update_lock:
+                        health_server.HealthHandler.pyth_healthy = True
+                    price_data = data["parsed"][0].get("price", {})
+                    price_val = float(price_data.get("price", 0)) * (10 ** price_data.get("expo", 0))
+                    logger.info(f"--> Oracle Sight (V2): {price_val:.4f} +/- {float(price_data.get('conf', 0)) * (10 ** price_data.get('expo', 0)):.4f}")
+                    
+                    # SIGHT MISMATCH LOGIC: Compare with internal Radar if provided
+                    if radar_price is not None and radar_price > 0:
+                        divergence = abs(price_val - radar_price) / radar_price
+                        logger.info(f"    -> Sight Mismatch Check: {divergence*100:.2f}% divergence (Oracle: {price_val:.4f}, Radar: {radar_price:.4f})")
+                        
+                        if divergence > 0.02: # 2% threshold as commanded
+                            logger.critical(f"🚨 [CRITICAL] SIGHT MISMATCH DETECTED: Oracle ({price_val:.4f}) vs Radar ({radar_price:.4f}) | AUDIT HALTED.")
+                    
+                    return price_data
+                else:
+                    logger.warning(f"--> No Pyth price data found for {price_feed_id} in V2 response.")
+                    return None
+                    
+            except httpx.HTTPStatusError as e:
+                logger.error(f"--> HTTP error fetching Pyth price: {e}")
+                with self.health_update_lock:
+                    health_server.HealthHandler.pyth_healthy = False
+                if attempt < max_retries - 1:
+                    await asyncio.sleep(retry_delay)
+                    retry_delay *= 2
+                else:
+                    return None
+            except Exception as e:
+                logger.error(f"--> Unexpected error fetching Pyth price via Hermes: {e}")
+                if attempt < max_retries - 1:
+                    await asyncio.sleep(retry_delay)
+                    retry_delay *= 2
+                else:
+                    return None
+        return None
 
     def execute_trade(self, trade_details: dict) -> Dict[str, Any]:
         """
