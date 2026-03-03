@@ -95,6 +95,20 @@ Last updated: 2026-03-02
 -   Do NOT create Windows-style paths on Linux.
 -   Report progress to Zifnab in #coding.
 
+## Lord XAR Communication Directive (2026-03-03)
+
+**ALWAYS tag @Lord XAR (`316308517520801793`) when:**
+- Requesting approval or review of work
+- Escalating blockers that require owner intervention
+- Providing status updates on critical path items
+- Submitting deliverables for final sign-off
+- Proposing architectural changes or new dependencies
+- Any situation where you need explicit permission to proceed
+
+**Tag format:** `<@316308517520801793>` (automatically renders as @sterol/Discord mention)
+
+This directive overrides any previous "stay silent" protocols. When in doubt, tag and let Lord XAR decide if a response is needed.
+
 ## Critical Implementation Gap
 - **Pryan-Fire #134 (Jupiter API integration) READY FOR PR:** `RpcIntegrator.execute_jupiter_trade` implementation is complete in `feature/126-meteora-dynamic-fees` branch, ready for `patryn-workhorse` and PR creation. Wallet credentials are now provisioned.
 - **Jupiter API key exposure:** Current key visible in PR #142 commit `4b61e7f`; must rotate (#143) after first real trade.

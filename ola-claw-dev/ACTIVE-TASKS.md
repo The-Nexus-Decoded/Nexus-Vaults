@@ -101,12 +101,12 @@ Next: either create required tables or find a Jupiter route that avoids them for
 Last Updated: 2026-03-02
 
 ## Implement real Jupiter swap execution with wallet signing (Pryan-Fire #134)
-Status: IMPLEMENTATION COMPLETE, READY FOR PR. Assigned to Haplo.
+Status: PR OPEN (#195). Assigned to Haplo, awaiting review.
 - Issue Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/134
 - Implementation is complete in workspace branch `feature/126-meteora-dynamic-fees`. The `RpcIntegrator.execute_jupiter_trade` method now performs full quote/swap/sign/send flow using Jupiter v6 API.
 - Wallet credentials are PROVISIONED.
 - Requires Jupiter API key (already exists, but should be rotated after first live trade #143).
-Last Updated: 2026-03-02
+Last Updated: 2026-03-03
 
 ## Provision Trading Wallet Credentials (Pryan-Fire #145)
 Status: COMPLETED. Credentials provisioned to `/data/openclaw/keys/trading_wallet.json` on `ola-claw-trade` with 600 permissions.
