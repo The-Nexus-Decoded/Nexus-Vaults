@@ -59,7 +59,12 @@ Last updated: 2026-03-02
     4.  Generate separate pages for detailed sections (e.g., `cluster-planner.html`, `full-research.html`).
     5.  POST clickable hyperlinks (Markdown format) to **#repository** Discord channel immediately upon completion.
     6.  Use Tailscale IP of the serving server (likely ola-claw-dev:[REDACTED_TS_IP]).
--   **RESEARCH LIBRARY:** All completed research portals should be aggregated into the Research Library index (`research-index.html`) on ola-claw-main ([REDACTED_TS_IP]). The index is maintained by Zifnab; I will provide link and brief description for inclusion.
+-   **RESEARCH LIBRARY:** All completed research deliverables should be aggregated into the Research Library index (`research-index.html`) on ola-claw-main ([REDACTED_TS_IP]). The index is maintained by Zifnab. I will provide:
+    -   Title
+    -   Brief description (1 sentence)
+    -   Direct link to the page (for both summary/main page AND each major detailed page if they are substantial standalone documents)
+    -   Tags
+    -   Date
 -   **TROUBLESHOOTING LESSONS:** If blank pages occur:
     - Avoid `backdrop-filter: blur()` (causes rendering issues in some browsers).
     - Use solid backgrounds (`rgba()` or hex colors).
