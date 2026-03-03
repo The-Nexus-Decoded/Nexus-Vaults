@@ -50,15 +50,16 @@ Last updated: 2026-03-02
 -   All trade execution must target the bot wallet. Owner wallet is for read-only queries.
 
 ## Website Creation Directive (2026-03-03)
--   **WHEN:** Lord Xar asks me to create a website for research that is complete and approved.
--   **WHAT:** Automatically build a cool, responsive HTML portal with the research findings, include both summary and detailed pages, and create clickable hyperlinks for direct access.
+-   **WHEN:** Research task is completed and approved.
+-   **WHAT:** Automatically build a cool, responsive HTML portal with research findings, include both summary and detailed pages, and create clickable hyperlinks for direct access.
 -   **HOW:**
     1.  Use `python3 -m http.server` from `/data/openclaw/workspace` (Zifnab's proven pattern) to serve files.
     2.  Prefer port 8081; if busy, try 8082, etc.
     3.  Create main index.html with card-based navigation, dark theme, clean typography.
     4.  Generate separate pages for detailed sections (e.g., `cluster-planner.html`, `full-research.html`).
-    5.  POST clickable hyperlinks to Discord (Markdown format) immediately upon completion.
+    5.  POST clickable hyperlinks (Markdown format) to **#repository** Discord channel immediately upon completion.
     6.  Use Tailscale IP of the serving server (likely ola-claw-dev:[REDACTED_TS_IP]).
+-   **RESEARCH LIBRARY:** All completed research portals should be aggregated into the Research Library index (`research-index.html`) on ola-claw-main ([REDACTED_TS_IP]). The index is maintained by Zifnab; I will provide link and brief description for inclusion.
 -   **TROUBLESHOOTING LESSONS:** If blank pages occur:
     - Avoid `backdrop-filter: blur()` (causes rendering issues in some browsers).
     - Use solid backgrounds (`rgba()` or hex colors).
