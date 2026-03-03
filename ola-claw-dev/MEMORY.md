@@ -3,6 +3,10 @@
 Last updated: 2026-03-02
 
 ## Recent Events & Blocks
+- **2026-03-03 | Research Portal Created: Qwen 3.5 Model Comparison:** Created comprehensive hardware decision guide for Qwen 3.5 models (0.8B to 397B). Portal: http://[REDACTED_TS_IP]:8086/qwen35-model-comparison.html. Includes GPU-specific recommendations (RTX 5080 → 35B-A3B), VRAM requirements, SWE-bench quality scores, MoE vs Dense analysis, and purchase advice. Posted to #repository and added to Research Library.
+- **2026-03-03 | Research Portal Updated: LLM Cluster Planner 2026:** Replaced outdated cluster planner with 2026 hardware (RTX 5080, 4080 Super) and updated model specs (Qwen 3.5, Kimi K2.5, GLM-5, LFM2). Portal: http://[REDACTED_TS_IP]:8085/llm-cluster-planner-2026.html. Posted to #repository.
+- **2026-03-03 | Research Portal Created: Trending LLMs 2026 — Deep Technical Analysis:** Comprehensive 27KB technical deep-dive on hottest 2026 LLMs (Qwen 3.5, Kimi K2.5, GLM-5, LFM2). Includes architecture specs, benchmark tables vs GPT-5/Claude, hardware requirements, deployment guides. Portal: http://[REDACTED_TS_IP]:8084/trending-llms-2026-detailed.html. Posted to #repository.
+- **2026-03-03 | Research Library Directive Formalized:** MEMORY.md updated with Website Creation Directive: all completed research → auto-create HTML portal → serve via python3 -m http.server → post clickable links to #repository → provide metadata to Zifnab for Research Library index inclusion. No asking permission — just build and deliver.
 - **2026-03-02 | Issue Closed: Duplicate Jupiter API Integration (Pryan-Fire #147):** Closed as duplicate of Pryan-Fire #134. Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/147
 - **2026-03-02 | Issue Closed: Wallet Provisioning (Pryan-Fire #145):** Wallet credentials successfully provisioned to `ola-claw-trade`. Issue CLOSED. Link: https://github.com/The-Nexus-Decoded/Pryan-Fire/issues/145
 - **2026-03-02 | Issue Closed: Duplicate Wallet Provisioning (Pryan-Fire #146):** Closed as a duplicate of Pryan-Fire #145.
