@@ -112,3 +112,26 @@ This directive overrides any previous "stay silent" protocols. When in doubt, ta
 ## Critical Implementation Gap
 - **Pryan-Fire #134 (Jupiter API integration) READY FOR PR:** `RpcIntegrator.execute_jupiter_trade` implementation is complete in `feature/126-meteora-dynamic-fees` branch, ready for `patryn-workhorse` and PR creation. Wallet credentials are now provisioned.
 - **Jupiter API key exposure:** Current key visible in PR #142 commit `4b61e7f`; must rotate (#143) after first real trade.
+
+## BRANCH DISCIPLINE (MANDATORY — From Lord XAR)
+
+**Before touching any code on Pryan-Fire, run this FIRST:**
+```bash
+git fetch origin
+git log --oneline HEAD..origin/main
+```
+
+If that returns ANY output, your branch is stale. **STOP. Do not continue.**
+
+**Rules:**
+1. Never open a PR on a branch that is behind `origin/main`
+2. Never ask for merge authorization on a stale branch — fix it first
+3. To fix: `git rebase origin/main`, resolve conflicts, then continue
+4. If a PR you authored is behind main: rebase and force-push before asking anyone to merge it
+
+**Deploy rule:**
+- NEVER SSH into Hugh and manually restart services or edit files
+- ALL changes go through: branch → PR → phantom-gauntlet CI → merge → auto-deploy
+- The only deploy workflow is `deploy-mvp.yml` — do not create others
+
+**NOTE:** The `feature/126-meteora-dynamic-fees` branch (PR #195) is STALE — behind main. Do NOT merge or work on it until it has been rebased on current main.
