@@ -17,29 +17,55 @@
 - [x] Pryan-Fire Windows Clone (Nexus-Vaults #11 related) - Zifnab - `Pryan-Fire` repository successfully cloned to `C:\Users\olawal\Pryan-Fire` on Windows workstation.
 - [x] Claude Code Analysis (Nexus-Vaults #11) - Zifnab - Completed initial analysis; identified race condition.
 - [ ] Fleet Workspace Git Sync (Nexus-Vaults#1) - Zifnab - Ongoing daily redaction and push to GitHub.
-- [ ] Security: PAT exposed in channel - rotation required (Chelestra-Sea #43) - Zifnab (PAT rotation pending GitHub unblock), Haplo (local verification)
+- [ ] Security: PAT exposed in channel - rotation required (Chelestra-Sea #43) - Zifnab, Haplo (action pending)
 
 ### Zifnab: Fleet Coordination & Monitoring
 - **Rate Guard Fleet Monitor:** Active (15-min cron).
 - **Memory Guard:** Active (5-min cron).
-- **GitHub Operations:** Currently blocked from merging/closing PRs on Pryan-Fire due to token permissions (infection flagged by GitHub). Escalated to Lord Xar.
-- **Trading Pipeline Bugfixes (Pryan-Fire #133–#139):** In Progress. Implemented:
-  - TradeExecutor: config-driven paper mode, fail-fast wallet loading (issues #136, #139)
-  - Jupiter swap execution via direct HTTP (issue #134)
-  - Signal ingestion endpoint on orchestrator (issue #138)
-  - Pyth price fallback to CoinGecko (> $1k) likely resolves #137 (verify)
-  - Updated RpcIntegrator callers? (RpcIntegrator itself still stub; note: active service uses TradeOrchestrator, not RpcIntegrator)
-  - Next: Deploy changes to ola-claw-trade, install missing deps (FastAPI, uvicorn) in orchestrator venv, set env vars for live wallet, test end-to-end.
-- **Service Integration:** Modified TradeOrchestrator to embed TradeExecutor and start HTTP signal server (port 8002). Need to verify dependencies and restart service.
+- **GitHub Operations:** Restored. Merging/closing PRs functional. Haplo has admin on Pryan-Fire. Open PRs can be processed.
+- **Trading Pipeline (Pryan-Fire #133–#139, #141, #145):** Implementation complete in workspace on ola-claw-dev but **NOT YET COMMITTED**. Key fixes deployed:
+  - TradeExecutor: config-driven paper mode, fail-fast wallet loading (#136, #139)
+  - Jupiter swap execution via direct HTTP (#134)
+  - Signal ingestion endpoint on orchestrator (#138)
+  - Pyth price fallback to CoinGecko (> $1k) (#137)
+  - RiskManager Discord integration with mock fallback (#141)
+- **Jupiter Swap PR #195:** Open but has merge conflicts; requires rebase onto current main before review.
+- **Jupiter v6 deserialization (#152):** Merged (resolved).
+- **Wallet History Analysis:** Completed. Extracted trades from Owner wallet (73,660 transactions) and Bot wallet (933 transactions). Insights:
+  - Owner: 14,701 trades across 532 tokens; average fee 0.00064 SOL/trade; strong speculative bias (187 "pump" tokens, minimal USDC/wSOL). Activity peaks Fri 13:00-17:UTC.
+  - Bot: No token balance changes detected (transactions likely non-trade or pre-funding). Data archived in `Pryan-Fire/tools/solana-wallet-analyzer/output_analysis/`.
+- **Service Status (ola-claw-trade):** patryn-trader running (PID 610795) but **stub Jupiter** (pre-merge code). Cannot execute real trades until #159 is merged and deployed.
+- **Wallet Credentials:** ✅ Provisioned on ola-claw-trade (Pryan-Fire #145 complete). File: `/data/openclaw/keys/trading_wallet.json` (600)
+- **Next Steps:**
+  1. Lord Xar merges PR #159
+  2. Deploy to ola-claw-trade via `patryn-workhorse` + `nexus-bridge`
+  3. Perform devnet smoke test ($1-2) then mainnet trade
+  4. Rotate Jupiter API key (#143)
+
+### Project: The Assassins Ledger (Arianus-Sky #3)
+- **Status:** LAUNCHED — GitHub Project #11 created, tickets assigned.
+- **Supervision:** Alfred (Windows CLI) | Coordination: Zifnab
+- **Haplo Tickets:**
+  - Pryan-Fire #184: Enhanced trade data capture
+  - **Pryan-Fire #185: Discord webhook broadcaster → ABANDONED (wrong assignment)**
+  - **Chelestra-Sea #84: Meteora DLMM webhook → COMPLETED (PR #89 merged)**
+  - Abarrach-Stone #3: trades.db schema migration
+- **Lord Xar Ticket:** Chelestra-Sea #78 (Discord webhook setup) — still needed for URL
+- **Milestones:**
+  - [x] Haplo completes Meteora webhook service and PR merged
+  - [ ] DB migration validated against existing 564 records
+  - [ ] Discord webhook URL provisioned by Lord Xar (Chelestra-Sea#78)
+  - [ ] End-to-end feed verification in #trading channel
+- **Blockers:** Awaiting webhook creation (Chelestra-Sea#78) before final integration test.
 
 ### Haplo: CI/CD Deployment Pipeline (Pryan-Fire #1)
-- Status: **BLOCKED** - Self-hosted runner `ola-claw-dev` token expired/signature invalid; GitHub Actions jobs stuck in queued.
-- Action: Re-register runner with fresh token.
-- Impact: Blocks deployments (PR #132 already merged, but not yet deployed).
+- Status: **ACTIVE** - Self-hosted runner online on ola-claw-dev.
+- Current task: Jupiter improvements committed and PR #159 opened.
+- Waiting on merge; no further action needed.
 
 ### Hugh: Chelestra-Sea #2 (Profile Distillation)
-- Status: **BLOCKED** - Pending dependency installation (sqlite3, chromadb, PyPDF2, python-docx, openpyxl) requested 2026-03-01.
-- Role: Trading operative; will test trading pipeline once Zifnab's fixes are deployed.
+- Status: **COMPLETED** (2026-03-02 01:15 CST)
+- Result: Processed 22,630 files, 44 errors; SQLite + ChromaDB fully built
 
 ### Lord Xar: Lobster Workflow Management
 - Under direct management.

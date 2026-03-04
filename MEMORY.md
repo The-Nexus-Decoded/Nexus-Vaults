@@ -149,9 +149,10 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - Emergency exit authority (owner wallet controlling bot wallet) deferred until bot proves itself.
 
 ## DISCORD
-- @Zifnab (me): #the-Nexus (requireMention: true), #jarvis (requireMention: false), #coding (requireMention: false)
-- @HughTheHand: #trading (requireMention: false), #the-Nexus
-- @Haplo: #coding (requireMention: false), #the-Nexus
+- @Zifnab (me): #the-Nexus (requireMention: true), #jarvis (requireMention: false), #coding (requireMention: true)
+- @HughTheHand: #crypto (requireMention: true), #coding (requireMention: true), #the-Nexus (requireMention: true)
+- @Haplo: #coding (requireMention: true), #the-Nexus (requireMention: true)
+- To delegate: you MUST @mention the target agent by name or they won't see it
 - Guild: 1475082873777426494 | allowBots: true on all 3
 
 ### Channel IDs
@@ -287,10 +288,13 @@ After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get
 - Quick health check: `fleet health --json | fleet format` (no workflow needed)
 - Cron logs at `/data/openclaw/logs/fleet/` — read these instead of running commands
 
-## ACTIVE DIRECTIVE FROM LORD XAR (2026-03-01 14:00 UTC)
-- **OVERRIDE: You ARE coding for Pryan-Fire #122.** Haplo is DOWN (model issues). You are implementing the sub-issues you created (#126-#131) YOURSELF. Do not delegate back to Haplo.
-- Start with #126: implement get_meteora_dynamic_fees in TradeExecutor
-- The code lives in /data/repos/Pryan-Fire on Haplo's server. You can access it via SSH or clone it locally.
+## DELEGATION RULES (Updated 2026-03-03 by Lord Alfred)
+- **Haplo is ONLINE.** Delegate all coding tasks to him via @mention in #coding.
+- **Hugh is ONLINE.** Delegate all trading tasks to him via @mention in #crypto.
+- You are the COORDINATOR. You do NOT write code. You review, challenge, and assign.
+- When delegating: @mention the agent, state the task clearly, reference the GitHub issue.
+- If an agent is idle for 30+ minutes with open tasks, nudge them.
+- If an agent is stuck, escalate to Lord Xar — do NOT take over their work.
 
 ## NEW TOOL: opus-deep-think (Research via Claude Opus) -- Queue-Managed
 - Use the `opus-deep-think.lobster` workflow for all Opus queries. This manages the fleet-wide queue automatically.
@@ -335,3 +339,69 @@ NEVER use Opus for:
 - If the queue wait exceeds 10 minutes, your request times out. Retry later.
 - No hard daily limit, but Lord Xar monitors usage. Abuse will result in limits being enforced.
 - Queue status: run `/data/openclaw/scripts/shared/opus-queue.sh status` via exec for a quick check.
+
+## RESEARCH PORTAL WORKFLOW (NOTION INTEGRATION)
+
+### Overview
+All research deliverables (HTML portals) are archived in a Notion database called **Research Library**. This provides search, filtering, ordering, and collaborative management.
+
+### Database
+- Parent page: "Nexus_Research_Library"
+- Database title: "Research Library"
+- Database ID: `c5b9666f-eeb7-4b39-9692-6d9fafe055a8`
+- Properties:
+  - **Title** (title)
+  - **Portal URL** (url)
+  - **Description** (rich text)
+  - **Date Added** (date)
+  - **Tags** (multi-select: hardware, llm, moe, deployment, quantization, benchmarks, specs, cost-analysis, planning, research)
+  - **Status** (select: planning, research, deployed)
+  - **Source File** (rich text)
+
+### Website Creation Directive (Updated)
+When a research portal is completed by Haplo:
+1. Serve the HTML via `python3 -m http.server` on ola-claw-dev (port 8081/8082)
+2. Post a summary in **#coding** with:
+   - Portal title
+   - Portal URL
+   - Source file path
+   - Tags
+3. Zifnab automatically adds the entry to the Notion Research Library database
+4. The **#repository** channel contains a link to the Notion database (read-only shared view)
+
+### Notion Setup
+- Integration name: Nexus-Research (internal)
+- API key stored at `~/.config/notion/api_key` (permissions 600)
+- Notion API version: 2025-09-03
+- Parent page ID: `31846edc57ff80268513d09964584ccd` (shared with integration)
+
+### Migration
+Three existing research portals have been migrated to the Notion database:
+1. GPU Cluster for Qwen 3.5 32B – Cluster Planner
+2. GPU Qwen 3.5 Comparison — Deep Research
+3. MoonshotAI Kimi-K2.5 — System Requirements & Deployment Guide
+
+The static `research-index.html` is deprecated; the Notion database is the single source of truth.
+
+## BRANCH DISCIPLINE (MANDATORY — From Lord XAR)
+
+**Before authorizing or merging any Pryan-Fire PR, check it is not stale:**
+```bash
+gh pr view <number> --json mergeStateStatus
+```
+Or ask Haplo to run: `git fetch origin && git log --oneline HEAD..origin/main`
+
+If the branch is behind `origin/main`, **do not authorize the merge.** Tell Haplo to rebase first.
+
+**Rules:**
+1. Never authorize a merge on a stale branch
+2. Never instruct Haplo to work from a branch that is behind main
+3. If a PR has been open more than 48 hours, treat it as stale — verify before merging
+4. When delegating coding tasks to Haplo, always specify: "branch from current main"
+
+**Deploy rule:**
+- NEVER instruct Hugh to manually restart services or edit files via SSH
+- ALL changes go through: branch → PR → phantom-gauntlet CI → merge → auto-deploy
+- The only deploy workflow is `deploy-mvp.yml`
+
+**NOTE:** PR #195 (`feature/126-meteora-dynamic-fees`) is currently STALE — behind main by several commits. Do NOT authorize its merge until Haplo has rebased it on current main.
