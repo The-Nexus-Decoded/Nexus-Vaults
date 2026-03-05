@@ -1,13 +1,20 @@
 name: fleet-status
-description: "Aggregate health status from all 3 fleet servers using fleet CLI"
+description: "Aggregate health status, disk usage, and process status from all 3 fleet servers."
 steps:
-  - id: health
-    description: "Get fleet health from rate guard"
-    command: fleet health --json
-    timeoutMs: 15000
-
-  - id: report
-    description: "Format health report"
-    command: fleet format health-report
-    stdin: $health.stdout
-    timeoutMs: 10000
+  - id: status_local
+    description: "Check status of ola-claw-dev (local)"
+    command: |
+      echo "--- [ola-claw-dev] Status ---"
+      uptime
+      df -h /data | grep /data
+      systemctl --user is-active openclaw-gateway
+  - id: status_main
+    description: "Check status of ola-claw-main (Zifnab)"
+    command: |
+      echo "--- [ola-claw-main] Status ---"
+      ssh [REDACTED_IP] "uptime; df -h /data | grep /data; systemctl --user is-active openclaw-gateway"
+  - id: status_trade
+    description: "Check status of ola-claw-trade (Hugh)"
+    command: |
+      echo "--- [ola-claw-trade] Status ---"
+      ssh [REDACTED_IP] "uptime; df -h /data | grep /data; systemctl --user is-active openclaw-gateway"

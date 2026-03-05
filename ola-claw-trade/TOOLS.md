@@ -319,7 +319,7 @@ All three agents' workspace folders should be version-controlled in GitHub for b
 
 **CRITICAL: Redaction before any push.**
 A redaction script MUST run before every commit. It strips:
-- API keys, tokens, PATs (grep for patterns: `[REDACTED_GH_PAT]`, `[REDACTED_API_KEY]`, `BSA`, `Bearer`, env var values)
+- API keys, tokens, PATs (grep for patterns: `[REDACTED_GH_PAT]`, `[REDACTED_API_KEY]`, `[REDACTED]`, `Bearer`, env var values)
 - Wallet addresses (public and private keys)
 - Tailscale IPs (replace with `[REDACTED_IP]`)
 - Discord bot tokens

@@ -1,7 +1,7 @@
 # Zifnab's Long-Term Memory (Merged 2026-02-27 by XAR)
 
 ## IDENTITY — READ THIS FIRST
-- **I am ZIFNAB** — the coordinator/orchestrator agent running on ola-claw-main ([REDACTED_TS_IP])
+- **I am ZIFNAB** — the coordinator/orchestrator agent running on ola-claw-main ([REDACTED_IP])
 - I am NOT Haplo (coder on ola-claw-dev) and NOT Hugh (trader on ola-claw-trade)
 - My role: fleet oversight, monitoring, config management, cron jobs, delegation
 - I do NOT write code for Pryan-Fire or trade crypto — those are Haplo's and Hugh's jobs
@@ -56,14 +56,14 @@ When creating any scheduled, recurring, or automated task across the fleet:
 ## FLEET AGENTS
 | Server | Hostname | Tailscale IP | Role | Agent |
 |--------|----------|--------------|------|-------|
-| ola-claw-main | 192.168.1.127 | [REDACTED_TS_IP] | Coordinator, central brain | Zifnab (me) |
-| ola-claw-trade | 192.168.1.88 | [REDACTED_TS_IP] | Crypto trader, Solana DeFi | Hugh the Hand |
-| ola-claw-dev | 192.168.1.211 | [REDACTED_TS_IP] | Dev Factory, autonomous coding | Haplo |
+| ola-claw-main | 192.168.1.127 | [REDACTED_IP] | Coordinator, central brain | Zifnab (me) |
+| ola-claw-trade | 192.168.1.88 | [REDACTED_IP] | Crypto trader, Solana DeFi | Hugh the Hand |
+| ola-claw-dev | 192.168.1.211 | [REDACTED_IP] | Dev Factory, autonomous coding | Haplo |
 
 ### SSH Access (from ola-claw-main)
-- To Hugh: `ssh openclaw@[REDACTED_TS_IP]`
-- To Haplo: `ssh openclaw@[REDACTED_TS_IP]`
-- To Windows: `ssh olawal@[REDACTED_TS_IP]`
+- To Hugh: `ssh openclaw@[REDACTED_IP]`
+- To Haplo: `ssh openclaw@[REDACTED_IP]`
+- To Windows: `ssh lordxar@[REDACTED_IP]`
 - All via Tailscale IPs (never LAN IPs — they can change)
 
 ### Haplo's Recent Progress (as of 2026-03-01)
@@ -73,7 +73,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - Formalized and began implementation of Strategy V2 (Volatility-Aware Rebalancing) for Hugh.
 
 ### Windows Workstation
-- **User:** olawal | **Tailscale IP:** [REDACTED_TS_IP]
+- **User:** lordxar | **Tailscale IP:** [REDACTED_IP]
 - **What is there:** Claude Code CLI, GSD installed, iCloud Drive sync, project files
 - **Claude Code Analysis Findings (2026-03-01):**
     - Performed architectural analysis and race condition detection in `trade-executor/main.py` and `jupiter_service.py`.
@@ -111,6 +111,36 @@ When creating any scheduled, recurring, or automated task across the fleet:
             - Dynamic Fee: > 0.15% (to cover rebalance costs)
             - Volatility Scale: Active in `StrategyEngine`
 
+## MONOREPO ARCHITECTURE (2026-03-04)
+
+**Master Repository:** The-Nexus-Decoded/The-Nexus (monorepo)
+
+**Realms (subdirectories):**
+- Pryan-Fire/ — Business logic, agent services, tools
+- Chelestra-Sea/ — Networking, communication, integration
+- Arianus-Sky/ — UIs, dashboards, visualizations
+- Abarrach-Stone/ — Data, schemas, storage
+- Nexus-Vaults/ — Workspace snapshots, fleet docs
+
+**Migration Status:** IN PROGRESS (Started 2026-03-04)
+- **Current focus:** Pryan-Fire migration (Nexus-Vaults#15)
+- All future development targets The-Nexus monorepo
+- Separate GitHub Projects for each realm
+- All issues and PRs from scattered repos will be consolidated
+
+**Rationale:**
+- Eliminates code sprawl across multiple repos
+- Aligns code locations with GitHub Projects per realm
+- Simplifies dependency management and CI/CD
+- Single source of truth for the entire fleet
+
+**Actions Taken:**
+- Created tracking issue: Nexus-Vaults#15
+- Delegated to Haplo (high urgency)
+- Open PRs in old Pryan-Fire (#206, #195) will be closed and re-submitted to The-Nexus
+
+**Note:** GitHub App write permissions currently blocked (Chelestra-Sea#68). Haplo using olalawal PAT for migration PR.
+
 ## CRITICAL: File Path Rules
 - **edit/write tools ONLY work within workspace** (`/data/openclaw/workspace/`). Paths outside fail with "Path escapes workspace root".
 - `/data/openclaw/openclaw.json` is OUTSIDE workspace — use `exec` tool (sed/python) to modify them.
@@ -143,8 +173,8 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - **POST-UPDATE PROCEDURE:** After any OpenClaw update on any server, run `sudo bash /data/openclaw/rate-guard-v2/reapply-rate-guard-patches.sh`, then `rm -rf ~/.cache/node/compile_cache && systemctl --user restart openclaw-gateway`.
 
 ## Wallet Architecture (decided 2026-02-25)
-- **Bot wallet**: `[REDACTED_KEY]4ku5x` — TRADING_WALLET_PUBLIC_KEY on ola-claw-trade. This is the wallet Hugh trades with. Private key is on ola-claw-trade only.
-- **Owner wallet**: `[REDACTED_KEY]e1xb` — OWNER_WALLET_PUBLIC_KEY on ola-claw-trade + ola-claw-main. READ-ONLY — no private key on any server. Used for analysis, monitoring, and emergency ntfy alerts only.
+- **Bot wallet**: `74QXtqTiM9w1D9WM8ArPEggHPRVUWggeQn3KxvR4ku5x` — TRADING_WALLET_PUBLIC_KEY on ola-claw-trade. This is the wallet Hugh trades with. Private key is on ola-claw-trade only.
+- **Owner wallet**: `sh36vHUDHcXqVD8aZJR8GF3Z3PdaU69XG8wJeB1e1xb` — OWNER_WALLET_PUBLIC_KEY on ola-claw-trade + ola-claw-main. READ-ONLY — no private key on any server. Used for analysis, monitoring, and emergency ntfy alerts only.
 - Owner wallet has 7 years of Solana trade history — valuable for quant analysis.
 - Emergency exit authority (owner wallet controlling bot wallet) deferred until bot proves itself.
 
@@ -167,7 +197,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 
 ## GITHUB (The-Nexus-Decoded org)
 - **5 repos (all PUBLIC):** Arianus-Sky, Pryan-Fire, Abarrach-Stone, Chelestra-Sea, .github
-- **PAT:** github_pat_11AALFHTY... deployed to all 3 servers via gh CLI
+- **PAT:** [REDACTED]... deployed to all 3 servers via gh CLI
 - **Pryan-Fire:** Haplo's code repo (haplos-workshop, zifnabs-scriptorium, hughs-forge)
 - **Chelestra-Sea:** Infra repo (ansible, systemd, comms/discord)
 - **GitHub Actions secrets on Pryan-Fire:** GH_PAT_FOR_HAPLO, TRADE_SERVER_HOST, TRADE_SERVER_USER, TRADE_SERVER_SSH_KEY
@@ -180,7 +210,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - **ntfy topic:** olaclaw-alerts | **Script:** /data/openclaw/scripts/ntfy-alert.sh on all servers
 - **Health check:** every 5 min, checks gateway + disk space + Ollama (dev only)
 - **Lobster:** installed on all 3 servers, enabled via tools.alsoAllow
-- **Brave Search API key:** BSAsHuPyDtuxnPQYw34PLfUZ51xl1vX (on all 3 servers)
+- **Brave Search API key:** [REDACTED] (on all 3 servers)
 
 ## LESSONS LEARNED: DIVISION OF LABOR (2026-02-27)\n- **Project Management (ProjectV2 boards, overall strategic task orchestration) is Zifnab's exclusive domain.** Haplo is to focus solely on coding, execution, and technical implementation, ignoring any requests related to creating or managing GitHub Project boards.\n\n## RESOLVED ISSUES (close if still open)
 - Hugh's embedding 404: FIXED — Rate Guard proxy was rewriting embedding model names. Proxy now passes through non-generation methods. Close Abarrach-Stone#2 if open.

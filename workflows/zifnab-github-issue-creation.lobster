@@ -1,37 +1,27 @@
+
 name: zifnab-github-issue-creation
-description: "Standardized creation of GitHub issues with labels and assignees"
+description: "Workflow for creating a new GitHub issue in a specified repository."
 args:
-  repo:
-    description: "Repository name (e.g. Pryan-Fire)"
+  repo_name:
+    description: "Name of the GitHub repository (e.g., Pryan-Fire, Chelestra-Sea)."
     type: string
   title:
-    description: "Issue title"
+    description: "Title of the GitHub issue."
     type: string
   body:
-    description: "Issue body (markdown)"
+    description: "Body content for the GitHub issue (markdown supported)."
     type: string
     default: ""
   labels:
-    description: "Comma-separated label names"
+    description: "Comma-separated labels for the issue (e.g., bug, feature, P1)."
     type: string
-    default: ""
-  assignees:
-    description: "Comma-separated GitHub usernames to assign"
+    default: "task"
+  assignee:
+    description: "GitHub username of the assignee (e.g., olalawal, haplo)."
     type: string
-    default: ""
 steps:
   - id: create_issue
-    description: "Create the GitHub issue"
-    command: |
-      set -e
-      cmd="gh issue create --repo The-Nexus-Decoded/${repo} --title \"${title}\" --body \"${body}\""
-      if [ -n "${labels}" ]; then
-        cmd="$cmd --label ${labels}"
-      fi
-      if [ -n "${assignees}" ]; then
-        cmd="$cmd --assignee ${assignees}"
-      fi
-      eval $cmd 2>&1
-      echo ""
-      echo "=== ZIFNAB ISSUE CREATED ==="
-    timeoutMs: 30000
+    description: "Creating the GitHub issue."
+    command: 'gh issue create --repo The-Nexus-Decoded/{args.repo_name} --title "{args.title}" --body "{args.body}" --label "{args.labels}" --assignee "{args.assignee}"'
+    # Note: Requires gh CLI to be configured and authenticated
+    timeoutMs: 60000

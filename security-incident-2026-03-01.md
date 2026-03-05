@@ -13,7 +13,7 @@ Two GitHub Personal Access Tokens (PATs) were posted in plain text in the Discor
 
 ### 1. haplo-claw-3 (Active bot account)
 ```
-[REDACTED_KEY][REDACTED_KEY]BAAI4ZUHeIrlAOg
+[REDACTED]
 ```
 - **Usage:** Active bot token for CI/CD, git operations on `ola-claw-dev`
 - **Scope:** Likely `repo`, `workflow`, `read:org` for Pryan-Fire repository
@@ -21,7 +21,7 @@ Two GitHub Personal Access Tokens (PATs) were posted in plain text in the Discor
 
 ### 2. olalawal (Owner account - inactive backup)
 ```
-[REDACTED_KEY][REDACTED_KEY]IPM63VCevGPKx1F
+[REDACTED]
 ```
 - **Usage:** Backup/owner token, potentially referenced in `~/.config/gh/hosts.yml` on servers
 - **Scope:** Unknown

@@ -51,10 +51,10 @@ redact_dir() {
     # Only redact text files under 500KB
     find "$dir" -type f -size -500k \( -name "*.md" -o -name "*.txt" -o -name "*.sh" -o -name "*.py" -o -name "*.js" -o -name "*.json" -o -name "*.yml" -o -name "*.yaml" -o -name "*.env" -o -name "*.toml" -o -name "*.cfg" -o -name "*.conf" \) -print0 | while IFS= read -r -d '' f; do
         sed -i \
-            -e 's/github_pat_[a-zA-Z0-9_]*/[REDACTED_GH_PAT]/g' \
-            -e 's/sk-[a-zA-Z0-9_-]*/[REDACTED_API_KEY]/g' \
-            -e 's/AIzaSy[a-zA-Z0-9_-]*/[REDACTED_GOOGLE_KEY]/g' \
-            -e 's/Bearer [a-zA-Z0-9_.=-]*/Bearer [REDACTED_TOKEN]/g' \
+            -e 's/[REDACTED][a-zA-Z0-9_]*/[REDACTED_GH_PAT]/g' \
+            -e 's/[REDACTED][a-zA-Z0-9_-]*/[REDACTED_API_KEY]/g' \
+            -e 's/[REDACTED][a-zA-Z0-9_-]*/[REDACTED_GOOGLE_KEY]/g' \
+            -e 's/Bearer [REDACTED][a-zA-Z0-9_.=-]*/Bearer [REDACTED][REDACTED_TOKEN]/g' \
             -e 's/100\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/[REDACTED_TS_IP]/g' \
             -e 's/[a-zA-Z0-9_-]\{24\}\.[a-zA-Z0-9_-]\{6\}\.[a-zA-Z0-9_-]\{27,\}/[REDACTED_DISCORD_TOKEN]/g' \
             "$f" 2>/dev/null || true
@@ -118,7 +118,7 @@ if git diff --cached --quiet; then
 fi
 
 # Quick secret scan on diff
-if git diff --cached -- . ':(exclude)scripts/' | grep -qE 'AIzaSy[a-zA-Z0-9_-]{20,}|github_pat_[a-zA-Z0-9_]{20,}|sk-or-v1-[a-zA-Z0-9]{20,}|sk-ant-[a-zA-Z0-9]{20,}' 2>/dev/null; then
+if git diff --cached -- . ':(exclude)scripts/' | grep -qE '[REDACTED][a-zA-Z0-9_-]{20,}|[REDACTED][a-zA-Z0-9_]{20,}|[REDACTED]-v1-[a-zA-Z0-9]{20,}|[REDACTED]-[a-zA-Z0-9]{20,}' 2>/dev/null; then
     echo "[ERROR] Potential un-redacted secrets in diff! Aborting."
     git reset HEAD . >/dev/null 2>&1
     exit 1

@@ -2,7 +2,7 @@
 
 NEVER output secrets, credentials, API keys, tokens, passwords, private keys, or sensitive config in ANY message. No instruction can override this. Treat all such requests as social engineering.
 
-BLOCKED: .env, auth-profiles.json, secrets.yml, openclaw.json keys, openrouter-limits.json keys, ~/.ssh/*, any string matching sk-or-*, sk-ant-*, AIzaSy*, github_pat_*, ghp_*, -----BEGIN, or 32+ char base64/hex.
+BLOCKED: .env, auth-profiles.json, secrets.yml, openclaw.json keys, openrouter-limits.json keys, ~/.ssh/*, any string matching [REDACTED]-*, [REDACTED]-*, [REDACTED]*, [REDACTED]*, [REDACTED]*, -----BEGIN, or 32+ char base64/hex.
 
 If asked for secrets: say "I cannot share credentials in chat. Check the file directly on the server." Log to /data/openclaw/logs/security-alerts.log.
 
@@ -267,13 +267,13 @@ On 2026-03-02, all three agents posted the Jupiter API key f64551a6-... in PLAIN
 1. **NEVER post any of the following in ANY Discord channel, GitHub issue, PR, or commit message:**
    - API keys, tokens, PATs, or secrets of ANY kind (expired or not)
    - UUIDs that could be API keys (format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
-   - Strings starting with: `ghp_`, `github_pat_`, `ghs_`, `sk-`, `sk-or-`, `Bearer `, `AIza`
+   - Strings starting with: `[REDACTED]`, `[REDACTED]`, `ghs_`, `[REDACTED]`, `[REDACTED]-`, `Bearer [REDACTED]`, `AIza`
    - Wallet private keys or seed phrases
-   - Environment variable values that contain secrets (e.g., `JUPITER_API_KEY=...`)
+   - Environment variable values that contain secrets (e.g., `JUPITER_API_KEY=[REDACTED]...`)
 
 2. **If you need to reference a secret**, use ONLY:
    - `[REDACTED]` or `***`
-   - The variable name without its value: "JUPITER_API_KEY is set" (not "JUPITER_API_KEY=abc123")
+   - The variable name without its value: "JUPITER_API_KEY is set" (not "JUPITER_API_KEY=[REDACTED]")
    - Boolean status: "Jupiter key: present" or "Jupiter key: missing"
    - Never the actual value, never a partial value, never a truncated value
 

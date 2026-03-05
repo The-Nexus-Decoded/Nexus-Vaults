@@ -1,18 +1,17 @@
 name: death-gate-fleet-sync
-description: "Fleet-wide repository synchronization using fleet workspace-sync"
-args:
-  files:
-    description: "Comma-separated files to sync (default: TOOLS.md,MEMORY.md)"
-    type: string
-    default: "TOOLS.md,MEMORY.md"
+description: "Death Gate Cycle: Fleet-wide repository synchronization and status verification."
 steps:
-  - id: sync
-    description: "Sync workspace files across fleet"
-    command: fleet workspace-sync --json --from zifnab --to haplo,hugh --files ${files}
-    timeoutMs: 60000
-
-  - id: report
-    description: "Show sync results"
-    command: fleet format
-    stdin: $sync.stdout
-    timeoutMs: 10000
+  - id: sync_main
+    description: "Sync Pryan-Fire to Zifnab (ola-claw-main)"
+    command: |
+      echo "--- Syncing Pryan-Fire to Zifnab ---"
+      ssh [REDACTED_IP] "cd /data/openclaw/workspace/Pryan-Fire && git pull origin main"
+  - id: sync_trade
+    description: "Sync Pryan-Fire to Hugh (ola-claw-trade)"
+    command: |
+      echo "--- Syncing Pryan-Fire to Hugh ---"
+      ssh [REDACTED_IP] "cd /data/openclaw/workspace/Pryan-Fire && git pull origin main"
+  - id: verify_fleet
+    description: "Verify fleet health across all realms"
+    command: |
+      /data/openclaw/workspace/Chelestra-Sea/workflows/fleet-status.lobster

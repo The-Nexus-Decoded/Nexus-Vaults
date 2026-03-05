@@ -1,8 +1,8 @@
 
-name: fix-risk-manager-imports
+name: fix-ri[REDACTED]-imports
 steps:
   - id: read_main_py
-    command: ls -l /data/repos/Pryan-Fire/hughs-forge/services/risk-manager/main.py
+    command: ls -l /data/repos/Pryan-Fire/hughs-forge/services/ri[REDACTED]/main.py
     description: "Read main.py to identify import order"
   - id: fix_imports
     command: |
@@ -14,7 +14,7 @@ steps:
   - id: commit_changes
     command: |
       cd /data/repos/Pryan-Fire/
-      git add hughs-forge/services/risk-manager/main.py
+      git add hughs-forge/services/ri[REDACTED]/main.py
       git commit -m "FIX: Correct import order in risk manager"
     description: "Commit fixed import order"
 

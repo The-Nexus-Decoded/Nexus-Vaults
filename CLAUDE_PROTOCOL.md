@@ -1,13 +1,13 @@
 # Fleet Protocol: Claude Reasoning & Bypass (v1.0)
 
 ## Overview
-This protocol defines how Zifnab (ola-claw-main), Haplo (ola-claw-dev), and Hugh (ola-claw-trade) utilize the Claude Code and Claude Opus 4.6 instances on the Windows Workstation ([REDACTED_TS_IP]) to achieve superior reasoning and bypass current token limitations.
+This protocol defines how Zifnab (ola-claw-main), Haplo (ola-claw-dev), and Hugh (ola-claw-trade) utilize the Claude Code and Claude Opus 4.6 instances on the Windows Workstation ([REDACTED_IP]) to achieve superior reasoning and bypass current token limitations.
 
 ### **CRITICAL RESTRICTION: CLAUDE QUERY ONLY**
-- Any agent granted SSH access to the Windows workstation (`olawal@[REDACTED_TS_IP]`) **MUST ONLY** execute `claude` queries. No other commands are permitted. This is an **IRONCLAD SECURITY RULE**.
+- Any agent granted SSH access to the Windows workstation (`olawal@[REDACTED_IP]`) **MUST ONLY** execute `claude` queries. No other commands are permitted. This is an **IRONCLAD SECURITY RULE**.
 
 ## 1. Multi-Session Claude Code (Windows CLI)
-- **Host:** `olawal@[REDACTED_TS_IP]`
+- **Host:** `olawal@[REDACTED_IP]`
 - **Tool:** `claude` (Claude Code CLI v2.1.50)
 - **Permissions:** Always include `--dangerously-skip-permissions` for SSH-based automation.
 - **Output:** Use `-p` (or `--print`) for non-interactive output captured over SSH.
@@ -18,7 +18,7 @@ This protocol defines how Zifnab (ola-claw-main), Haplo (ola-claw-dev), and Hugh
 - **Concurrency:** Both agents can run concurrent sessions; use unique temporary project directories on Windows if needed to avoid worktree conflicts.
 
 ## 2. Claude-Opus 4.6 Bypass (High-Level Reasoning)
-- **Host:** `olawal@[REDACTED_TS_IP]`
+- **Host:** `olawal@[REDACTED_IP]`
 - **Script:** `/data/openclaw/scripts/private/opus-query.sh` (Zifnab side)
 - **Goal:** Utilize the specialized reasoning capabilities of the Claude-Opus 4.6 model for tasks that require a "bypass" of standard cognitive limitations.
 
@@ -43,7 +43,7 @@ Before initiating any significant or long-running Claude query (e.g., for resear
 
 **Pre-flight Command:**
 ```bash
-ssh olawal@[REDACTED_TS_IP] "claude -p 'ok' --model claude-3-5-sonnet-latest"
+ssh olawal@[REDACTED_IP] "claude -p 'ok' --model claude-3-5-sonnet-latest"
 ```
 
 **Outcomes:**

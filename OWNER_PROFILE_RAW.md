@@ -5897,9 +5897,9 @@ NONE
   - curl
   - HTTP POST
   - JWT (JSON Web Tokens)
-- **Auth Key:** [REDACTED_KEY]DLUhTNTEyIiwiemlwIjoiREVGIn0.
+- **Auth Key:** eyJhbGciOiJBMjU2S1ciLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwiemlwIjoiREVGIn0.
 
-**Source: [REDACTED_KEY][REDACTED_KEY]cense.pdf**
+**Source: 76699304-christian-mission-religious-events-retreats-church-wordpress-theme-license.pdf**
 **Owner Profile:**
 
 - **Career History:** NONE
@@ -5907,7 +5907,7 @@ NONE
 - **Education:** NONE
 - **Projects:** 
   - Title: Christian Mission - Religious Events & Retreats Church WordPress Theme
-  - URL: https://themeforest.net/item/[REDACTED_KEY]eats-churchwordpress-theme/59329701
+  - URL: https://themeforest.net/item/christian-mission-religious-events-retreats-churchwordpress-theme/59329701
   - Purchase Date: 2025-08-19
 - **Interests:** NONE
 - **Tools:** WordPress, Envato Market
@@ -6309,7 +6309,7 @@ NONE
 **Career History:** NONE  
 **Skills:** Programming, AI Setup, Game Development  
 **Education:** NONE  
-**Projects:** Building an RPG game with a labrinth escape element, real-world task-based AI assignments for Lord XAR's goals  
+**Projects:** Building an RPG game with a labrinth escape element, real-world ta[REDACTED] AI assignments for Lord XAR's goals  
 **Interests:** Escapades, Real-world problem-solving, Role-playing games  
 **Tools:** Likely uses programming languages and tools for game development and AI setup
 
@@ -6384,7 +6384,7 @@ NONE
 **Tools:**  
 - Firewall rules update
 
-**Source: [REDACTED_KEY]l_Documentation_v2.docx**
+**Source: Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:**
 - NONE
 
@@ -6415,7 +6415,7 @@ NONE
 - Azure DevOps
 - SINUMERIK Machine Controllers
 
-**Source: [REDACTED_KEY]l_Documentation_v2.docx**
+**Source: Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:**  
 NONE
 
@@ -6448,7 +6448,7 @@ NONE
 - Azure Table Storage
 - ParkIQ Dashboard
 
-**Source: [REDACTED_KEY]l_Documentation_v2.docx**
+**Source: Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Owner Profile:**
 
 **Location:** North Central US
@@ -6483,7 +6483,7 @@ NONE
     - **IncomingSqlProgramData:** Program execution records (Figure 4.3)
     - **IncomingDataCollectionErrors:** Error logs
 
-**Source: [REDACTED_KEY]l_Documentation_v2.docx**
+**Source: Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:** NONE
 
 **Skills:**
@@ -6511,7 +6511,7 @@ NONE
 - SQL Server (OLALOANERLT\SQLEXPRESS and TITAN-PC\PIHMISQL)
 - OPC UA Heartbeat monitoring
 
-**Source: [REDACTED_KEY]l_Documentation_v2.docx**
+**Source: Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:**  
 NONE
 
@@ -6533,7 +6533,7 @@ NONE
 - DataCollectionLog.TableName: DataCollectionLogDev
 - OPC Servers (OPC.SINUMERIK.Machineswitch, OPC.SinumerikEvents.1)
 
-**Source: [REDACTED_KEY]l_Documentation_v2.docx**
+**Source: Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:**  
 NONE
 
@@ -6570,7 +6570,7 @@ NONE
 - .NET Framework
 - Data Collection Console
 
-**Source: [REDACTED_KEY]l_Documentation_v2.docx**
+**Source: Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:** NONE
 
 **Skills:** SQL Server, OPC AE alarm process, DataCollectionConsole.exe, C# programming, Azure partitioning
@@ -6583,7 +6583,7 @@ NONE
 
 **Tools:** SQL Server 2014 Express, OPC AE alarm process, Azure Batch, Task Manager
 
-**Source: [REDACTED_KEY]l_Documentation_v2.docx**
+**Source: Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:** NONE
 
 **Skills:**
@@ -6605,7 +6605,7 @@ NONE
 - OPC.SINUMERIK.Machineswitch
 - OPCSinumerikAlarm.exe
 
-**Source: [REDACTED_KEY]l_Documentation_v2.docx**
+**Source: Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:**  
 NONE
 
@@ -6632,7 +6632,7 @@ NONE
 - SINUMERIK Nodes
 - OPSProductivity Database
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Owner Profile:**
 
 - **Career History:** NONE
@@ -6654,7 +6654,7 @@ NONE
   - DataCollectionConsole
   - .NET Framework (likely used for development)
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (unspecified company)
 - **Responsibilities:** Development and maintenance of OPC DA services in C#.
@@ -6683,7 +6683,7 @@ NONE
 - Visual Studio
 - OPC Server Tools
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (unspecified company)
 - **Responsibilities:** 
@@ -6710,7 +6710,7 @@ NONE (not specified)
 - Visual Studio
 - OPC DA Client Library
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE
 
 **Skills:** 
@@ -6733,7 +6733,7 @@ NONE (not specified)
 - .NET Framework
 - OPC Client SDK
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -6757,7 +6757,7 @@ NONE (not specified)
 - C#  
 - .NET Runtime
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer / Software Engineer
 - **Company:** Not specified
@@ -6789,7 +6789,7 @@ NONE (not specified)
 - .NET Framework
 - OPC DA Client SDK
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -6814,7 +6814,7 @@ NONE (not specified)
 - Visual Studio IDE  
 - .NET Framework 4.x or later
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC DA, C#, .NET Framework, Machine Data Discovery, SQL Database Interaction  
 **Education:** NONE  
@@ -6822,7 +6822,7 @@ NONE (not specified)
 **Interests:** Automation, Machine Configuration Reading, Data Storage  
 **Tools:** TitaniumAS.Opc.Client, Visual Studio, OPC Data Access (OPC DA)
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC DA, Alarm Handling, Automation, Exception Handling  
 **Education:** NONE  
@@ -6830,7 +6830,7 @@ NONE (not specified)
 **Interests:** Machine Automation, Data Collection, Event Handling  
 **Tools:** TitaniumAS.Opc.Client, OPCITEMDEF
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC DA, COMException handling, Data collection, Machine monitoring  
 **Education:** NONE  
@@ -6838,7 +6838,7 @@ NONE (not specified)
 **Interests:** Machine maintenance, Automation technologies, Error resolution  
 **Tools:** TitaniumAS.Opc.Client, OpcItemMgt, OPCITEMDEF
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE
 
 **Skills:** Machine data discovery, programming, debugging, testing, database interaction.
@@ -6851,7 +6851,7 @@ NONE (not specified)
 
 **Tools:** Test automation software, debuggers, database management systems.
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -6877,7 +6877,7 @@ Quality Assessment of Machine Data
 - Machine Data Storage Solution (likely proprietary)
 - Internal Routing System
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -6907,7 +6907,7 @@ NONE
 - SQL Database
 - Visual Studio
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer / Software Engineer
 - **Company:** Not specified
@@ -6934,7 +6934,7 @@ NONE
 - TitaniumAS.Opc.Client library
 - Visual Studio
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -6958,7 +6958,7 @@ NONE
 - Visual Studio (for development)
 - .NET Framework for application runtime
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE
 
 **Skills:** 
@@ -6980,7 +6980,7 @@ NONE
 - OPC Client Libraries
 - SQL Database
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -7006,7 +7006,7 @@ NONE
 - Visual Studio  
 - OPC Client Libraries
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -7031,7 +7031,7 @@ NONE
 - TitaniumAS.Opc.Client Library
 - DataCollectionConsole
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -7057,7 +7057,7 @@ NONE
 - .NET Framework  
 - Visual Studio
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, .NET, C#, COM programming  
 **Education:** NONE  
@@ -7065,7 +7065,7 @@ NONE
 **Interests:** Machine data collection, automation, and industrial control systems  
 **Tools:** TitaniumAS.Opc.Client library, SQL Database
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -7089,7 +7089,7 @@ NONE
 - OPC Client Libraries (TitaniumAS.Opc.Client)
 - .NET Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -7113,7 +7113,7 @@ NONE
 - TitaniumAS.Opc.Client library  
 - .NET Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer
 - **Company:** TitaniumAS
@@ -7145,7 +7145,7 @@ NONE
 - OPC DA API
 - Microsoft .NET Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer
 - **Company:** TitaniumAS
@@ -7169,7 +7169,7 @@ NONE
 - Visual Studio
 - .NET Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** Testing, Data Storage, Machine Data Handling  
 **Education:** NONE  
@@ -7177,7 +7177,7 @@ NONE
 **Interests:** Machine data discovery, automated testing, database management  
 **Tools:** None specifically mentioned, but likely includes tools for data storage and testing
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** None mentioned.
 - **Employer:** None mentioned.
@@ -7201,7 +7201,7 @@ NONE
 - .NET Framework (C#)
 - OPC DA (Distributed Automation)
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -7227,7 +7227,7 @@ NONE
 - C#
 - TitaniumAS.Opc.Client library
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (Implied)
 - **Company:** TitaniumAS
@@ -7258,7 +7258,7 @@ NONE
 - OPC Client Libraries (TitaniumAS)
 - .NET Framework SDK
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -7284,7 +7284,7 @@ NONE
 - TitaniumAS.Opc.Client library
 - .NET Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC communication, .NET development, machine control, data collection  
 **Education:** NONE  
@@ -7292,7 +7292,7 @@ NONE
 **Interests:** Programming, robotics, industrial automation  
 **Tools:** TitaniumAS.Opc.Client, OPC DA Server
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Owner Profile**
 
 - **DisplayName:** [Other] ACTFEEDRATE[U1,1]
@@ -7311,7 +7311,7 @@ NONE
 **Skills**
 - Machine Data Discovery and Storage
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** Machine data storage, testing, quality control  
 **Education:** NONE  
@@ -7319,7 +7319,7 @@ NONE
 **Interests:** Automation systems, precision engineering  
 **Tools:** Internal routing, machine discovery tool, database management system
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** NONE  
 **Education:** NONE  
@@ -7327,7 +7327,7 @@ NONE
 **Interests:** NONE  
 **Tools:** Machine Data Storage, ACTSPEED[U1,1], ACTSPEED[U1,2], ACTSPEED[U1,3]
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -7354,7 +7354,7 @@ NONE
 - Programming Languages: Not explicitly mentioned, but likely Python, C#, or similar for testing and data storage  
 - Database Systems: Not explicitly mentioned, but likely SQL Server, MongoDB, etc.
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC testing, .NET development, exception handling, COM programming  
 **Education:** NONE  
@@ -7362,7 +7362,7 @@ NONE
 **Interests:** Robotics, Industrial automation  
 **Tools:** TitaniumAS.Opc.Client, C# .NET Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -7388,7 +7388,7 @@ NONE
 - .NET Framework 4.x
 - OPC DA SDK
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (Implied by the use of tools and technology in the code snippets provided.)
 - **Location:** Not specified.
@@ -7422,7 +7422,7 @@ NONE
 - Visual Studio (for development)
 - .NET Framework (runtime environment for the application)
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -7446,7 +7446,7 @@ NONE
 - OPCITEMDEF
 - OPCDaGroup
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -7474,7 +7474,7 @@ NONE
 - TitaniumAS.Opc.Client.Da  
 - DataCollectionConsole Services
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -7500,7 +7500,7 @@ NONE
 - IOPCItemMgt  
 - OpcDaGroup
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -7523,7 +7523,7 @@ NONE
 - .NET Framework
 - C#
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -7547,7 +7547,7 @@ NONE
 - TitaniumAS.Opc.Client library
 - Visual Studio
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC DA, COM Programming, PLC (Programmable Logic Controller) Testing, Exception Handling, .NET Framework, C#  
 **Education:** NONE  
@@ -7557,7 +7557,7 @@ NONE
 - **Interests:** NONE  
 - **Tools:** Visual Studio, OPC Client Libraries, .NET Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPCItemMgt, COMWrapper, OpcDaGroup, DataCollectionConsole.Services.OPCDAService  
 **Education:** NONE  
@@ -7565,7 +7565,7 @@ NONE
 **Interests:** NONE  
 **Tools:** TitaniumAS.Opc.Client, OPCITEMDEF
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer
 - **Company:** TitaniumAS
@@ -7599,7 +7599,7 @@ NONE
 - .NET Framework
 - OPC DA Client Library
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -7623,7 +7623,7 @@ NONE
 - .NET Framework
 - TitaniumAS.Opc.Client Library
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Data Collection Console Developer
 - **Company:** TitaniumAS
@@ -7651,7 +7651,7 @@ NONE
 - TitaniumAS Opc Client Library
 - Visual Studio
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (Implied by role in a service called `OPCDAService`)
 - **Company:** Likely from the context of the software being used.
@@ -7679,7 +7679,7 @@ NONE
 - TitaniumAS.Opc.Client library for interacting with OPC servers
 - Debugging tools for COM exceptions
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (Software)
 - **Company:** TitaniumAS
@@ -7707,7 +7707,7 @@ NONE
 - .NET Framework SDK
 - OPC DA Client Libraries
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, .NET, C#, COM Interop, PLC programming (Sinumerik)  
 **Education:** NONE  
@@ -7715,7 +7715,7 @@ NONE
 **Interests:** PLC diagnostics, industrial automation  
 **Tools:** TitaniumAS Opc Client SDK, Visual Studio
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -7743,7 +7743,7 @@ NONE
 - OPC DA Client SDK
 - C# Development Environment
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -7769,7 +7769,7 @@ NONE
 - C#  
 - TitaniumAS.Opc.Client Library
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC testing, PLC programming, COMException handling, exception tracking, data collection, asynchronous processing  
 **Education:** NONE  
@@ -7777,7 +7777,7 @@ NONE
 **Interests:** Automation systems, manufacturing processes, industrial control systems  
 **Tools:** OPCItemMgt, TitaniumAS.Opc.Client, .NET Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**
 - NONE
 
@@ -7806,7 +7806,7 @@ NONE
 - .NET Framework SDK
 - OPC Client Library
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer / Software Engineer
 - **Company:** TitaniumAS
@@ -7830,7 +7830,7 @@ NONE
 - Visual Studio (IDE)
 - TitaniumAS Opc Client Library
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -7860,7 +7860,7 @@ NONE
 - Visual Studio
 - OPC Client Libraries
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Project Role:** Developer, DataCollectionConsole.Services.OPCDAService
 
@@ -7888,7 +7888,7 @@ NONE
 - Visual Studio (IDE)
 - OPC DA SDK
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, Da, COMException, Data Collection, Sinumerik, OpcDaGroup, TiTaniumAS libraries.  
 **Education:** NONE  
@@ -7896,7 +7896,7 @@ NONE
 **Interests:** Machine Data Storage  
 **Tools:** TiTaniumAS.Opc.Client, OPCITEMDEF, IOPCItemMgt
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -7921,7 +7921,7 @@ NONE
 - .NET Framework
 - Windows Forms / WPF
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -7951,7 +7951,7 @@ NONE
 - OPC DA Client Libraries (TitaniumAS)
 - SQL Server (for storing data)
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPCItemMgt, OpcDaGroup, AddItems, OPCITEMDEF, HRESULT, COMException, DataCollectionConsole, OPCDAService  
 **Education:** NONE  
@@ -7959,7 +7959,7 @@ NONE
 **Interests:** OPC UA, Automation Systems  
 **Tools:** TitaniumAS.Opc.Client, .NET Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Not specified  
 - **Company:** Not specified  
@@ -7983,7 +7983,7 @@ NONE
 - Visual Studio (for .NET development)
 - OPC servers (Sinumerik)
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -8010,7 +8010,7 @@ NONE
 - OPCDAService  
 - DataCollectionConsole
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -8036,7 +8036,7 @@ NONE
 - C# Development Environment (Visual Studio)  
 - OPC DA Client Libraries
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, .NET, C#, COMException Handling  
 **Education:** NONE  
@@ -8044,7 +8044,7 @@ NONE
 **Interests:** OPC Development, Automation  
 **Tools:** TitaniumAS.Opc.Client, NUnit Testing Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer
 - **Company:** Not specified
@@ -8073,7 +8073,7 @@ NONE
 - .NET Framework
 - OPC SDK
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, COMException, Data Collection, OPC DA, Item Management  
 **Education:** NONE  
@@ -8081,7 +8081,7 @@ NONE
 **Interests:** NONE  
 **Tools:** TitaniumAS.Opc.Client.Interop, OPCITEMDEF, OpcItemMgt, IOPCItemMgt
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, COMException handling, OPCITEMDEF, IOPCItemMgt, OPCDaGroup, AddItems method  
 **Education:** NONE  
@@ -8089,7 +8089,7 @@ NONE
 **Interests:** None provided  
 **Tools:** TitaniumAS.Opc.Client library
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -8116,7 +8116,7 @@ NONE
 - TitaniumAS.Opc.Client (OPC DA Client Library)
 - Stack Trace Analysis
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** OPCDAService Developer
 - **Company:** DataCollectionConsole
@@ -8149,7 +8149,7 @@ NONE
 - OPC Client SDK
 - COMWrapper Library
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer / Software Engineer
 - **Company:** TitaniumAS
@@ -8180,7 +8180,7 @@ NONE
 - OPC UA SDK
 - C# Development Tools
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer
 - **Company:** TitaniumAS
@@ -8207,7 +8207,7 @@ NONE
 - C#
 - Visual Studio
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -8237,7 +8237,7 @@ NONE
 - Visual Studio (for development and debugging)
 - C# .NET Framework
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -8261,7 +8261,7 @@ NONE
 - OPC Item Management
 - TitaniumAS.Opc.Client.Interop.Da.IOPCItemMgt
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -8290,7 +8290,7 @@ NONE
 - Visual Studio
 - C# IDEs
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** NONE  
 **Education:** NONE  
@@ -8298,7 +8298,7 @@ NONE
 **Interests:** NONE  
 **Tools:** NONE
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** NONE  
 **Education:** NONE  
@@ -8306,7 +8306,7 @@ NONE
 **Interests:** NONE  
 **Tools:** NONE
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -8328,7 +8328,7 @@ NONE
 - Automation Tools  
 - Database Management Tools
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -8358,7 +8358,7 @@ NONE
 - Test group creation tools
 - Value reading interfaces
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Owner Profile Summary:**  
 - **Name:** Spindle  
 - **Occupation:** Not specified in the text. The text appears to be part of a system logging output rather than a personal profile.
@@ -8381,7 +8381,7 @@ NONE
 **Tools:** NONE  
 - The tools used appear to be part of a data discovery and storage system, but specific tool names are not detailed.
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** Machine data discovery, OPC DA item management, test group creation and removal  
 **Education:** NONE  
@@ -8389,7 +8389,7 @@ NONE
 **Interests:** Automation, machine control  
 **Tools:** None specified
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_SUMMARY_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC communication, SINUMERIK machine states and parameters, NCK configuration  
 **Education:** NONE  
@@ -8397,7 +8397,7 @@ NONE
 **Interests:** Machine monitoring, automation programming  
 **Tools:** OPC.SINUMERIK.Machineswitch, SINUMERIK controllers
 
-**Source: [REDACTED_KEY]4523.txt**
+**Source: SINUMERIK_Discovery_SUMMARY_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** NONE  
 **Education:** NONE  
@@ -20131,7 +20131,7 @@ NONE
 - API Development
 - Photo Management
 - JSON Handling
-- Authorization Bearer Token
+- Authorization Bearer [REDACTED]
 
 **Education:**  
 NONE
@@ -33256,9 +33256,9 @@ NONE
   - curl
   - HTTP POST
   - JWT (JSON Web Tokens)
-- **Auth Key:** [REDACTED_KEY]DLUhTNTEyIiwiemlwIjoiREVGIn0.
+- **Auth Key:** eyJhbGciOiJBMjU2S1ciLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwiemlwIjoiREVGIn0.
 
-**Source: /data/openclaw/staging/Projects/GAZA/[REDACTED_KEY][REDACTED_KEY]cense.pdf**
+**Source: /data/openclaw/staging/Projects/GAZA/76699304-christian-mission-religious-events-retreats-church-wordpress-theme-license.pdf**
 **Owner Profile:**
 
 - **Career History:** NONE
@@ -33266,7 +33266,7 @@ NONE
 - **Education:** NONE
 - **Projects:** 
   - Title: Christian Mission - Religious Events & Retreats Church WordPress Theme
-  - URL: https://themeforest.net/item/[REDACTED_KEY]eats-churchwordpress-theme/59329701
+  - URL: https://themeforest.net/item/christian-mission-religious-events-retreats-churchwordpress-theme/59329701
   - Purchase Date: 2025-08-19
 - **Interests:** NONE
 - **Tools:** WordPress, Envato Market
@@ -33668,7 +33668,7 @@ NONE
 **Career History:** NONE  
 **Skills:** Programming, AI Setup, Game Development  
 **Education:** NONE  
-**Projects:** Building an RPG game with a labrinth escape element, real-world task-based AI assignments for Lord XAR's goals  
+**Projects:** Building an RPG game with a labrinth escape element, real-world ta[REDACTED] AI assignments for Lord XAR's goals  
 **Interests:** Escapades, Real-world problem-solving, Role-playing games  
 **Tools:** Likely uses programming languages and tools for game development and AI setup
 
@@ -33743,7 +33743,7 @@ NONE
 **Tools:**  
 - Firewall rules update
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]l_Documentation_v2.docx**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:**
 - NONE
 
@@ -33774,7 +33774,7 @@ NONE
 - Azure DevOps
 - SINUMERIK Machine Controllers
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]l_Documentation_v2.docx**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:**  
 NONE
 
@@ -33807,7 +33807,7 @@ NONE
 - Azure Table Storage
 - ParkIQ Dashboard
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]l_Documentation_v2.docx**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Owner Profile:**
 
 **Location:** North Central US
@@ -33842,7 +33842,7 @@ NONE
     - **IncomingSqlProgramData:** Program execution records (Figure 4.3)
     - **IncomingDataCollectionErrors:** Error logs
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]l_Documentation_v2.docx**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:** NONE
 
 **Skills:**
@@ -33870,7 +33870,7 @@ NONE
 - SQL Server (OLALOANERLT\SQLEXPRESS and TITAN-PC\PIHMISQL)
 - OPC UA Heartbeat monitoring
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]l_Documentation_v2.docx**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:**  
 NONE
 
@@ -33892,7 +33892,7 @@ NONE
 - DataCollectionLog.TableName: DataCollectionLogDev
 - OPC Servers (OPC.SINUMERIK.Machineswitch, OPC.SinumerikEvents.1)
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]l_Documentation_v2.docx**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:**  
 NONE
 
@@ -33929,7 +33929,7 @@ NONE
 - .NET Framework
 - Data Collection Console
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]l_Documentation_v2.docx**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:** NONE
 
 **Skills:** SQL Server, OPC AE alarm process, DataCollectionConsole.exe, C# programming, Azure partitioning
@@ -33942,7 +33942,7 @@ NONE
 
 **Tools:** SQL Server 2014 Express, OPC AE alarm process, Azure Batch, Task Manager
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]l_Documentation_v2.docx**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:** NONE
 
 **Skills:**
@@ -33964,7 +33964,7 @@ NONE
 - OPC.SINUMERIK.Machineswitch
 - OPCSinumerikAlarm.exe
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]l_Documentation_v2.docx**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/Park_Industries_DataCollection_Technical_Documentation_v2.docx**
 **Career History:**  
 NONE
 
@@ -33991,7 +33991,7 @@ NONE
 - SINUMERIK Nodes
 - OPSProductivity Database
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Owner Profile:**
 
 - **Career History:** NONE
@@ -34013,7 +34013,7 @@ NONE
   - DataCollectionConsole
   - .NET Framework (likely used for development)
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (unspecified company)
 - **Responsibilities:** Development and maintenance of OPC DA services in C#.
@@ -34042,7 +34042,7 @@ NONE
 - Visual Studio
 - OPC Server Tools
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (unspecified company)
 - **Responsibilities:** 
@@ -34069,7 +34069,7 @@ NONE (not specified)
 - Visual Studio
 - OPC DA Client Library
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE
 
 **Skills:** 
@@ -34092,7 +34092,7 @@ NONE (not specified)
 - .NET Framework
 - OPC Client SDK
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -34116,7 +34116,7 @@ NONE (not specified)
 - C#  
 - .NET Runtime
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer / Software Engineer
 - **Company:** Not specified
@@ -34148,7 +34148,7 @@ NONE (not specified)
 - .NET Framework
 - OPC DA Client SDK
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -34173,7 +34173,7 @@ NONE (not specified)
 - Visual Studio IDE  
 - .NET Framework 4.x or later
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC DA, C#, .NET Framework, Machine Data Discovery, SQL Database Interaction  
 **Education:** NONE  
@@ -34181,7 +34181,7 @@ NONE (not specified)
 **Interests:** Automation, Machine Configuration Reading, Data Storage  
 **Tools:** TitaniumAS.Opc.Client, Visual Studio, OPC Data Access (OPC DA)
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC DA, Alarm Handling, Automation, Exception Handling  
 **Education:** NONE  
@@ -34189,7 +34189,7 @@ NONE (not specified)
 **Interests:** Machine Automation, Data Collection, Event Handling  
 **Tools:** TitaniumAS.Opc.Client, OPCITEMDEF
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC DA, COMException handling, Data collection, Machine monitoring  
 **Education:** NONE  
@@ -34197,7 +34197,7 @@ NONE (not specified)
 **Interests:** Machine maintenance, Automation technologies, Error resolution  
 **Tools:** TitaniumAS.Opc.Client, OpcItemMgt, OPCITEMDEF
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE
 
 **Skills:** Machine data discovery, programming, debugging, testing, database interaction.
@@ -34210,7 +34210,7 @@ NONE (not specified)
 
 **Tools:** Test automation software, debuggers, database management systems.
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -34236,7 +34236,7 @@ Quality Assessment of Machine Data
 - Machine Data Storage Solution (likely proprietary)
 - Internal Routing System
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -34266,7 +34266,7 @@ NONE
 - SQL Database
 - Visual Studio
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer / Software Engineer
 - **Company:** Not specified
@@ -34293,7 +34293,7 @@ NONE
 - TitaniumAS.Opc.Client library
 - Visual Studio
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -34317,7 +34317,7 @@ NONE
 - Visual Studio (for development)
 - .NET Framework for application runtime
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE
 
 **Skills:** 
@@ -34339,7 +34339,7 @@ NONE
 - OPC Client Libraries
 - SQL Database
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -34365,7 +34365,7 @@ NONE
 - Visual Studio  
 - OPC Client Libraries
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -34390,7 +34390,7 @@ NONE
 - TitaniumAS.Opc.Client Library
 - DataCollectionConsole
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -34416,7 +34416,7 @@ NONE
 - .NET Framework  
 - Visual Studio
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, .NET, C#, COM programming  
 **Education:** NONE  
@@ -34424,7 +34424,7 @@ NONE
 **Interests:** Machine data collection, automation, and industrial control systems  
 **Tools:** TitaniumAS.Opc.Client library, SQL Database
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -34448,7 +34448,7 @@ NONE
 - OPC Client Libraries (TitaniumAS.Opc.Client)
 - .NET Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -34472,7 +34472,7 @@ NONE
 - TitaniumAS.Opc.Client library  
 - .NET Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer
 - **Company:** TitaniumAS
@@ -34504,7 +34504,7 @@ NONE
 - OPC DA API
 - Microsoft .NET Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer
 - **Company:** TitaniumAS
@@ -34528,7 +34528,7 @@ NONE
 - Visual Studio
 - .NET Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** Testing, Data Storage, Machine Data Handling  
 **Education:** NONE  
@@ -34536,7 +34536,7 @@ NONE
 **Interests:** Machine data discovery, automated testing, database management  
 **Tools:** None specifically mentioned, but likely includes tools for data storage and testing
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** None mentioned.
 - **Employer:** None mentioned.
@@ -34560,7 +34560,7 @@ NONE
 - .NET Framework (C#)
 - OPC DA (Distributed Automation)
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -34586,7 +34586,7 @@ NONE
 - C#
 - TitaniumAS.Opc.Client library
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (Implied)
 - **Company:** TitaniumAS
@@ -34617,7 +34617,7 @@ NONE
 - OPC Client Libraries (TitaniumAS)
 - .NET Framework SDK
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -34643,7 +34643,7 @@ NONE
 - TitaniumAS.Opc.Client library
 - .NET Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC communication, .NET development, machine control, data collection  
 **Education:** NONE  
@@ -34651,7 +34651,7 @@ NONE
 **Interests:** Programming, robotics, industrial automation  
 **Tools:** TitaniumAS.Opc.Client, OPC DA Server
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Owner Profile**
 
 - **DisplayName:** [Other] ACTFEEDRATE[U1,1]
@@ -34670,7 +34670,7 @@ NONE
 **Skills**
 - Machine Data Discovery and Storage
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** Machine data storage, testing, quality control  
 **Education:** NONE  
@@ -34678,7 +34678,7 @@ NONE
 **Interests:** Automation systems, precision engineering  
 **Tools:** Internal routing, machine discovery tool, database management system
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** NONE  
 **Education:** NONE  
@@ -34686,7 +34686,7 @@ NONE
 **Interests:** NONE  
 **Tools:** Machine Data Storage, ACTSPEED[U1,1], ACTSPEED[U1,2], ACTSPEED[U1,3]
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -34713,7 +34713,7 @@ NONE
 - Programming Languages: Not explicitly mentioned, but likely Python, C#, or similar for testing and data storage  
 - Database Systems: Not explicitly mentioned, but likely SQL Server, MongoDB, etc.
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC testing, .NET development, exception handling, COM programming  
 **Education:** NONE  
@@ -34721,7 +34721,7 @@ NONE
 **Interests:** Robotics, Industrial automation  
 **Tools:** TitaniumAS.Opc.Client, C# .NET Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -34747,7 +34747,7 @@ NONE
 - .NET Framework 4.x
 - OPC DA SDK
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (Implied by the use of tools and technology in the code snippets provided.)
 - **Location:** Not specified.
@@ -34781,7 +34781,7 @@ NONE
 - Visual Studio (for development)
 - .NET Framework (runtime environment for the application)
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -34805,7 +34805,7 @@ NONE
 - OPCITEMDEF
 - OPCDaGroup
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -34833,7 +34833,7 @@ NONE
 - TitaniumAS.Opc.Client.Da  
 - DataCollectionConsole Services
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -34859,7 +34859,7 @@ NONE
 - IOPCItemMgt  
 - OpcDaGroup
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -34882,7 +34882,7 @@ NONE
 - .NET Framework
 - C#
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -34906,7 +34906,7 @@ NONE
 - TitaniumAS.Opc.Client library
 - Visual Studio
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC DA, COM Programming, PLC (Programmable Logic Controller) Testing, Exception Handling, .NET Framework, C#  
 **Education:** NONE  
@@ -34916,7 +34916,7 @@ NONE
 - **Interests:** NONE  
 - **Tools:** Visual Studio, OPC Client Libraries, .NET Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPCItemMgt, COMWrapper, OpcDaGroup, DataCollectionConsole.Services.OPCDAService  
 **Education:** NONE  
@@ -34924,7 +34924,7 @@ NONE
 **Interests:** NONE  
 **Tools:** TitaniumAS.Opc.Client, OPCITEMDEF
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer
 - **Company:** TitaniumAS
@@ -34958,7 +34958,7 @@ NONE
 - .NET Framework
 - OPC DA Client Library
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -34982,7 +34982,7 @@ NONE
 - .NET Framework
 - TitaniumAS.Opc.Client Library
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Data Collection Console Developer
 - **Company:** TitaniumAS
@@ -35010,7 +35010,7 @@ NONE
 - TitaniumAS Opc Client Library
 - Visual Studio
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (Implied by role in a service called `OPCDAService`)
 - **Company:** Likely from the context of the software being used.
@@ -35038,7 +35038,7 @@ NONE
 - TitaniumAS.Opc.Client library for interacting with OPC servers
 - Debugging tools for COM exceptions
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer (Software)
 - **Company:** TitaniumAS
@@ -35066,7 +35066,7 @@ NONE
 - .NET Framework SDK
 - OPC DA Client Libraries
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, .NET, C#, COM Interop, PLC programming (Sinumerik)  
 **Education:** NONE  
@@ -35074,7 +35074,7 @@ NONE
 **Interests:** PLC diagnostics, industrial automation  
 **Tools:** TitaniumAS Opc Client SDK, Visual Studio
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -35102,7 +35102,7 @@ NONE
 - OPC DA Client SDK
 - C# Development Environment
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -35128,7 +35128,7 @@ NONE
 - C#  
 - TitaniumAS.Opc.Client Library
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC testing, PLC programming, COMException handling, exception tracking, data collection, asynchronous processing  
 **Education:** NONE  
@@ -35136,7 +35136,7 @@ NONE
 **Interests:** Automation systems, manufacturing processes, industrial control systems  
 **Tools:** OPCItemMgt, TitaniumAS.Opc.Client, .NET Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**
 - NONE
 
@@ -35165,7 +35165,7 @@ NONE
 - .NET Framework SDK
 - OPC Client Library
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer / Software Engineer
 - **Company:** TitaniumAS
@@ -35189,7 +35189,7 @@ NONE
 - Visual Studio (IDE)
 - TitaniumAS Opc Client Library
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - None provided
 
@@ -35219,7 +35219,7 @@ NONE
 - Visual Studio
 - OPC Client Libraries
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Project Role:** Developer, DataCollectionConsole.Services.OPCDAService
 
@@ -35247,7 +35247,7 @@ NONE
 - Visual Studio (IDE)
 - OPC DA SDK
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, Da, COMException, Data Collection, Sinumerik, OpcDaGroup, TiTaniumAS libraries.  
 **Education:** NONE  
@@ -35255,7 +35255,7 @@ NONE
 **Interests:** Machine Data Storage  
 **Tools:** TiTaniumAS.Opc.Client, OPCITEMDEF, IOPCItemMgt
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -35280,7 +35280,7 @@ NONE
 - .NET Framework
 - Windows Forms / WPF
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -35310,7 +35310,7 @@ NONE
 - OPC DA Client Libraries (TitaniumAS)
 - SQL Server (for storing data)
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPCItemMgt, OpcDaGroup, AddItems, OPCITEMDEF, HRESULT, COMException, DataCollectionConsole, OPCDAService  
 **Education:** NONE  
@@ -35318,7 +35318,7 @@ NONE
 **Interests:** OPC UA, Automation Systems  
 **Tools:** TitaniumAS.Opc.Client, .NET Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Not specified  
 - **Company:** Not specified  
@@ -35342,7 +35342,7 @@ NONE
 - Visual Studio (for .NET development)
 - OPC servers (Sinumerik)
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -35369,7 +35369,7 @@ NONE
 - OPCDAService  
 - DataCollectionConsole
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -35395,7 +35395,7 @@ NONE
 - C# Development Environment (Visual Studio)  
 - OPC DA Client Libraries
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, .NET, C#, COMException Handling  
 **Education:** NONE  
@@ -35403,7 +35403,7 @@ NONE
 **Interests:** OPC Development, Automation  
 **Tools:** TitaniumAS.Opc.Client, NUnit Testing Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer
 - **Company:** Not specified
@@ -35432,7 +35432,7 @@ NONE
 - .NET Framework
 - OPC SDK
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, COMException, Data Collection, OPC DA, Item Management  
 **Education:** NONE  
@@ -35440,7 +35440,7 @@ NONE
 **Interests:** NONE  
 **Tools:** TitaniumAS.Opc.Client.Interop, OPCITEMDEF, OpcItemMgt, IOPCItemMgt
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC, COMException handling, OPCITEMDEF, IOPCItemMgt, OPCDaGroup, AddItems method  
 **Education:** NONE  
@@ -35448,7 +35448,7 @@ NONE
 **Interests:** None provided  
 **Tools:** TitaniumAS.Opc.Client library
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -35475,7 +35475,7 @@ NONE
 - TitaniumAS.Opc.Client (OPC DA Client Library)
 - Stack Trace Analysis
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** OPCDAService Developer
 - **Company:** DataCollectionConsole
@@ -35508,7 +35508,7 @@ NONE
 - OPC Client SDK
 - COMWrapper Library
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer / Software Engineer
 - **Company:** TitaniumAS
@@ -35539,7 +35539,7 @@ NONE
 - OPC UA SDK
 - C# Development Tools
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - **Position:** Developer
 - **Company:** TitaniumAS
@@ -35566,7 +35566,7 @@ NONE
 - C#
 - Visual Studio
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -35596,7 +35596,7 @@ NONE
 - Visual Studio (for development and debugging)
 - C# .NET Framework
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -35620,7 +35620,7 @@ NONE
 - OPC Item Management
 - TitaniumAS.Opc.Client.Interop.Da.IOPCItemMgt
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -35649,7 +35649,7 @@ NONE
 - Visual Studio
 - C# IDEs
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** NONE  
 **Education:** NONE  
@@ -35657,7 +35657,7 @@ NONE
 **Interests:** NONE  
 **Tools:** NONE
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** NONE  
 **Education:** NONE  
@@ -35665,7 +35665,7 @@ NONE
 **Interests:** NONE  
 **Tools:** NONE
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 NONE
 
@@ -35687,7 +35687,7 @@ NONE
 - Automation Tools  
 - Database Management Tools
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:**  
 - NONE
 
@@ -35717,7 +35717,7 @@ NONE
 - Test group creation tools
 - Value reading interfaces
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Owner Profile Summary:**  
 - **Name:** Spindle  
 - **Occupation:** Not specified in the text. The text appears to be part of a system logging output rather than a personal profile.
@@ -35740,7 +35740,7 @@ NONE
 **Tools:** NONE  
 - The tools used appear to be part of a data discovery and storage system, but specific tool names are not detailed.
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_VERBOSE_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** Machine data discovery, OPC DA item management, test group creation and removal  
 **Education:** NONE  
@@ -35748,7 +35748,7 @@ NONE
 **Interests:** Automation, machine control  
 **Tools:** None specified
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_SUMMARY_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** OPC communication, SINUMERIK machine states and parameters, NCK configuration  
 **Education:** NONE  
@@ -35756,7 +35756,7 @@ NONE
 **Interests:** Machine monitoring, automation programming  
 **Tools:** OPC.SINUMERIK.Machineswitch, SINUMERIK controllers
 
-**Source: /data/openclaw/staging/Projects/ParkIndustries/[REDACTED_KEY]4523.txt**
+**Source: /data/openclaw/staging/Projects/ParkIndustries/SINUMERIK_Discovery_SUMMARY_20251012_164523.txt**
 **Career History:** NONE  
 **Skills:** NONE  
 **Education:** NONE  
@@ -47490,7 +47490,7 @@ NONE
 - API Development
 - Photo Management
 - JSON Handling
-- Authorization Bearer Token
+- Authorization Bearer [REDACTED]
 
 **Education:**  
 NONE

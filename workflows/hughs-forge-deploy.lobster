@@ -1,44 +1,38 @@
 name: hughs-forge-deploy
-description: "Deploy hughs-forge to ola-claw-trade: test, deliver, restart"
+description: "Deploys the hughs-forge trading application to ola-claw-trade."
 args:
-  repo:
-    description: "Repository name (e.g., Pryan-Fire)"
+  service_name:
+    description: "Name of the systemd service to restart on ola-claw-trade."
     type: string
-    default: "Pryan-Fire"
-  branch:
-    description: "Branch to deliver"
+    default: hughs-trade-executor.service
+  build_command:
+    description: "Command to build the hughs-forge project on ola-claw-dev."
     type: string
-    default: "main"
-  target_path:
-    description: "Path to repo on target server"
+    default: "echo 'Assuming build is handled by CI or local workflow. Skipping explicit build step here.'"
+  artifact_path:
+    description: "Path to the deployment artifacts on ola-claw-dev."
     type: string
-    default: "/data/repos/Pryan-Fire"
+    default: "/data/openclaw/workspace/Pryan-Fire/hughs-forge/dist"
+  remote_deploy_path:
+    description: "Remote path on ola-claw-trade where artifacts will be deployed."
+    type: string
+    default: "/data/openclaw/workspace/Pryan-Fire/hughs-forge"
 steps:
-  - id: test
-    description: "Run gauntlet on the repo"
-    command: fleet gauntlet --json --target ${target_path}
-    timeoutMs: 300000
-
-  - id: review
-    description: "Review test results before deploy"
+  - id: build_local
+    description: "Execute build command for hughs-forge on ola-claw-dev."
+    command: "{args.build_command}"
+  - id: transfer_artifacts
+    description: "Transfer built artifacts to ola-claw-trade."
     command: |
-      echo "========================================="
-      echo "  HUGHS FORGE DEPLOY"
-      echo "========================================="
-      echo ""
-      fleet format gauntlet-report
-      echo ""
-      echo "Approve to deliver and restart on Hugh."
-    stdin: $test.stdout
-    approval: required
-    timeoutMs: 10000
-
-  - id: deliver
-    description: "Git deliver to Hugh"
-    command: fleet deliver --json --repo ${repo} --branch ${branch} --message "Deploy hughs-forge via workflow"
-    timeoutMs: 60000
-
-  - id: verify
-    description: "Verify health after deploy"
-    command: fleet health --json | fleet format
-    timeoutMs: 15000
+      echo "--- Transferring artifacts to ola-claw-trade ---"
+      scp -r {args.artifact_path} openclaw@[REDACTED_IP]:{args.remote_deploy_path}
+  - id: restart_service
+    description: "Restart the hughs-forge service on ola-claw-trade."
+    command: |
+      echo "--- Restarting {args.service_name} on ola-claw-trade ---"
+      ssh openclaw@[REDACTED_IP] "sudo systemctl restart {args.service_name} && sudo systemctl status {args.service_name} --no-pager"
+  - id: verify_deployment
+    description: "Verify the deployment by checking service status on ola-claw-trade."
+    command: |
+      echo "--- Verifying deployment on ola-claw-trade ---"
+      ssh openclaw@[REDACTED_IP] "sudo systemctl is-active {args.service_name}"

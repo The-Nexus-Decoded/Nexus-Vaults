@@ -1,56 +1,44 @@
 name: zifnab-memory-maintenance
-description: "Gather recent daily memory files for review and distillation"
+description: "Workflow for distilling recent daily memory files and achieving continuity for Lord Xar."
 args:
-  days:
-    description: "Number of recent days to gather (including today)"
+  days_back:
+    description: "Number of days back to collect memory files."
     type: integer
-    default: 7
-  workspace:
-    description: "Workspace path containing memory directory"
-    type: string
-    default: "/data/openclaw/workspace"
+    default: 2
 steps:
-  - id: list_files
-    description: "List available memory files"
+  - id: dates
+    description: "Calculate dates for the lookback period."
     command: |
-      set -e
-      MEMDIR="${workspace}/memory"
-      echo "Memory directory: ${MEMDIR}"
-      ls -1tr "${MEMDIR}"/*.md 2>/dev/null | tail -${days} || echo "No memory files found"
-    timeoutMs: 10000
-
-  - id: gather
-    description: "Concatenate recent memory files"
-    command: |
-      set -e
-      MEMDIR="${workspace}/memory"
-      if [ ! -d "${MEMDIR}" ]; then
-        echo "ERROR: Memory directory not found: ${MEMDIR}"
-        exit 1
-      fi
-      FILES=$(ls -1tr "${MEMDIR}"/*.md 2>/dev/null | tail -${days})
-      if [ -z "${FILES}" ]; then
-        echo "No memory files to gather"
-        exit 0
-      fi
-      echo "=== GATHERING MEMORY FILES ==="
-      for f in ${FILES}; do
-        echo "--- $(basename "$f") ---"
-        cat "$f"
-        echo ""
+      # Generate list of dates in YYYY-MM-DD format
+      for i in $(seq 0 $(({args.days_back} - 1))); do
+        date -d "$i days ago" +%Y-%m-%d
       done
-      echo "=== MEMORY GATHER COMPLETE ==="
-    timeoutMs: 10000
-
-  - id: summary
-    description: "Show file count and total size"
+  - id: fetch_logs
+    description: "Gather content from recent memory files."
     command: |
-      set -e
-      MEMDIR="${workspace}/memory"
-      if [ -d "${MEMDIR}" ]; then
-        echo "Memory files (last ${days} days):"
-        ls -lh "${MEMDIR}"/*.md 2>/dev/null | tail -${days} | awk '{print $5, $9}'
-        total=$(ls -1 "${MEMDIR}"/*.md 2>/dev/null | wc -l)
-        echo "Total memory files: ${total}"
-      fi
-    timeoutMs: 5000
+      echo "--- START MEMORY COLLECTION ---"
+      while read -r d; do
+        if [ -f "/data/openclaw/workspace/memory/$d.md" ]; then
+          echo "### DATE: $d"
+          cat "/data/openclaw/workspace/memory/$d.md"
+          echo -e "\n---\n"
+        fi
+      done <<EOF
+      {dates.stdout}
+      EOF
+      echo "--- END MEMORY COLLECTION ---"
+  - id: status_check
+    description: "Capture the current fleet heartbeat status."
+    command: |
+      echo "### FLEET STATUS SNAPSHOT"
+      curl -s http://localhost:8787/health | jq -C . || echo "Rate Guard unreachable."
+  - id: finalize_for_distillation
+    description: "Consolidate everything for the coordinator's review."
+    command: |
+      echo "## MEMORY MAINTENANCE REPORT"
+      echo "Refining continuity for the Lord of the Patryns..."
+      echo ""
+      echo "{fetch_logs.stdout}"
+      echo ""
+      echo "{status_check.stdout}"
+    approval: required

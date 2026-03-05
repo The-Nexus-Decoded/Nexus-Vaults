@@ -4,10 +4,10 @@
 
 | Host | Tailscale IP | User | Role |
 |------|-------------|------|------|
-| ola-claw-main (you) | [REDACTED_TS_IP] | openclaw | Coordinator |
-| ola-claw-trade (Hugh) | [REDACTED_TS_IP] | openclaw | Trading (standby) |
-| ola-claw-dev (Haplo) | [REDACTED_TS_IP] | openclaw | Development |
-| Windows workstation | [REDACTED_TS_IP] | olawal | Claude CLI, GSD, backups |
+| ola-claw-main (you) | [REDACTED_IP] | openclaw | Coordinator |
+| ola-claw-trade (Hugh) | [REDACTED_IP] | openclaw | Trading (standby) |
+| ola-claw-dev (Haplo) | [REDACTED_IP] | openclaw | Development |
+| Windows workstation | [REDACTED_IP] | olawal | Claude CLI, GSD, backups |
 
 All connections via Tailscale IPs. Never use LAN IPs -- they change.
 
@@ -54,17 +54,17 @@ journalctl --user -u openclaw-gateway --no-pager -n 50
 systemctl --user status quota-monitor.timer
 
 # Restart Hugh
-ssh openclaw@[REDACTED_TS_IP] "systemctl --user restart openclaw-gateway"
+ssh openclaw@[REDACTED_IP] "systemctl --user restart openclaw-gateway"
 
 # Restart Haplo
-ssh openclaw@[REDACTED_TS_IP] "systemctl --user restart openclaw-gateway"
+ssh openclaw@[REDACTED_IP] "systemctl --user restart openclaw-gateway"
 ```
 
 ## Self-Restart Protocol
 
 1. Write state to /data/openclaw/workspace/.restart-state.md
-2. SSH to Windows: `ssh olawal@[REDACTED_TS_IP]`
-3. From Windows: `ssh openclaw@[REDACTED_TS_IP] "systemctl --user restart openclaw-gateway"`
+2. SSH to Windows: `ssh olawal@[REDACTED_IP]`
+3. From Windows: `ssh openclaw@[REDACTED_IP] "systemctl --user restart openclaw-gateway"`
 4. On next boot: read .restart-state.md, delete after reading
 5. **Fallback:** If SSH to Windows fails, report to Lord Xar via Discord and wait.
 
@@ -118,7 +118,7 @@ NEVER use Opus for:
 ## Claude CLI on Windows
 
 ```bash
-ssh olawal@[REDACTED_TS_IP] "cd /path/to/project && claude --dangerously-skip-permissions 'task description'"
+ssh olawal@[REDACTED_IP] "cd /path/to/project && claude --dangerously-skip-permissions 'task description'"
 ```
 GSD project files: `H:/IcloudDrive/iCloudDrive/Documents/Windows/Documents/Projects/AI_Tools_And_Information/openclaw-homelab/`
 
@@ -320,7 +320,7 @@ All three agents' workspace folders should be version-controlled in GitHub for b
 
 **CRITICAL: Redaction before any push.**
 A redaction script MUST run before every commit. It strips:
-- API keys, tokens, PATs (grep for patterns: `github_pat_`, `sk-`, `BSA`, `Bearer`, env var values)
+- API keys, tokens, PATs (grep for patterns: `[REDACTED]`, `[REDACTED]`, `[REDACTED]`, `Bearer`, env var values)
 - Wallet addresses (public and private keys)
 - Tailscale IPs (replace with `[REDACTED_IP]`)
 - Discord bot tokens

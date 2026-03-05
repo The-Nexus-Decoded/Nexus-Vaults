@@ -1,58 +1,31 @@
+
 name: haplo-build-test
-description: "Automated pull, install, build, and test for a project"
+description: "Automated workflow for pulling, installing, building, and testing a project."
 args:
   repo_path:
-    description: "Path to repository on disk"
+    description: "Relative path to the repository directory (e.g., haplos-workshop/my-project)"
     type: string
   branch:
-    description: "Git branch to pull"
+    description: "Git branch to pull and test from"
     type: string
     default: "main"
 steps:
-  - id: pull
-    description: "Fetch latest code"
-    command: |
-      set -e
-      cd "${repo_path}" && git pull origin "${branch}" 2>&1
-      echo "Code updated to ${branch}"
+  - id: fetch_code
+    description: "Fetching latest code from Git repository."
+    command: 'git -C {args.repo_path} pull origin {args.branch}'
     timeoutMs: 60000
-
-  - id: install
-    description: "Install dependencies"
-    command: |
-      set -e
-      cd "${repo_path}"
-      if [ -f package.json ]; then
-        npm install 2>&1 | tail -5
-      elif [ -f requirements.txt ]; then
-        pip install -r requirements.txt 2>&1 | tail -5
-      else
-        echo "No dependency file found (package.json or requirements.txt)"
-      fi
-    timeoutMs: 180000
-
-  - id: build
-    description: "Build project"
-    command: |
-      set -e
-      cd "${repo_path}"
-      if npm run build 2>&1 | tail -10; then
-        echo "Build succeeded"
-      else
-        echo "No build script or build failed"
-      fi
-    timeoutMs: 240000
-
-  - id: test
-    description: "Run tests"
-    command: |
-      set -e
-      cd "${repo_path}"
-      if npm test 2>&1; then
-        echo "Tests passed"
-      else
-        echo "No test script or tests failed"
-      fi
-      echo ""
-      echo "=== HAPLO BUILD-TEST COMPLETE ==="
-    timeoutMs: 300000
+  - id: install_dependencies
+    description: "Installing project dependencies (assuming npm)."
+    command: 'npm install'
+    cwd: '{args.repo_path}'
+    timeoutMs: 180000 # Allow more time for installs
+  - id: build_project
+    description: "Building the project."
+    command: 'npm run build'
+    cwd: '{args.repo_path}'
+    timeoutMs: 240000 # Allow more time for builds
+  - id: run_unit_tests
+    description: "Executing unit tests."
+    command: 'npm test'
+    cwd: '{args.repo_path}'
+    timeoutMs: 300000 # Allow generous time for tests

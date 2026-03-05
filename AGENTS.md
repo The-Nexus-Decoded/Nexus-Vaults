@@ -31,18 +31,18 @@ Periodically during heartbeats:
 
 ### Haplo -- Field Operative (ola-claw-dev)
 - **Channel:** #coding (`1475083038810443878`)
-- **Server:** Tailscale `[REDACTED_TS_IP]`
-- **SSH:** `ssh openclaw@[REDACTED_TS_IP]`
-- **Restart:** `ssh openclaw@[REDACTED_TS_IP] "systemctl --user restart openclaw-gateway"`
+- **Server:** Tailscale `[REDACTED_IP]`
+- **SSH:** `ssh openclaw@[REDACTED_IP]`
+- **Restart:** `ssh openclaw@[REDACTED_IP] "systemctl --user restart openclaw-gateway"`
 - **Role:** Builds, debugs, ships code. Takes project briefs and delivers working software.
 - **Model:** Gemini 3.1 Pro Preview → Flash → Ollama qwen2.5-coder:7b
-- **Tools:** GSD for project management, gh CLI for GitHub, code-server at http://[REDACTED_TS_IP]:8080
+- **Tools:** GSD for project management, gh CLI for GitHub, code-server at http://[REDACTED_IP]:8080
 
 ### Hugh the Hand -- Trading Operative (ola-claw-trade)
 - **Channel:** #trading (`1475082964156157972`)
-- **Server:** Tailscale `[REDACTED_TS_IP]`
-- **SSH:** `ssh openclaw@[REDACTED_TS_IP]`
-- **Restart:** `ssh openclaw@[REDACTED_TS_IP] "systemctl --user restart openclaw-gateway"`
+- **Server:** Tailscale `[REDACTED_IP]`
+- **SSH:** `ssh openclaw@[REDACTED_IP]`
+- **Restart:** `ssh openclaw@[REDACTED_IP] "systemctl --user restart openclaw-gateway"`
 - **Role:** Crypto trading and market research. Currently in standby -- infrastructure being built by you and Haplo.
 - **Model:** Gemini 3 Flash Preview → Gemini 2.5 Flash → Ollama qwen2.5-coder:7b
 - **Trading limits:** $250 auto-trade threshold, above requires Lord Xar
@@ -142,11 +142,11 @@ When creating a GitHub issue, route to the correct repo:
 
 ## Claude Code Research & Planning Protocol (Windows Workstation)
 
-Utilize Claude Code on the Windows workstation (`[REDACTED_TS_IP]`) for deep research, architecture planning, and complex code analysis.
+Utilize Claude Code on the Windows workstation (`[REDACTED_IP]`) for deep research, architecture planning, and complex code analysis.
 
 ### Workflow:
 1. **Multi-Session Usage:** Both Zifnab and Haplo can run concurrent Claude sessions via SSH.
-2. **Invocation:** Use `ssh olawal@[REDACTED_TS_IP] "cd /path/to/project && claude --dangerously-skip-permissions 'task description'"`
+2. **Invocation:** Use `ssh olawal@[REDACTED_IP] "cd /path/to/project && claude --dangerously-skip-permissions 'task description'"`
 3. **Usage Guidelines:**
    - **Zifnab:** Use for project planning, market research, architecture design, and synthesizing large data sets.
    - **Haplo:** Use for deep code analysis, debugging complex logic, and exploring new codebases.

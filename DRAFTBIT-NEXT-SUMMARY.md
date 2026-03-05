@@ -101,7 +101,7 @@ Draftbit Next is a **complete AI-native rebuild** of the original Draftbit platf
 
 **Sources:**
 - https://markaicode.com/draftbit-5-professional-apps-2025/
-- https://community.draftbit.com/c/whats-new/[REDACTED_KEY]t
+- https://community.draftbit.com/c/whats-new/we-re-opening-the-beta-for-draftbit-next
 
 ---
 

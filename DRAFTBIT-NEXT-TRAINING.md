@@ -488,7 +488,7 @@ Success: User can create a habit and mark it complete in <10 seconds.
 
 1. **Configure API Resource**
    - Base URL: `https://api.example.com/v1`
-   - Add Header: `Authorization` = `Bearer {{API_TOKEN}}`
+   - Add Header: `Authorization` = `Bearer [REDACTED]{{API_TOKEN}}`
    - Store `API_TOKEN` in global variables (Settings → Variables)
 
 2. **Fetch data**
@@ -776,8 +776,8 @@ Draftbit → AsyncStorage (device) → future Firebase/Supabase sync
 - **Community tutorials:** https://community.draftbit.com/c/tutorials/
 
 ### External Guides
-- **Hasura Integration Tutorial:** https://hasura.io/blog/[REDACTED_KEY][REDACTED_KEY]
-- **Building an App video series:** https://community.draftbit.com/c/tutorials/[REDACTED_KEY]s
+- **Hasura Integration Tutorial:** https://hasura.io/blog/a-tutorial-using-hasura-with-draftbit-a-low-code-tool-for-building-mobile-apps
+- **Building an App video series:** https://community.draftbit.com/c/tutorials/building-an-app-in-draftbit-video-series
 - **Draftbit Review (Habit Tracker example):** https://www.unite.ai/draftbit-review/
 
 ### GitHub

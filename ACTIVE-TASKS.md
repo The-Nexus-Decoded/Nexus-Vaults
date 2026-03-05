@@ -40,7 +40,7 @@
   1. Lord Xar merges PR #159
   2. Deploy to ola-claw-trade via `patryn-workhorse` + `nexus-bridge`
   3. Perform devnet smoke test ($1-2) then mainnet trade
-  4. Rotate Jupiter API key (#143)
+  4. Rotate Jupiter API key (**Pryan-Fire #211** — assigned to Lord Xar, P0 blocker)
 
 ### Project: The Assassins Ledger (Arianus-Sky #3)
 - **Status:** LAUNCHED — GitHub Project #11 created, tickets assigned.
@@ -58,16 +58,27 @@
   - [ ] End-to-end feed verification in #trading channel
 - **Blockers:** Awaiting webhook creation (Chelestra-Sea#78) before final integration test.
 
-### Haplo: CI/CD Deployment Pipeline (Pryan-Fire #1)
-- Status: **ACTIVE** - Self-hosted runner online on ola-claw-dev.
-- Current task: Jupiter improvements committed and PR #159 opened.
-- Waiting on merge; no further action needed.
+### Haplo: Monorepo Migration (Nexus-Vaults #15)
+- Status: **IN PROGRESS** - Consolidating all realm code into The-Nexus monorepo.
+- Current task: Creating PR with full consolidated structure.
+- Follow-up task: Nexus-Vaults #16 (file completeness verification) will run after merge.
+
+### Haplo: Librarian Phase (Nexus-Vaults #17)
+- Status: **PENDING** - Surgical refinement after initial consolidation.
+- Tasks: Master Map README, file redistribution (feeds→Arianus-Sky, trades.db→Abarrach-Stone, memory→Nexus-Vaults, Chelestra-Sea integration), path logic updates, context realignment.
+- Will start after initial migration PR is opened/merged.
+
+### Haplo: PR Review & Deployment
+- **Review pending:** PR #210 (orchestrator wrapper) — blocked until Jupiter key rotation (#211) completes
+- After key rotation: approve PR #210 → merge → deploy → verify wrapper activation
 
 ### Hugh: Chelestra-Sea #2 (Profile Distillation)
 - Status: **COMPLETED** (2026-03-02 01:15 CST)
 - Result: Processed 22,630 files, 44 errors; SQLite + ChromaDB fully built
 
 ### Lord Xar: Lobster Workflow Management
+- **Nexus-Vaults #18:** Automate workflow deployment and sync across fleet — IN PROGRESS (policy design, verification script built)
+- **Chelestra-Sea #96:** PR merged; `.github/workflows/deploy-on-merge.yml` added to main (post-merge fix) — awaiting secret setup to activate
 - Under direct management.
 
 ## RESOLVED (DO NOT RE-ASSIGN)
