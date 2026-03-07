@@ -161,7 +161,7 @@ SERVERS=(
 )
 
 # For each server: rsync workspace to staging, redact secrets, copy to repo
-# Redaction covers: GitHub PATs, API keys, Google keys, Bearer [REDACTED],
+# Redaction covers: GitHub PATs, API keys, Google keys, Bearer [REDACTED][REDACTED],
 # Tailscale IPs, Discord tokens, and any keys in $KEYS_DIR
 # Pre-commit hook scans diff for un-redacted secrets and aborts if found
 # Then commits and pushes to origin

@@ -17,9 +17,14 @@
 - [x] Pryan-Fire Windows Clone (Nexus-Vaults #11 related) - Zifnab - `Pryan-Fire` repository successfully cloned to `C:\Users\olawal\Pryan-Fire` on Windows workstation.
 - [x] Claude Code Analysis (Nexus-Vaults #11) - Zifnab - Completed initial analysis; identified race condition.
 - [ ] Fleet Workspace Git Sync (Nexus-Vaults#1) - Zifnab - Ongoing daily redaction and push to GitHub.
+- [ ] Meteora REST API Integration (Pryan-Fire) - Haplo - Switch to Shyft API for position reads. Support configurable profit rules per wallet.
 - [ ] Security: PAT exposed in channel - rotation required (Chelestra-Sea #43) - Zifnab, Haplo (action pending)
 
-### Zifnab: Fleet Coordination & Monitoring
+### Lord Xar: Document Sync & Re-parse (2026-03-05)
+- Status: **IN PROGRESS** — delegated to Haplo
+- Source: Windows `H:\IcloudDrive\...\Documents` (52,849 files)
+- Target: `/data/openclaw/staging/` on ola-claw-main
+- Acceptance: Full 52K indexed in SQLite DB
 - **Rate Guard Fleet Monitor:** Active (15-min cron).
 - **Memory Guard:** Active (5-min cron).
 - **GitHub Operations:** Restored. Merging/closing PRs functional. Haplo has admin on Pryan-Fire. Open PRs can be processed.
@@ -41,6 +46,7 @@
   2. Deploy to ola-claw-trade via `patryn-workhorse` + `nexus-bridge`
   3. Perform devnet smoke test ($1-2) then mainnet trade
   4. Rotate Jupiter API key (**Pryan-Fire #211** — assigned to Lord Xar, P0 blocker)
+- **Pryan-Fire #205:** Full regression analysis on trading data (wins/losses patterns) → knowledge base — Hugh (P1)
 
 ### Project: The Assassins Ledger (Arianus-Sky #3)
 - **Status:** LAUNCHED — GitHub Project #11 created, tickets assigned.

@@ -20131,7 +20131,7 @@ NONE
 - API Development
 - Photo Management
 - JSON Handling
-- Authorization Bearer [REDACTED]
+- Authorization Bearer [REDACTED][REDACTED]
 
 **Education:**  
 NONE
@@ -47490,7 +47490,7 @@ NONE
 - API Development
 - Photo Management
 - JSON Handling
-- Authorization Bearer [REDACTED]
+- Authorization Bearer [REDACTED][REDACTED]
 
 **Education:**  
 NONE

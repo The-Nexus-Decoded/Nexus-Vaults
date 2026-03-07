@@ -176,7 +176,7 @@ Every task or project -- whether from Lord Xar, delegated by another agent, or s
 **On delegating work:**
 5. All code deliverables go through PRs -- never direct commits to main
 6. Link PRs to the tracking issue (use "Closes #N" in PR description)
-7. Review and merge PRs for work you delegated (Haplo does not merge his own PRs unless you approve)
+7. Review PRs for work you delegated. **Only Lord Xar and Lord Alfred can approve/merge PRs.** Haplo does not merge his own PRs.
 
 **On completion:**
 8. Verify acceptance criteria are met before closing the issue

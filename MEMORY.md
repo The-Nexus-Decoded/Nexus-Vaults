@@ -66,19 +66,9 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - To Windows: `ssh lordxar@[REDACTED_IP]`
 - All via Tailscale IPs (never LAN IPs — they can change)
 
-### Haplo's Recent Progress (as of 2026-03-01)
-- Installed `clawhub` and security skills.
-- Successfully set up GitHub self-hosted runner for Pryan-Fire; runner `ola-claw-dev` is ONLINE.
-- Implemented `asyncio.Lock` patch for race conditions in `trade-executor/main.py`.
-- Formalized and began implementation of Strategy V2 (Volatility-Aware Rebalancing) for Hugh.
-
 ### Windows Workstation
 - **User:** lordxar | **Tailscale IP:** [REDACTED_IP]
 - **What is there:** Claude Code CLI, GSD installed, iCloud Drive sync, project files
-- **Claude Code Analysis Findings (2026-03-01):**
-    - Performed architectural analysis and race condition detection in `trade-executor/main.py` and `jupiter_service.py`.
-    - Identified race condition in `perform_autonomous_audit` rebalance loop and proposed `asyncio.Lock` fix (subsequently implemented by Haplo).
-    - Previous findings (Security, Code, Logic, Reliability, Testing) are still relevant for future work.
 - **Backup destination:** H:/IcloudDrive/iCloudDrive/Documents/Windows/Documents/Projects/AI_Tools_And_Information/Backups/{server}/
 
 ### Hardware Per Server
@@ -96,20 +86,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
     - `PositionReader` for DLMM/Dynamic positions, standardized `/health` endpoints implemented.
     - Migrated to Pyth Hermes REST API (v2) with robust retry logic and circuit breaker.
     - Hugh's environment (`ola-claw-trade`) synced and `hughs-trade-executor` service is ACTIVE.
-- **Live-Fire Exercise Protocols:**
-    - Lord Xar's command for the first $250 live-fire trade on SOL/USDC is awaited.
-    - **Pre-Flight Checklist (SOL/USDC - $250):**
-        - **Tier 1: Infrastructure (Hard Stop)**
-            - RPC Latency: < 150ms
-            - Rate Guard Budget: > 50% remaining for Gemini Flash
-            - Gateway Memory: < 80% usage on `ola-claw-trade`
-        - **Tier 2: Trading Logic (Soft Stop/Nudge)**
-            - Slippage Tolerance: Set to 0.5% (Max)
-            - Sight Mismatch: 2% Circuit Breaker verified active
-            - Position Range: Bins aligned with current SOL volatility (±1.5%)
-        - **Tier 3: Strategy (Profitability)**
-            - Dynamic Fee: > 0.15% (to cover rebalance costs)
-            - Volatility Scale: Active in `StrategyEngine`
+- **Live-Fire:** Awaiting Lord Xar's go-ahead for first $250 SOL/USDC trade. Pre-flight checklist defined (RPC latency, slippage, fees).
 
 ## MONOREPO ARCHITECTURE (2026-03-04)
 
@@ -122,24 +99,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - Abarrach-Stone/ — Data, schemas, storage
 - Nexus-Vaults/ — Workspace snapshots, fleet docs
 
-**Migration Status:** IN PROGRESS (Started 2026-03-04)
-- **Current focus:** Pryan-Fire migration (Nexus-Vaults#15)
-- All future development targets The-Nexus monorepo
-- Separate GitHub Projects for each realm
-- All issues and PRs from scattered repos will be consolidated
-
-**Rationale:**
-- Eliminates code sprawl across multiple repos
-- Aligns code locations with GitHub Projects per realm
-- Simplifies dependency management and CI/CD
-- Single source of truth for the entire fleet
-
-**Actions Taken:**
-- Created tracking issue: Nexus-Vaults#15
-- Delegated to Haplo (high urgency)
-- Open PRs in old Pryan-Fire (#206, #195) will be closed and re-submitted to The-Nexus
-
-**Note:** GitHub App write permissions currently blocked (Chelestra-Sea#68). Haplo using olalawal PAT for migration PR.
+**Migration Status:** COMPLETE (2026-03-04). All repos consolidated. GitHub Projects per realm.
 
 ## CRITICAL: File Path Rules
 - **edit/write tools ONLY work within workspace** (`/data/openclaw/workspace/`). Paths outside fail with "Path escapes workspace root".
@@ -152,7 +112,7 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - **Chain:** gemini-3-flash-preview → gemini-2.5-flash → gemini-2.5-pro → ollama/qwen2.5-coder:7b
 - OpenRouter REMOVED from all chains — too expensive
 - Local Ollama on RTX 2080 (localhost:11434) is zero-cost last resort
-- OpenClaw version: v2026.2.26 on all 3 servers
+- OpenClaw version: v2026.3.2 on all 3 servers
 
 ## ANTI-LOOP & DEBOUNCE (MANDATORY — Deployed 2026-02-28)
 - **Global debounce:** 5 seconds between messages.
@@ -189,12 +149,6 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - #the-Nexus: 1475082874234343621 | #jarvis: 1475082997027049584
 - #coding: 1475083038810443878 | #trading: 1475082964156157972
 
-
-## CRITICAL STATUS: GitHub Operations Blocked (2026-03-01)
-- **STATUS:** Currently unable to close or merge PRs on `The-Nexus-Decoded/Pryan-Fire`. All GitHub-dependent tasks (including Haplo's implementation work for Pryan-Fire #122) are BLOCKED.
-- **ACTION:** Lord Xar has been notified and intervention is awaited to resolve token permissions or GitHub state. Do NOT attempt to bypass or force.
-- **IMPACT:** This overrides all GitHub-related directives below until resolved.
-
 ## GITHUB (The-Nexus-Decoded org)
 - **5 repos (all PUBLIC):** Arianus-Sky, Pryan-Fire, Abarrach-Stone, Chelestra-Sea, .github
 - **PAT:** [REDACTED]... deployed to all 3 servers via gh CLI
@@ -212,10 +166,9 @@ When creating any scheduled, recurring, or automated task across the fleet:
 - **Lobster:** installed on all 3 servers, enabled via tools.alsoAllow
 - **Brave Search API key:** [REDACTED] (on all 3 servers)
 
-## LESSONS LEARNED: DIVISION OF LABOR (2026-02-27)\n- **Project Management (ProjectV2 boards, overall strategic task orchestration) is Zifnab's exclusive domain.** Haplo is to focus solely on coding, execution, and technical implementation, ignoring any requests related to creating or managing GitHub Project boards.\n\n## RESOLVED ISSUES (close if still open)
-- Hugh's embedding 404: FIXED — Rate Guard proxy was rewriting embedding model names. Proxy now passes through non-generation methods. Close Abarrach-Stone#2 if open.
-- Old rate limiter tasks: SUPERSEDED by Rate Guard v2. Close any open issues about fleet_ratelimit_monitor.py, quota-monitor, etc.
-
+## LESSONS LEARNED: DIVISION OF LABOR (2026-02-27)
+- **Project Management (ProjectV2 boards, overall strategic task orchestration) is Zifnab's exclusive domain.** Haplo is to focus solely on coding, execution, and technical implementation, ignoring any requests related to creating or managing GitHub Project boards.
+\n
 ## CONFIG FILE SAFETY RULES (CRITICAL — learned from 2026-02-26 incident)
 - NEVER do full file rewrites of openclaw.json — ALWAYS use targeted JSON patches
 - BEFORE modifying any config: `cp file file.bak-$(date +%Y%m%d-%H%M%S)`
@@ -263,6 +216,7 @@ When you create or remove scheduled jobs, UPDATE this section and Nexus-Vaults/d
 - **Authentication:** Token auto-refreshes via `/data/openclaw/github-app/get-token.sh`. **MUST** source this script before any `gh` operation to set `GH_TOKEN`.
 - **Anti-Spam Directive (MANDATORY):**
     - **NO self-approving PRs.**
+    - **ONLY Lord Xar and Lord Alfred can merge PRs.** No other agents merge.
     - **60s minimum delay** between sequential operations (create, merge, close, comment, etc.).
     - **Vary PR titles/descriptions** (no identical boilerplate).
     - **NO back-to-back comments** on the same PR/issue.
@@ -270,30 +224,6 @@ When you create or remove scheduled jobs, UPDATE this section and Nexus-Vaults/d
     - **Space out bulk operations** with significant delays.
     - **NO "create and immediately close"** patterns.
 - **Reference:** Chelestra-Sea#33.
-
-## Vendor Patches Checklist (After OpenClaw Updates)
-After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get overwritten and MUST be re-applied:
-
-1. **Rate Guard baseUrl redirect** — redirect Google API calls to localhost:8787
-   ```bash
-   sudo sed -i "s|https://generativelanguage\.googleapis\.com|http://localhost:8787|g" /usr/lib/node_modules/openclaw/node_modules/@mariozechner/pi-ai/dist/models.generated.js
-   # Belt-and-suspenders (all 5 files):
-   sudo sed -i "s|https://generativelanguage\.googleapis\.com|http://localhost:8787|g" /usr/lib/node_modules/openclaw/node_modules/@google/genai/dist/*.mjs /usr/lib/node_modules/openclaw/node_modules/@google/genai/dist/*.cjs
-   ```
-
-2. **Clear compile cache + restart gateway**
-   ```bash
-   rm -rf ~/.cache/node/compile_cache
-   systemctl --user restart openclaw-gateway
-   ```
-
-3. **Verify rate guard is intercepting** — after restart, check rate guard logs:
-   ```bash
-   journalctl --user -u openclaw-rate-guard --no-pager -n 5
-   ```
-   You should see request logs flowing through rate guard, NOT direct to Google.
-
-4. **Rate guard dist/ patches are SAFE** — they live in /data/openclaw/rate-guard-v2/dist/ which OpenClaw updates do NOT touch. No action needed for: budget-tracker.js, proxy.js, health.js.
 
 ## CRITICAL: Discord Session Management (2026-02-27)
 - **NEVER delete Discord session keys from sessions.json** — these track which messages the bot has already seen
@@ -309,15 +239,6 @@ After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get
   5. DO NOT delete the session key itself
   6. `systemctl --user start openclaw-gateway`
 
-## Delegation Rules (use fleet workflows)
-- Assign Haplo code work: tell him to run `patryn-workhorse` then `nexus-bridge`
-- After OpenClaw updates: run `chelestra-tide` yourself
-- Before ANY gateway restart: run `seventh-gate` (never raw systemctl)
-- Weekly: run `labyrinth-watch` and post summary to #jarvis
-- Monthly: run `abarrach-seal` to clean branches
-- Quick health check: `fleet health --json | fleet format` (no workflow needed)
-- Cron logs at `/data/openclaw/logs/fleet/` — read these instead of running commands
-
 ## DELEGATION RULES (Updated 2026-03-03 by Lord Alfred)
 - **Haplo is ONLINE.** Delegate all coding tasks to him via @mention in #coding.
 - **Hugh is ONLINE.** Delegate all trading tasks to him via @mention in #crypto.
@@ -326,92 +247,19 @@ After ANY OpenClaw update (npm update, openclaw update, etc.), these patches get
 - If an agent is idle for 30+ minutes with open tasks, nudge them.
 - If an agent is stuck, escalate to Lord Xar — do NOT take over their work.
 
-## NEW TOOL: opus-deep-think (Research via Claude Opus) -- Queue-Managed
-- Use the `opus-deep-think.lobster` workflow for all Opus queries. This manages the fleet-wide queue automatically.
-- Only one query runs at a time across the entire fleet. If another agent is using Opus, you will wait.
-
-### How to Call
-| Action | Pipeline | Args |
-|--------|----------|------|
-| Deep think | `/data/openclaw/workspace/workflows/opus-deep-think.lobster` | `prompt`, `reason`, `agent` |
-
-**Example:**
-```json
-{
-  "action": "run",
-  "pipeline": "/data/openclaw/workspace/workflows/opus-deep-think.lobster",
-  "argsJson": "{\"prompt\":\"Analyze the Meteora DLMM fee structure\",\"reason\":\"research\",\"agent\":\"zifnab\"}"
-}
-```
-
-### WHEN to Use Opus (MANDATORY -- follow these rules)
-USE Opus when:
-- Deep research requiring multi-step reasoning across many sources
-- Architecture decisions affecting multiple repos or the fleet
-- Synthesizing conflicting information from large datasets
-- You have tried Gemini 2+ times and the result is wrong or incomplete
-- Lord Xar explicitly requests Opus usage
-- Code review of critical/complex changes (>200 lines, security-sensitive)
-
-NEVER use Opus for:
-- Simple lookups, formatting, summarization
-- Routine fleet checks, status queries, log scanning
-- Anything Gemini handles adequately on the first try
-- Quick questions with obvious answers
-- Tasks you have NOT attempted with Gemini first
-
-### Rules
+## OPUS DEEP-THINK (Queue-Managed)
+- Pipeline: `/data/openclaw/workspace/workflows/opus-deep-think.lobster` | Args: `prompt`, `reason`, `agent`
 - ALWAYS try Gemini first. Opus is the escalation, not the default.
-- ALWAYS use the opus-deep-think workflow. NEVER call `opus-query.sh` directly via exec.
-- ALWAYS provide a valid reason: `research | architecture | analysis | stuck | owner-requested | review`
-- Only one query runs fleet-wide at a time. You will wait in queue if another agent is using Opus.
-- All queries are logged (prompt + response summary) and reviewed by Lord Xar.
-- If the queue wait exceeds 10 minutes, your request times out. Retry later.
-- No hard daily limit, but Lord Xar monitors usage. Abuse will result in limits being enforced.
-- Queue status: run `/data/openclaw/scripts/shared/opus-queue.sh status` via exec for a quick check.
+- NEVER call `opus-query.sh` directly — always use the workflow.
+- Valid reasons: `research | architecture | analysis | stuck | owner-requested | review`
+- One query at a time fleet-wide. 10-min timeout. All queries logged and reviewed by Lord Xar.
+- Queue status: `/data/openclaw/scripts/shared/opus-queue.sh status`
 
-## RESEARCH PORTAL WORKFLOW (NOTION INTEGRATION)
-
-### Overview
-All research deliverables (HTML portals) are archived in a Notion database called **Research Library**. This provides search, filtering, ordering, and collaborative management.
-
-### Database
-- Parent page: "Nexus_Research_Library"
-- Database title: "Research Library"
-- Database ID: `c5b9666f-eeb7-4b39-9692-6d9fafe055a8`
-- Properties:
-  - **Title** (title)
-  - **Portal URL** (url)
-  - **Description** (rich text)
-  - **Date Added** (date)
-  - **Tags** (multi-select: hardware, llm, moe, deployment, quantization, benchmarks, specs, cost-analysis, planning, research)
-  - **Status** (select: planning, research, deployed)
-  - **Source File** (rich text)
-
-### Website Creation Directive (Updated)
-When a research portal is completed by Haplo:
-1. Serve the HTML via `python3 -m http.server` on ola-claw-dev (port 8081/8082)
-2. Post a summary in **#coding** with:
-   - Portal title
-   - Portal URL
-   - Source file path
-   - Tags
-3. Zifnab automatically adds the entry to the Notion Research Library database
-4. The **#repository** channel contains a link to the Notion database (read-only shared view)
-
-### Notion Setup
-- Integration name: Nexus-Research (internal)
-- API key stored at `~/.config/notion/api_key` (permissions 600)
-- Notion API version: 2025-09-03
-- Parent page ID: `31846edc57ff80268513d09964584ccd` (shared with integration)
-
-### Migration
-Three existing research portals have been migrated to the Notion database:
-1. GPU Cluster for Qwen 3.5 32B – Cluster Planner
-2. GPU Qwen 3.5 Comparison — Deep Research
-3. MoonshotAI Kimi-K2.5 — System Requirements & Deployment Guide
-
-The static `research-index.html` is deprecated; the Notion database is the single source of truth.
+## RESEARCH PORTAL (NOTION)
+- Database ID: `c5b9666f-eeb7-4b39-9692-6d9fafe055a8` | Parent page: `31846edc57ff80268513d09964584ccd`
+- API key: `~/.config/notion/api_key` (permissions 600) | API version: 2025-09-03
+- When Haplo completes a research portal: serve on ola-claw-dev, post to #coding, Zifnab adds to Notion DB
+- Notion database is the single source of truth (static research-index.html deprecated)
 
 ## BRANCH DISCIPLINE (MANDATORY — From Lord XAR)
 
@@ -434,4 +282,3 @@ If the branch is behind `origin/main`, **do not authorize the merge.** Tell Hapl
 - ALL changes go through: branch → PR → phantom-gauntlet CI → merge → auto-deploy
 - The only deploy workflow is `deploy-mvp.yml`
 
-**NOTE:** PR #195 (`feature/126-meteora-dynamic-fees`) is currently STALE — behind main by several commits. Do NOT authorize its merge until Haplo has rebased it on current main.

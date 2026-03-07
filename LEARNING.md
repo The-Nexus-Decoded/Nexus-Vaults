@@ -1,3 +1,15 @@
+## 2026-03-05 | Haplo pushed without code review
+
+**What happened:** Haplo pushed PR #119 with Meteora SDK implementation without testing or self-review. Bugs found: ValueTypeError (should be ValueError), wrong default wallet hardcoded, wallet address in GraphQL query (injection risk), no rate limiting, missing endpoints, API key in query string instead of header.
+
+**Why:** No self-review step before pushing. Haplo argued with Lord Xar/Alfred about Shyft vs Meteora without verifying his own code first.
+
+**Fix:** 
+1. Before pushing any PR, must self-review and confirm compiles/runs locally
+2. Full audit, not just basic review
+3. Test locally and iterate through all problems BEFORE bringing to chat
+4. Only Lord Xar and Lord Alfred can merge PRs
+
 ## 2026-02-28 | The Lobster Phantom Loop
 Haplo entered a 20+ message hard loop in #coding regarding a missing `lobster` CLI. 
 Despite the ticket (Chelestra-Sea #24) being closed by Lord Xar, the executable remained physically missing. 

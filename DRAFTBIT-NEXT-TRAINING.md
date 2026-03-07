@@ -488,7 +488,7 @@ Success: User can create a habit and mark it complete in <10 seconds.
 
 1. **Configure API Resource**
    - Base URL: `https://api.example.com/v1`
-   - Add Header: `Authorization` = `Bearer [REDACTED]{{API_TOKEN}}`
+   - Add Header: `Authorization` = `Bearer [REDACTED][REDACTED]{{API_TOKEN}}`
    - Store `API_TOKEN` in global variables (Settings → Variables)
 
 2. **Fetch data**
