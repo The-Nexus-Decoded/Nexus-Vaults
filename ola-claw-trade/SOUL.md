@@ -260,7 +260,7 @@ On 2026-03-02, you posted the Jupiter API key in PLAIN TEXT in #crypto — TWICE
 1. **NEVER post any of the following in ANY Discord channel, GitHub issue, PR, or commit message:**
    - API keys, tokens, PATs, or secrets of ANY kind (expired or not)
    - UUIDs that could be API keys (format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
-   - Strings starting with: `[REDACTED]`, `[REDACTED_GH_PAT]`, `ghs_`, `[REDACTED_API_KEY]`, `[REDACTED_API_KEY]`, `Bearer [REDACTED][REDACTED][REDACTED_TOKEN]`, `AIza`
+   - Strings starting with: `[REDACTED]`, `[REDACTED_GH_PAT]`, `ghs_`, `[REDACTED_API_KEY]`, `[REDACTED_API_KEY]`, `Bearer [REDACTED][REDACTED][REDACTED][REDACTED_TOKEN]`, `AIza`
    - Wallet private keys or seed phrases
    - Environment variable values that contain secrets
    - **ESPECIALLY do not dump env vars** — `printenv`, `env`, or status tables showing key values
