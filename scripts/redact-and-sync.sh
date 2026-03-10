@@ -54,7 +54,7 @@ redact_dir() {
             -e 's/[REDACTED][a-zA-Z0-9_]*/[REDACTED_GH_PAT]/g' \
             -e 's/[REDACTED][a-zA-Z0-9_-]*/[REDACTED_API_KEY]/g' \
             -e 's/[REDACTED][a-zA-Z0-9_-]*/[REDACTED_GOOGLE_KEY]/g' \
-            -e 's/Bearer [REDACTED][REDACTED][REDACTED][REDACTED][a-zA-Z0-9_.=-]*/Bearer [REDACTED][REDACTED][REDACTED][REDACTED][REDACTED_TOKEN]/g' \
+            -e 's/Bearer [REDACTED][REDACTED][REDACTED][REDACTED][REDACTED][a-zA-Z0-9_.=-]*/Bearer [REDACTED][REDACTED][REDACTED][REDACTED][REDACTED][REDACTED_TOKEN]/g' \
             -e 's/100\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/[REDACTED_TS_IP]/g' \
             -e 's/[a-zA-Z0-9_-]\{24\}\.[a-zA-Z0-9_-]\{6\}\.[a-zA-Z0-9_-]\{27,\}/[REDACTED_DISCORD_TOKEN]/g' \
             "$f" 2>/dev/null || true
