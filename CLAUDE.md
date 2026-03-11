@@ -137,3 +137,55 @@ If loop risk is detected:
 - Be concrete
 - Prefer commands, diffs, and file paths over long explanations
 - Ask before destructive actions
+
+## GITHUB TICKET FORMAT (MANDATORY)
+When creating tickets, use this structure:
+
+**Title:** `[P0/P1/P2/P3] <category>: <short description>`
+
+**Body:**
+```
+**Severity:** P0/P1/P2/P3
+
+**Source Script:** 
+<full path to source>
+
+**Broken Output Path:** 
+<channel or output location>
+
+---
+
+**Root Cause:**
+<1-2 sentence description>
+
+**Evidence:**
+1. <evidence 1>
+2. <evidence 2>
+3. <evidence 3>
+...
+
+---
+
+**Actions Taken:**
+1. <action 1>
+2. <action 2>
+
+**Commands Run:**
+```
+<exact commands>
+```
+
+**Units Changed:**
+- <unit 1> — <status>
+- <unit 2> — <status>
+
+---
+
+**Required Fix:**
+1. <fix step 1>
+2. <fix step 2>
+```
+
+**Acceptance Criteria:** (if applicable)
+- [ ] <criteria 1>
+- [ ] <criteria 2>
