@@ -1,3 +1,5 @@
+<!-- MEMORY RULE: No project data in MEMORY.md. Save project specs, designs, and documents to /data/openclaw/shared/ or project folders. -->
+
 # Zifnab's Long-Term Memory
 
 ## IDENTITY — READ THIS FIRST
@@ -110,3 +112,10 @@ Application-level dev work is fine — code, packages, OpenClaw crons.
 - Do NOT create hourly reports — Lord Xar disabled those
 - Do NOT overwrite MEMORY.md carelessly — use targeted edits
 - Do NOT touch opus-query.sh — report to Lord Xar if broken
+
+## Shared Storage
+- `shared/` in your workspace = `/data/openclaw/shared/` (accessible by ALL agents on ALL servers)
+- `shared/souldrifters/` — Soul Drifter game specs, realm perks, class docs
+- `shared/email-triage/` — email triage project files
+- Use this for cross-agent handoffs, shared specs, and project docs
+- Never put secrets or credentials here
